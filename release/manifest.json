@@ -1,0 +1,48 @@
+{
+  "name": "Path of exile blocklist",
+  "version": "0.2.1",
+  "manifest_version": 3,
+  "permissions": [
+    "storage"
+  ],
+  "description": "Hide posts from unwanted users on PoE Forum",
+  "options_page": "src/options/index.html",
+  "action": {
+    "default_title": "Path of exile blocklist"
+  },
+  "icons": {
+    "16": "src/assets/logo-16x16.png",
+    "32": "src/assets/logo-32x32.png",
+    "64": "src/assets/logo-64x64.png",
+    "128": "src/assets/logo-128x128.png"
+  },
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/main.ts-loader.76e2f06c.js"
+      ],
+      "matches": [
+        "https://*.pathofexile.com/*"
+      ],
+      "css": [
+        "assets/main.5ba0b939.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "https://*.pathofexile.com/*"
+      ],
+      "resources": [
+        "assets/Storage.37ebdd4d.js",
+        "assets/main.ts.c3509275.js"
+      ],
+      "use_dynamic_url": true
+    }
+  ]
+}

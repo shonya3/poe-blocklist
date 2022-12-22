@@ -1,0 +1,12 @@
+.blocklist-ext-hidden {
+	display: none;
+}
+
+blocked-content {
+	font-size: 1rem;
+}
+
+.blocklist-ext-user-icon {
+	margin-left: 5px;
+	cursor: pointer;
+}
