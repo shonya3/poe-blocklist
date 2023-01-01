@@ -1,7 +1,7 @@
 import { $ } from '../$';
 import { Storage } from '../../Storage';
 
-const ICON_CLASS = 'blocklist-user-icon';
+const ICON_CLASS = 'blocklist-ext-user-icon';
 
 const blockUserIconHtml = `<svg class="${ICON_CLASS}"
 					xmlns="http://www.w3.org/2000/svg"

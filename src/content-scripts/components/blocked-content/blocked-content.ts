@@ -34,9 +34,6 @@ export class BlockedContent extends HTMLElement {
 		this.userTooltip = props?.userTooltip ?? this.getAttribute('user-tooltip') ?? '';
 		this.keywordTooltip = props?.keywordTooltip ?? this.getAttribute('keyword-tooltip') ?? '';
 
-		this.setAttribute('kind', this.kind);
-		this.setAttribute('post-style', this.postStyle);
-
 		const element = this;
 		this.conditions = {
 			get text() {
@@ -55,6 +52,8 @@ export class BlockedContent extends HTMLElement {
 	}
 
 	connectedCallback() {
+		this.setAttribute('kind', this.kind);
+		this.setAttribute('post-style', this.postStyle);
 		const blockedUserIcon = `<svg class="text"
 					xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -120,7 +119,7 @@ export class BlockedContent extends HTMLElement {
 	</svg>
 		`;
 
-		const sr = this.attachShadow({ mode: 'open' });
+		const sr = this.attachShadow({ mode: 'closed' });
 
 		sr.adoptedStyleSheets = [css];
 
@@ -145,3 +144,8 @@ export class BlockedContent extends HTMLElement {
 }
 
 customElements.define('blocked-content', BlockedContent);
+declare global {
+	interface HTMLElementTagNameMap {
+		'blocked-content': BlockedContent;
+	}
+}
