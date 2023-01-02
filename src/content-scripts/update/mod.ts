@@ -5,7 +5,20 @@ export { IconBlockedUser } from '../components/icons/icon-blocked-user';
 
 const ICON_CLASS = 'blocklist-ext-user-icon';
 
-const blockUserIconHtml = `<icon-blocked-user width="30" height="30" class="${ICON_CLASS}"></icon-blocked-user>`;
+const iconBlocked = String.raw`
+    <icon-blocked-user
+        title="Hide messages from this user"
+        width="30"
+        height="30"
+        class="${ICON_CLASS}">
+    </icon-blocked-user>`;
+const iconUnblock = String.raw`
+    <icon-unblock-user
+        title="Hide messages from this user"
+        width="30"
+        height="30"
+        class="${ICON_CLASS}">
+    </icon-unblock-user>`;
 
 const unblockUserIconHtml = `<icon-unblock-user width="30" height="30" class="${ICON_CLASS}"></icon-unblock-user>`;
 
@@ -17,7 +30,7 @@ const addBlockUserIcon = async (post: Element) => {
 	const users = await Storage.getOrDefault('users', []);
 	const isUserBlocked = users.includes(username);
 
-	const svgHtml = isUserBlocked ? unblockUserIconHtml : blockUserIconHtml;
+	const svgHtml = isUserBlocked ? iconUnblock : iconBlocked;
 	buttons.insertAdjacentHTML('beforeend', svgHtml);
 
 	const blockedUserIcon = buttons.querySelector(`.${ICON_CLASS}`) as SVGElement;
