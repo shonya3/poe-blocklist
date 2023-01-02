@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@webcomponents/custom-elements": "^1.5.1",
+		"lit-html": "^2.5.0",
 		"vue": "^3.2.41"
 	},
 	"devDependencies": {

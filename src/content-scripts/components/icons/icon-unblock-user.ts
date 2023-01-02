@@ -53,7 +53,6 @@ export class IconUnblockUser extends HTMLElement {
 	}
 
 	attributeChangedCallback(name: 'width' | 'height' | 'title', oldVal: string, val: string) {
-		console.log('attribute');
 		switch (name) {
 			case 'height':
 				this.height = val;
@@ -79,9 +78,6 @@ export class IconUnblockUser extends HTMLElement {
 		const titleEl = this.$svg.querySelector('title');
 		if (!titleEl) throw new Error('no title element on icon element');
 		return titleEl;
-	}
-	connectedCallback() {
-		console.log('connected');
 	}
 }
 

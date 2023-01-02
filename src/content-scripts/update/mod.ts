@@ -14,13 +14,11 @@ const iconBlocked = String.raw`
     </icon-blocked-user>`;
 const iconUnblock = String.raw`
     <icon-unblock-user
-        title="Hide messages from this user"
+        title="Unblock this user"
         width="30"
         height="30"
         class="${ICON_CLASS}">
     </icon-unblock-user>`;
-
-const unblockUserIconHtml = `<icon-unblock-user width="30" height="30" class="${ICON_CLASS}"></icon-unblock-user>`;
 
 const addBlockUserIcon = async (post: Element) => {
 	const buttons = $.post.buttons(post);
