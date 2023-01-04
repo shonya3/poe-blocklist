@@ -8,7 +8,7 @@ const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: P
 	for (const quote of quotes) {
 		const content = $.quote.content(quote);
 		const id = quote.getAttribute(ELEMENT_ID_ATTR);
-		if (!content || !id) return;
+		if (!content || !id) continue;
 
 		const tooltipsByCategory = tooltipMap.get(id);
 		const userTooltip = tooltipsByCategory?.users;
