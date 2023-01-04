@@ -7,7 +7,7 @@ import { ELEMENT_ID_ATTR } from './mod';
 const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle) => {
 	for (const post of posts) {
 		const id = post.getAttribute(ELEMENT_ID_ATTR);
-		if (!id) return;
+		if (!id) continue;
 
 		const tooltipsByCategory = tooltipMap.get(id);
 		const userTooltip = tooltipsByCategory?.users;
