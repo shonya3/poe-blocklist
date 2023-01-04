@@ -1,5 +1,3 @@
-export { IconMonkey } from './content-scripts/components/icons/icon-mokey';
-
 export { BlockedContent } from './content-scripts/components/blocked-content/blocked-content';
 
 export {};
