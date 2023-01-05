@@ -22,7 +22,7 @@ const manifest: ManifestV3Export = {
 	},
 	content_scripts: [
 		{
-			js: ['src/content-scripts/main.ts'],
+			js: ['src/content-scripts/main.ts', 'node_modules/@webcomponents/custom-elements/custom-elements.min.js'],
 			matches: ['https://*.pathofexile.com/*'],
 		},
 	],

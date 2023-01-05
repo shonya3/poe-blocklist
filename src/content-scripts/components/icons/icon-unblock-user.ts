@@ -1,6 +1,3 @@
-// polyfill https://bugs.chromium.org/p/chromium/issues/detail?id=390807
-import '@webcomponents/custom-elements';
-
 export class IconUnblockUser extends HTMLElement {
 	constructor() {
 		super();

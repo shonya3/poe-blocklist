@@ -2,8 +2,6 @@ import { BlockedContentProps, PostOrQuote, PostStyle } from '../../../types';
 export { IconBlockedUser } from '../icons/icon-blocked-user';
 export { IconMonkey } from '../icons/icon-monkey';
 import { html, render } from 'lit-html';
-// polyfill https://bugs.chromium.org/p/chromium/issues/detail?id=390807
-import '@webcomponents/custom-elements';
 
 export const css = new CSSStyleSheet();
 import styles from './styles.css?inline';
