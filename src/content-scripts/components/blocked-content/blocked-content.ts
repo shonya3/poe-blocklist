@@ -19,12 +19,7 @@ export class BlockedContent extends HTMLElement {
 		keywordIcon: boolean;
 	};
 	get tooltip(): string {
-		const tooltip =
-			[this.userTooltip, this.keywordTooltip]
-				.filter(s => s.length > 0)
-				.join('   |   ')
-				.replaceAll(' ', '&nbsp') ?? 'Reveal content';
-		return tooltip;
+		return [this.userTooltip, this.keywordTooltip].filter(s => s.length > 0).join('   |   ');
 	}
 	constructor(props?: BlockedContentProps) {
 		super();

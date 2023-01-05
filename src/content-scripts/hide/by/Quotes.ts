@@ -46,10 +46,7 @@ const tQuotesByKeywords = (quote: HTMLElement, keywords: SearchData['keywords'])
 
 	const text = getElementDirectText(content);
 
-	return keywords
-		.filter(word => text.includes(word))
-		.join(', ')
-		.replaceAll(' ', '&nbsp');
+	return keywords.filter(word => text.includes(word)).join(', ');
 };
 
 const tooltippers = {

@@ -38,11 +38,7 @@ const tPostByKeywords = (post: HTMLElement, keywords: SearchData['keywords']): T
 	if (!contentElement) return '';
 
 	const text = getElementDirectText(contentElement);
-	const foundKeywords = keywords.filter(word => text.toLowerCase().includes(word.toLowerCase()));
-	if (!foundKeywords.length) return '';
-
-	const spaceEscapedWords = foundKeywords.join(', ').replaceAll(' ', '&nbsp');
-	return spaceEscapedWords;
+	return keywords.filter(word => text.toLowerCase().includes(word.toLowerCase())).join(', ');
 };
 
 const tooltippers = {
