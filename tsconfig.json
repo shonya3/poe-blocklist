@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"useDefineForClassFields": true,
+		"useDefineForClassFields": false,
 		"module": "ESNext",
 		"moduleResolution": "Node",
 		"strict": true,
@@ -12,7 +12,8 @@
 		"lib": ["ESNext", "DOM"],
 		"skipLibCheck": true,
 		"noEmit": true,
-		"allowJs": true
+		"allowJs": true,
+		"experimentalDecorators": true
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 	"references": [{ "path": "./tsconfig.node.json" }]

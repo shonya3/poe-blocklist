@@ -1,18 +1,14 @@
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { html } from 'lit';
-import './blocked-content';
+import { html } from 'lit-html';
+import './vanilla-blocked-content';
 import { Meta } from '@storybook/web-components';
-import { BlockedContent } from './blocked-content';
+import { VanillaBlockedContent } from './vanilla-blocked-content';
 import { BlockedContentProps } from '../../../types';
 
-export default {
-	title: 'Elements/blocked-content',
+const meta = {
+	title: 'Elements/vanilla-blocked-content',
 	component: 'blocked-content',
 	args: {
 		kind: 'post',
-		postStyle: 'normal',
-		userTooltip: 'SHONYA3',
-		keywordTooltip: 'harvest',
 	},
 	argTypes: {
 		kind: {
@@ -33,14 +29,16 @@ export default {
 			control: { type: 'text' },
 		},
 	},
-} satisfies Meta<BlockedContent>;
+} satisfies Meta<VanillaBlockedContent>;
 
 export const Default = {
 	render: ({ userTooltip, keywordTooltip, kind, postStyle }: BlockedContentProps) =>
-		html`<blocked-content
+		html`<vanilla-blocked-content
 			kind="${kind}"
 			post-style="${postStyle}"
-			user-tooltip="${ifDefined(userTooltip)}"
-			keyword-tooltip="${ifDefined(keywordTooltip)}"
-		></blocked-content>`,
+			user-tooltip="${userTooltip ?? ''}"
+			keyword-tooltip="${keywordTooltip ?? ''}"
+		></vanilla-blocked-content>`,
 };
+
+export default meta;

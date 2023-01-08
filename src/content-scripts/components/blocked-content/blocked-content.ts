@@ -1,33 +1,44 @@
+import { LitElement, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { BlockedContentProps, PostOrQuote, PostStyle } from '../../../types';
-export { IconBlockedUser } from '../icons/icon-blocked-user';
-export { IconMonkey } from '../icons/icon-monkey';
-import { html, render } from 'lit-html';
+import { styles } from './styles';
 
-export const css = new CSSStyleSheet();
-import styles from './styles.css?inline';
-css.replaceSync(styles);
+@customElement('blocked-content')
+export class BlockedContent extends LitElement {
+	static styles = styles;
 
-export class BlockedContent extends HTMLElement {
-	kind: PostOrQuote;
-	postStyle: PostStyle;
-	userTooltip: string;
-	keywordTooltip: string;
+	/** Visual style of element rendering */
+	@property({ reflect: true, type: String, attribute: 'post-style' })
+	postStyle: PostStyle = 'normal';
+
+	@property({ reflect: true, type: String })
+	kind: PostOrQuote = 'quote';
+
+	@property({ reflect: true, type: String, attribute: 'user-tooltip' })
+	userTooltip: string | null = null;
+
+	@property({ reflect: true, type: String, attribute: 'keyword-tooltip' })
+	keywordTooltip: string | null = null;
+
 	conditions: {
 		text: boolean;
 		icon: boolean;
 		userIcon: boolean;
 		keywordIcon: boolean;
 	};
+
 	get tooltip(): string {
-		return [this.userTooltip, this.keywordTooltip].filter(s => s.length > 0).join('   |   ');
+		return [this.userTooltip, this.keywordTooltip].filter(s => Boolean(s)).join('   |   ');
 	}
+
 	constructor(props?: BlockedContentProps) {
 		super();
 
 		this.kind = (props?.kind ?? this.getAttribute('kind') ?? 'post') as PostOrQuote;
 		this.postStyle = (props?.postStyle ?? this.getAttribute('post-style') ?? 'normal') as PostStyle;
-		this.userTooltip = props?.userTooltip ?? this.getAttribute('user-tooltip') ?? '';
-		this.keywordTooltip = props?.keywordTooltip ?? this.getAttribute('keyword-tooltip') ?? '';
+		this.userTooltip = props?.userTooltip ?? this.getAttribute('user-tooltip') ?? null;
+		this.keywordTooltip = props?.keywordTooltip ?? this.getAttribute('keyword-tooltip') ?? null;
 
 		const element = this;
 		this.conditions = {
@@ -35,51 +46,49 @@ export class BlockedContent extends HTMLElement {
 				return element.postStyle === 'full' && element.kind !== 'quote';
 			},
 			get icon() {
-				return element.postStyle === 'normal' || (element.kind === 'quote' && element.postStyle === 'full');
+				return element.postStyle === 'normal' || element.postStyle === 'full';
 			},
 			get userIcon() {
-				return element.conditions.icon && element.userTooltip.length > 0;
+				return element.conditions.icon && Boolean(element.userTooltip);
 			},
 			get keywordIcon() {
-				return element.conditions.icon && element.keywordTooltip.length > 0;
+				return element.conditions.icon && Boolean(element.keywordTooltip);
 			},
 		};
 	}
 
-	connectedCallback() {
-		const sr = this.attachShadow({ mode: 'open' });
-		sr.adoptedStyleSheets = [css];
-		this.setAttribute('kind', this.kind);
-		this.setAttribute('post-style', this.postStyle);
-
+	override render() {
 		const blockedUserIcon = html`<icon-blocked-user
-			title="${this.userTooltip}"
+			title="${this.userTooltip ?? ''}"
 			width="35"
 			height="35"
 		></icon-blocked-user>`;
 
-		const keywordIcon = html`<icon-monkey title="${this.keywordTooltip}" width="28" height="28"></icon-monkey>`;
+		const keywordIcon = html`<icon-monkey
+			title="${this.keywordTooltip ?? ''}"
+			width="28"
+			height="28"
+		></icon-monkey>`;
 
-		const icons = html`<div class="icons">
-			${this.conditions.userIcon ? blockedUserIcon : ''} ${this.conditions.keywordIcon ? keywordIcon : ''}
-		</div>`;
-
-		const markup = html`
-			${this.conditions.userIcon || this.conditions.keywordIcon ? icons : ''}
-			${this.conditions.text ? '<p class="text">Blocked user</p>' : ''}
-			<button title=${this.tooltip} type="button" class="button">show ${this.kind}</button>
+		const icons = html`
+			<div class="icons">
+				${this.conditions.userIcon ? blockedUserIcon : ''} ${this.conditions.keywordIcon ? keywordIcon : ''}
+			</div>
 		`;
-		render(markup, sr);
+		return html`
+			${this.conditions.userIcon || this.conditions.keywordIcon ? icons : ''}
+			${this.conditions.text ? html`<p class="text">Blocked user</p>` : ''}
+			<button @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button" class="button">
+				show ${this.kind}
+			</button>
+		`;
+	}
 
-		const button = sr.querySelector('button') as HTMLButtonElement;
-		button.addEventListener('click', () => {
-			this.remove();
-			this.dispatchEvent(new Event('button-clicked', { composed: true, bubbles: true }));
-		});
+	#onButtonClicked() {
+		this.remove();
+		this.dispatchEvent(new Event('button-clicked', { composed: true, bubbles: true }));
 	}
 }
-
-customElements.define('blocked-content', BlockedContent);
 declare global {
 	interface HTMLElementTagNameMap {
 		'blocked-content': BlockedContent;
