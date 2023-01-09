@@ -1,5 +1,5 @@
 import { $ } from '../../$';
-import { SearchData, Tooltipper, PostStyle, Tooltip, TooltipMap, BanCategory } from '../../../types';
+import { SearchData, Tooltipper, PostStyle, Tooltip, TooltipMap, BanCategory, Option } from '../../../types';
 import { BlockedContent } from '../../components/blocked-content/blocked-content';
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
@@ -33,16 +33,16 @@ const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: P
 	}
 };
 
-const tQuoteByUsers = (quote: HTMLElement, users: SearchData['users']): Tooltip => {
+const tQuoteByUsers = (quote: HTMLElement, users: SearchData['users']): Option<Tooltip> => {
 	const username = $.quote.username(quote);
-	if (!username || !users.includes(username)) return '';
+	if (!username || !users.includes(username)) return null;
 
 	return username;
 };
 
-const tQuotesByKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Tooltip => {
+const tQuotesByKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Option<Tooltip> => {
 	const content = $.quote.content(quote);
-	if (!content) return '';
+	if (!content) return null;
 
 	const text = getElementDirectText(content);
 

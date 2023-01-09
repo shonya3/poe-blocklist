@@ -21,8 +21,9 @@ export interface StorageItems {
 	postStyle: PostStyle;
 }
 
+export type Option<T> = T | null;
 export type Tooltip = string;
-export type Tooltipper = (el: HTMLElement, searchData: SearchData[BanCategory]) => Tooltip;
+export type Tooltipper = (el: HTMLElement, searchData: SearchData[BanCategory]) => Option<Tooltip>;
 export type ElementUuid = string;
 // export type TooltipsByCategory = Record<BanCategory, Tooltip>;
 export type TooltipMap = Map<ElementUuid, Partial<Record<BanCategory, Tooltip>>>;

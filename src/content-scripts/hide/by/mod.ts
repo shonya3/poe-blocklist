@@ -1,5 +1,5 @@
 import { $ } from '../../$';
-import { BanCategory, SearchData, Tooltipper, PostStyle, TooltipMap } from '../../../types';
+import { BanCategory, SearchData, Tooltipper, PostStyle, TooltipMap, Tooltip } from '../../../types';
 import { Posts } from './Posts';
 import { Quotes } from './Quotes';
 
@@ -26,11 +26,14 @@ const createTooltips = (
 	for (const element of elements) {
 		const id = element.getAttribute(ELEMENT_ID_ATTR);
 		if (!id) continue;
-		const elementTooltips: Partial<Record<BanCategory, string>> = {};
+		const elementTooltips: Partial<Record<BanCategory, Tooltip>> = {};
 		tooltips.set(id, elementTooltips);
 
 		for (const [category, tooltipper] of Object.entries(tooltippers) as [BanCategory, Tooltipper][]) {
-			elementTooltips[category] = tooltipper(element, searchData[category]);
+			const maybeTooltip = tooltipper(element, searchData[category]);
+			if (maybeTooltip) {
+				elementTooltips[category] = maybeTooltip;
+			}
 		}
 	}
 
