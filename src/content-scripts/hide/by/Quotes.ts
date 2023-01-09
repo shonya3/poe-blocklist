@@ -1,8 +1,9 @@
+import { html, nothing, render } from 'lit-html';
 import { $ } from '../../$';
 import { SearchData, Tooltipper, PostStyle, Tooltip, TooltipMap, BanCategory, Option } from '../../../types';
-import { BlockedContent } from '../../components/blocked-content/blocked-content';
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
+import '../../components/blocked-content/blocked-content';
 
 const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle): void => {
 	for (const quote of quotes) {
@@ -22,14 +23,20 @@ const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: P
 		if (header) hideElement(header);
 		if (quotationMarks) hideElement(quotationMarks);
 
-		const blockedContent = new BlockedContent({ postStyle, kind: 'quote', userTooltip, keywordTooltip });
-		blockedContent.addEventListener('button-clicked', () => {
-			revealElement(content);
-			if (header) revealElement(header);
-			if (quotationMarks) revealElement(quotationMarks);
-		});
-
-		quote.append(blockedContent);
+		render(
+			html`<blocked-content
+				post-style="${postStyle}"
+				kind="quote"
+				user-tooltip="${userTooltip ?? nothing}"
+				keyword-tooltip="${keywordTooltip ?? nothing}"
+				@button-clicked=${() => {
+					revealElement(content);
+					if (header) revealElement(header);
+					if (quotationMarks) revealElement(quotationMarks);
+				}}
+			></blocked-content>`,
+			quote
+		);
 	}
 };
 

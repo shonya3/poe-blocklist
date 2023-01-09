@@ -1,8 +1,9 @@
+import { html, render, nothing } from 'lit-html';
 import { $ } from '../../$';
 import { BanCategory, SearchData, Tooltipper, PostStyle, TooltipMap, Tooltip, Option } from '../../../types';
-import { BlockedContent } from '../../components/blocked-content/blocked-content';
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
+import '../../components/blocked-content/blocked-content';
 
 const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle) => {
 	for (const post of posts) {
@@ -17,12 +18,18 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 
 		$.post.children(post).forEach(td => hideElement(td));
 
-		const blockedContent = new BlockedContent({ postStyle, kind: 'post', userTooltip, keywordTooltip });
-		blockedContent.addEventListener('button-clicked', () => {
-			$.post.children(post).forEach(td => revealElement(td));
-		});
-
-		post.append(blockedContent);
+		render(
+			html`<blocked-content
+				post-style="${postStyle}"
+				kind="post"
+				user-tooltip="${userTooltip ?? nothing}"
+				keyword-tooltip="${keywordTooltip ?? nothing}"
+				@button-clicked=${() => {
+					$.post.children(post).forEach(td => revealElement(td));
+				}}
+			></blocked-content>`,
+			post
+		);
 	}
 };
 
