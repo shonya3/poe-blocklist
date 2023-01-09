@@ -38,10 +38,10 @@ export class BlockedContent extends LitElement {
 	constructor(props?: BlockedContentProps) {
 		super();
 
-		this.kind = (props?.kind ?? this.getAttribute('kind') ?? 'post') as PostOrQuote;
-		this.postStyle = (props?.postStyle ?? this.getAttribute('post-style') ?? 'normal') as PostStyle;
-		this.userTooltip = props?.userTooltip ?? this.getAttribute('user-tooltip') ?? null;
-		this.keywordTooltip = props?.keywordTooltip ?? this.getAttribute('keyword-tooltip') ?? null;
+		this.kind = props?.kind ?? (this.kind as PostOrQuote);
+		this.postStyle = props?.postStyle ?? (this.postStyle as PostStyle);
+		this.userTooltip = props?.userTooltip ?? this.userTooltip;
+		this.keywordTooltip = props?.keywordTooltip ?? this.keywordTooltip;
 
 		const element = this;
 		this.conditions = {
