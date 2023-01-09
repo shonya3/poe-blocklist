@@ -4,6 +4,9 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { BlockedContentProps, PostOrQuote, PostStyle } from '../../../types';
 import { styles } from './styles';
 
+import '../icons/icon-monkey';
+import '../icons/icon-blocked-user';
+
 @customElement('blocked-content')
 export class BlockedContent extends LitElement {
 	static styles = styles;

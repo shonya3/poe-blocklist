@@ -1,7 +1,8 @@
 import { $ } from '../$';
 import { Storage } from '../../Storage';
-export { IconUnblockUser } from '../components/icons/icon-unblock-user';
-export { IconBlockedUser } from '../components/icons/icon-blocked-user';
+
+import '../components/icons/icon-blocked-user';
+import '../components/icons/icon-unblock-user';
 
 const ICON_CLASS = 'blocklist-ext-user-icon';
 

@@ -1,4 +1,3 @@
-export { IconBlockedUser } from './components/icons/icon-blocked-user';
 import './index.css';
 import { Hide } from './hide/mod';
 import { Storage } from '../Storage';
