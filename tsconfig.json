@@ -13,7 +13,8 @@
 		"skipLibCheck": true,
 		"noEmit": true,
 		"allowJs": true,
-		"experimentalDecorators": true
+		"experimentalDecorators": true,
+		"types": ["vite/client", "chrome"]
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 	"references": [{ "path": "./tsconfig.node.json" }]
