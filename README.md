@@ -26,4 +26,4 @@ Install the latest release at https://chrome.google.com/webstore/detail/path-of-
 
 ## Recommended IDE Setup
 
--   [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+-   [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Lit](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin)
