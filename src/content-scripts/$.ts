@@ -1,20 +1,22 @@
+import { Option } from '../types';
+
 const post = {
-	buttons(post: Element): HTMLElement | null {
+	buttons(post: Element): Option<HTMLElement> {
 		return post.querySelector('div.buttons');
 	},
-	username(post: Element): string | null | undefined {
-		return post.querySelector('span.profile-link.post_by_account > a')?.textContent;
+	username(post: Element): Option<string> {
+		return post.querySelector('span.profile-link.post_by_account > a')?.textContent ?? null;
 	},
 
-	contentCell(post: Element): HTMLElement | null {
+	contentCell(post: Element): Option<HTMLElement> {
 		return post.querySelector('.content-container');
 	},
 
-	profileCell(post: Element): HTMLElement | null {
+	profileCell(post: Element): Option<HTMLElement> {
 		return post.querySelector('.post_info');
 	},
 
-	content(post: Element): HTMLElement | null {
+	content(post: Element): Option<HTMLElement> {
 		return post.querySelector('.content');
 	},
 
@@ -24,18 +26,18 @@ const post = {
 };
 
 const quote = {
-	quotationMarks(quote: Element): HTMLElement | null {
+	quotationMarks(quote: Element): Option<HTMLElement> {
 		return quote.querySelector('span.quote');
 	},
-	header(quote: Element): HTMLElement | null {
+	header(quote: Element): Option<HTMLElement> {
 		return quote.querySelector('.top');
 	},
-	content(quote: Element): HTMLElement | null {
+	content(quote: Element): Option<HTMLElement> {
 		return quote.querySelector('.bot');
 	},
 
-	username(quote: Element): string | null | undefined {
-		return quote.querySelector('.profile-link > a')?.textContent;
+	username(quote: Element): Option<string> {
+		return quote.querySelector('.profile-link > a')?.textContent ?? null;
 	},
 };
 
