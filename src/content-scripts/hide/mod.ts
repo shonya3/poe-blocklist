@@ -1,5 +1,3 @@
-import { byBlockedUsers } from './byBlockedUsers/mod';
-import { byKeywords } from './byKeywords';
 import { by } from './by/mod';
 
 export const getElementDirectText = (el: HTMLElement): string => {
@@ -13,7 +11,5 @@ export const hideElement = (element: HTMLElement): void => element.classList.add
 export const revealElement = (element: HTMLElement): void => element.classList.remove('blocklist-ext-hidden');
 
 export const Hide = {
-	byKeywords,
-	byBlockedUsers,
 	by,
 };

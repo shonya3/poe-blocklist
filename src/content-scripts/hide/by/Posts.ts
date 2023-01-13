@@ -21,7 +21,7 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 		$.post.children(post).forEach(td => hideElement(td));
 
 		render(
-			html`<td class="blocklist-ext-temp-td">
+			html`<td style="padding: 0" data-blocklist-ext-temp-td>
 					<blocked-content
 						lang="${getUserLang()}"
 						post-style="${postStyle}"
@@ -29,12 +29,12 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 						user-tooltip="${userTooltip ?? nothing}"
 						keyword-tooltip="${keywordTooltip ?? nothing}"
 						@button-clicked=${() => {
-							post.querySelectorAll('.blocklist-ext-temp-td').forEach(tempTd => tempTd.remove());
+							post.querySelectorAll('[data-blocklist-ext-temp-td]').forEach(tempTd => tempTd.remove());
 							$.post.children(post).forEach(td => revealElement(td));
 						}}
 					></blocked-content>
 				</td>
-				<td class="blocklist-ext-temp-td"></td>`,
+				<td style="padding: 0" data-blocklist-ext-temp-td></td>`,
 			post
 		);
 	}
