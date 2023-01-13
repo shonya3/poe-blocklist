@@ -13,7 +13,6 @@ import {
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
-import { getBrowserLang } from '../../lib';
 
 const buildQuotes = (
 	quotes: HTMLElement[],

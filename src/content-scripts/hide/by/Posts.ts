@@ -1,4 +1,3 @@
-import { BlockedContent } from './../../components/blocked-content/blocked-content';
 import { html, render, nothing } from 'lit-html';
 import { $ } from '../../$';
 import {
@@ -14,7 +13,6 @@ import {
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
-import { getBrowserLang } from '../../lib';
 
 const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle, lang: SupportedLang) => {
 	for (const post of posts) {
@@ -43,7 +41,7 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 						}}
 					></blocked-content>
 				</td>
-				<td style="padding: 0" data-blocklist-ext-temp-d></td>`,
+				<td style="padding: 0" data-blocklist-ext-temp-td></td>`,
 			post
 		);
 	}
