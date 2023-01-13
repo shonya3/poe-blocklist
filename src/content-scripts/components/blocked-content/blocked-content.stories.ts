@@ -11,6 +11,7 @@ export default {
 	args: {
 		kind: 'post',
 		postStyle: 'normal',
+		lang: 'en',
 		userTooltip: 'SHONYA3',
 		keywordTooltip: 'harvest',
 	},
@@ -25,6 +26,11 @@ export default {
 			control: { type: 'radio' },
 		},
 
+		lang: {
+			options: ['ru', 'en'],
+			control: { type: 'radio' },
+		},
+
 		userTooltip: {
 			control: { type: 'text' },
 		},
@@ -36,8 +42,9 @@ export default {
 } satisfies Meta<BlockedContent>;
 
 export const Default = {
-	render: ({ userTooltip, keywordTooltip, kind, postStyle }: BlockedContentProps) =>
+	render: ({ userTooltip, keywordTooltip, kind, postStyle, lang }: BlockedContentProps) =>
 		html`<blocked-content
+			lang="${lang}"
 			kind="${kind}"
 			post-style="${postStyle}"
 			user-tooltip="${ifDefined(userTooltip)}"

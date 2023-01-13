@@ -24,6 +24,9 @@ export class BlockedContent extends LitElement {
 	@property({ reflect: true, type: String, attribute: 'keyword-tooltip' })
 	keywordTooltip: string | null = null;
 
+	@property({ reflect: true, type: String, attribute: 'lang' })
+	lang: 'ru' | 'en' = 'en';
+
 	conditions: {
 		text: boolean;
 		icon: boolean;
@@ -42,6 +45,7 @@ export class BlockedContent extends LitElement {
 		this.postStyle = props?.postStyle ?? this.postStyle;
 		this.userTooltip = props?.userTooltip ?? this.userTooltip;
 		this.keywordTooltip = props?.keywordTooltip ?? this.keywordTooltip;
+		this.lang = props?.lang ?? this.lang;
 
 		const element = this;
 		this.conditions = {
@@ -74,15 +78,26 @@ export class BlockedContent extends LitElement {
 		></icon-monkey>`;
 
 		const icons = html`
-			<div class="icons">
+			<div part="icons">
 				${this.conditions.userIcon ? blockedUserIcon : ''} ${this.conditions.keywordIcon ? keywordIcon : ''}
 			</div>
 		`;
+
+		let buttonText = '';
+		switch (this.lang) {
+			case 'ru':
+				buttonText = `Показать ${this.kind === 'post' ? 'сообщение' : 'цитату'}`;
+				break;
+			case 'en':
+			default:
+				buttonText = `show ${this.kind}`;
+		}
+
 		return html`
 			${this.conditions.userIcon || this.conditions.keywordIcon ? icons : ''}
-			${this.conditions.text ? html`<p class="text">Blocked user</p>` : ''}
-			<button @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button" class="button">
-				show ${this.kind}
+			<!-- ${this.conditions.text ? html`<p class="text">Blocked user</p>` : ''} -->
+			<button part="button" @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button">
+				${buttonText}
 			</button>
 		`;
 	}

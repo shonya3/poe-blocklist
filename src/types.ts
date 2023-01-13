@@ -6,6 +6,7 @@ export type BanCategory = 'users' | 'keywords';
 export type BlockedContentProps = {
 	postStyle: PostStyle;
 	kind: PostOrQuote;
+	lang: 'ru' | 'en';
 	userTooltip?: string;
 	keywordTooltip?: string;
 };

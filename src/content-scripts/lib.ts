@@ -51,3 +51,9 @@ export const addDummyRows = (rows: number) => {
 		tbody.insertAdjacentHTML('afterbegin', html);
 	}
 };
+
+export const getUserLang = () => {
+	let lang = navigator.language.split('-')[0];
+	if (lang !== 'ru' && lang !== 'en') lang = 'en';
+	return lang;
+};

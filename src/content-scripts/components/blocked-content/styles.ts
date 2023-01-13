@@ -7,14 +7,11 @@ export const styles = css`
 		align-items: center;
 		justify-content: center;
 
-		--color: #b3a794;
-		--button-text-color: var(--color);
+		--color: #a38d6d;
+		--color-hover: #fff;
+		--button-color-text: var(--color);
 
 		color: var(--color);
-	}
-
-	.button:hover {
-		--button-text-color: #fff;
 	}
 
 	.text {
@@ -24,60 +21,49 @@ export const styles = css`
 		margin-top: 0;
 	}
 
-	.button {
+	[part='button'] {
 		padding: 0.4rem 0.8rem;
-		color: #333;
+		color: var(--button-color-text);
 		font: inherit;
 		text-transform: uppercase;
 		cursor: pointer;
 		border-radius: 0.2rem;
-		border: 1px solid var(--button-text-color);
-		background-color: var(--button-text-color);
+		background-color: transparent;
+		border: 1px solid var(--button-color-text);
 		transition: all 0.3s ease;
 	}
-	.button:hover {
+
+	:host [part='button']:hover {
+		--button-color-text: var(--color-hover);
+	}
+
+	:host([post-style='full']) [part='button'] {
+		background-color: var(--color);
+		color: #000;
+	}
+
+	:host([post-style='full']) [part='button']:hover {
+		color: var(--color-hover);
 		background-color: transparent;
-		color: var(--button-text-color);
 	}
 
-	:host([post-style='normal']) .button {
-		background: transparent;
-		color: var(--button-text-color);
-	}
-
-	:host([post-style='normal']):hover .button {
-		color: #fff;
-		border-color: #fff;
-	}
-
-	:host([post-style='strict']) .button {
-		background: transparent;
-		color: var(--button-text-color);
+	:host([post-style='strict']) [part='button'] {
+		padding-block: 0;
 		border: none;
 	}
 
-	:host([post-style='strict']):hover .button {
-		color: #fff;
-	}
-
-	:host([post-style='min']) .button {
-		background-color: transparent;
-		color: var(--button-text-color);
+	:host([post-style='min']) [part='button'] {
+		padding-block: 0;
 		border: none;
+		opacity: 90%;
 		text-transform: none;
-		font-weight: lighter;
-		opacity: 60%;
-	}
-
-	:host([post-style='min']):hover .button {
-		color: #fff;
 	}
 
 	:host([post-style='none']) {
 		display: none;
 	}
 
-	.icons {
+	[part='icons'] {
 		display: flex;
 		align-items: center;
 		gap: 5px;

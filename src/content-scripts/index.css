@@ -3,10 +3,14 @@
 }
 
 blocked-content {
-	font-size: 1rem;
+	font-size: 14px;
 }
 
 .blocklist-ext-user-icon {
 	margin-left: 5px;
 	cursor: pointer;
+}
+
+td.blocklist-ext-temp-td {
+	padding-block: 0;
 }

@@ -5,6 +5,7 @@ import { BanCategory, SearchData, Tooltipper, PostStyle, TooltipMap, Tooltip, Op
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
+import { getUserLang } from '../../lib';
 
 const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle) => {
 	for (const post of posts) {
@@ -22,6 +23,7 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 		render(
 			html`<td class="blocklist-ext-temp-td">
 					<blocked-content
+						lang="${getUserLang()}"
 						post-style="${postStyle}"
 						kind="post"
 						user-tooltip="${userTooltip ?? nothing}"

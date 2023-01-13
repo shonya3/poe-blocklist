@@ -4,6 +4,7 @@ import { SearchData, Tooltipper, PostStyle, Tooltip, TooltipMap, BanCategory, Op
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
+import { getUserLang } from '../../lib';
 
 const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle): void => {
 	for (const quote of quotes) {
@@ -25,6 +26,7 @@ const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: P
 
 		render(
 			html`<blocked-content
+				lang="${getUserLang()}"
 				post-style="${postStyle}"
 				kind="quote"
 				user-tooltip="${userTooltip ?? nothing}"
