@@ -1,13 +1,22 @@
 import { BlockedContent } from './../../components/blocked-content/blocked-content';
 import { html, render, nothing } from 'lit-html';
 import { $ } from '../../$';
-import { BanCategory, SearchData, Tooltipper, PostStyle, TooltipMap, Tooltip, Option } from '../../../types';
+import {
+	BanCategory,
+	SearchData,
+	Tooltipper,
+	PostStyle,
+	TooltipMap,
+	Tooltip,
+	Option,
+	SupportedLang,
+} from '../../../types';
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
-import { getUserLang } from '../../lib';
+import { getBrowserLang } from '../../lib';
 
-const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle) => {
+const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle, lang: SupportedLang) => {
 	for (const post of posts) {
 		const id = post.getAttribute(ELEMENT_ID_ATTR);
 		if (!id) continue;
@@ -23,7 +32,7 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 		render(
 			html`<td style="padding: 0" data-blocklist-ext-temp-td>
 					<blocked-content
-						lang="${getUserLang()}"
+						lang="${lang}"
 						post-style="${postStyle}"
 						kind="post"
 						user-tooltip="${userTooltip ?? nothing}"
@@ -34,7 +43,7 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 						}}
 					></blocked-content>
 				</td>
-				<td style="padding: 0" data-blocklist-ext-temp-td></td>`,
+				<td style="padding: 0" data-blocklist-ext-temp-d></td>`,
 			post
 		);
 	}

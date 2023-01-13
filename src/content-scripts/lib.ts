@@ -1,3 +1,5 @@
+import { SupportedLang } from '../types';
+
 export function htmlToElement(html: string): HTMLElement {
 	const template = document.createElement('template');
 	html = html.trim(); // Never return a text node of whitespace as the result
@@ -52,8 +54,9 @@ export const addDummyRows = (rows: number) => {
 	}
 };
 
-export const getUserLang = () => {
+export const getBrowserLang = (): SupportedLang => {
 	let lang = navigator.language.split('-')[0];
 	if (lang !== 'ru' && lang !== 'en') lang = 'en';
+	if (lang !== 'ru' && lang !== 'en') throw new Error('Not supported language');
 	return lang;
 };

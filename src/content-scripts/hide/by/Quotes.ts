@@ -1,12 +1,26 @@
 import { html, nothing, render } from 'lit-html';
 import { $ } from '../../$';
-import { SearchData, Tooltipper, PostStyle, Tooltip, TooltipMap, BanCategory, Option } from '../../../types';
+import {
+	SearchData,
+	Tooltipper,
+	PostStyle,
+	Tooltip,
+	TooltipMap,
+	BanCategory,
+	Option,
+	SupportedLang,
+} from '../../../types';
 import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
-import { getUserLang } from '../../lib';
+import { getBrowserLang } from '../../lib';
 
-const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle): void => {
+const buildQuotes = (
+	quotes: HTMLElement[],
+	tooltipMap: TooltipMap,
+	postStyle: PostStyle,
+	lang: SupportedLang
+): void => {
 	for (const quote of quotes) {
 		const content = $.quote.content(quote);
 		const id = quote.getAttribute(ELEMENT_ID_ATTR);
@@ -26,7 +40,7 @@ const buildQuotes = (quotes: HTMLElement[], tooltipMap: TooltipMap, postStyle: P
 
 		render(
 			html`<blocked-content
-				lang="${getUserLang()}"
+				lang="${lang}"
 				post-style="${postStyle}"
 				kind="quote"
 				user-tooltip="${userTooltip ?? nothing}"

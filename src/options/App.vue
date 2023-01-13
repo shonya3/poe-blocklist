@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { Storage } from '../Storage';
-import { PostStyle } from '../types';
+import { PostStyle, SupportedLang } from '../types';
 import TabElement from './TabElement.vue';
 import TabGroup from './TabGroup.vue';
 import IconSettings from './icons/IconSettings.vue';
 import BlockList from './BlockList.vue';
 import { useUsers } from './useUsers';
 import { useKeywords } from './useKeywords';
+import { getBrowserLang } from '../content-scripts/lib';
 
+const lang = ref<SupportedLang | null>(null);
 const { users, inputUser, addUser, deleteUser } = useUsers();
 const { keywords, inputKeyword, addKeyword, deleteKeyword } = useKeywords();
 const postStyle = ref<PostStyle>('normal');
@@ -28,10 +30,19 @@ watch(
 onMounted(async () => {
 	try {
 		postStyle.value = await Storage.getOrDefault('postStyle', 'normal');
+		lang.value = await Storage.getOrDefault('lang', getBrowserLang());
 	} catch (err) {
 		console.log(err);
 	}
 });
+
+watch(
+	() => lang.value,
+	val => {
+		if (val !== 'en' && val !== 'ru') return;
+		Storage.set('lang', val);
+	}
+);
 </script>
 
 <template>
@@ -72,6 +83,20 @@ onMounted(async () => {
 						<option v-for="option in postStyleOptions" :value="option.value">{{ option.text }}</option>
 					</select>
 				</div>
+				<div class="lang">
+					<span class="">Language</span>
+					<div class="lang-controls">
+						<div>
+							<label for="radio-lang-ru">ru</label>
+							<input id="radio-lang-ru" type="radio" value="ru" v-model="lang" />
+						</div>
+
+						<div>
+							<label for="radio-lang-en">en</label>
+							<input id="radio-lang-en" type="radio" value="en" v-model="lang" />
+						</div>
+					</div>
+				</div>
 			</main>
 		</div>
 	</div>
@@ -89,7 +114,6 @@ onMounted(async () => {
 :root {
 	font-family: 'Open Sans', sans-serif;
 	color: #374151;
-	font-size: 100%;
 }
 
 .container {
@@ -157,6 +181,9 @@ select {
 
 .settings-main {
 	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
 }
 
 .settings-name {
@@ -168,5 +195,16 @@ select {
 	align-items: center;
 	gap: 0.4rem;
 	margin-top: 0.8rem;
+}
+
+.lang {
+	font-size: 1.2rem;
+	display: flex;
+	gap: 1rem;
+}
+
+.lang-controls {
+	display: flex;
+	gap: 0.4rem;
 }
 </style>

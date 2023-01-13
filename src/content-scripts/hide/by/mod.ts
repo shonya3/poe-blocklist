@@ -1,11 +1,11 @@
 import { $ } from '../../$';
-import { BanCategory, SearchData, Tooltipper, PostStyle, TooltipMap, Tooltip } from '../../../types';
+import { BanCategory, SearchData, Tooltipper, PostStyle, TooltipMap, Tooltip, SupportedLang } from '../../../types';
 import { Posts } from './Posts';
 import { Quotes } from './Quotes';
 
 export const ELEMENT_ID_ATTR = 'data-blocklist-id';
 
-export const by = (searchData: SearchData, postStyle: PostStyle): void => {
+export const by = (searchData: SearchData, postStyle: PostStyle, lang: SupportedLang): void => {
 	const { posts, quotes } = $;
 
 	addIdAttrToElements(...posts, ...quotes);
@@ -13,8 +13,8 @@ export const by = (searchData: SearchData, postStyle: PostStyle): void => {
 	const postsTooltips = createTooltips(posts, Posts.tooltippers, searchData);
 	const quotesTooltips = createTooltips(quotes, Quotes.tooltippers, searchData);
 
-	Posts.buildPosts(posts, postsTooltips, postStyle);
-	Quotes.buildQuotes(quotes, quotesTooltips, postStyle);
+	Posts.buildPosts(posts, postsTooltips, postStyle, lang);
+	Quotes.buildQuotes(quotes, quotesTooltips, postStyle, lang);
 };
 
 const createTooltips = (
