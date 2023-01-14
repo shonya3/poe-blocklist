@@ -218,20 +218,13 @@ option {
 	gap: 7rem;
 }
 
-@media (max-width: 80em) {
+@media (width <= 1280px) {
 	.container {
 		gap: 5rem;
 	}
 }
 
-@media (max-width: 64em) {
-	.container {
-		gap: 3rem;
-		margin-inline: 2rem;
-	}
-}
-
-@media (max-width: 50em) {
+@media (width <= 1000px) {
 	.container {
 		grid-template-columns: 1fr;
 		margin-inline: 1rem;
