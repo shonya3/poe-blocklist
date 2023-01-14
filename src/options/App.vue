@@ -9,6 +9,7 @@ import BlockList from './BlockList.vue';
 import { useUsers } from './useUsers';
 import { useKeywords } from './useKeywords';
 import { getBrowserLang } from '../content-scripts/lib';
+import '../content-scripts/components/blocked-content/blocked-content';
 
 const lang = ref<SupportedLang | null>(null);
 const { users, inputUser, addUser, deleteUser } = useUsers();
@@ -76,7 +77,17 @@ watch(
 					<span>Settings</span>
 				</h2>
 			</header>
+
 			<main class="settings-main">
+				<div class="element-presentation">
+					<blocked-content
+						kind="post"
+						user-tooltip="Chris"
+						keyword-tooltip="harvest"
+						:post-style="postStyle"
+						:lang="lang"
+					></blocked-content>
+				</div>
 				<div class="post-style">
 					<label for="styleSelect" class="settings-name">Post style</label>
 					<select id="styleSelect" v-model="postStyle">
@@ -145,10 +156,6 @@ watch(
 	.lists {
 		order: 2;
 	}
-
-	.settings {
-		margin-left: 5rem;
-	}
 }
 
 .settings {
@@ -171,7 +178,6 @@ select {
 .post-style {
 	display: flex;
 	gap: 20px;
-	align-items: center;
 }
 
 .heading-secondary {
@@ -183,7 +189,7 @@ select {
 	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
-	gap: 0.6rem;
+	gap: 0.4rem;
 }
 
 .settings-name {
@@ -205,6 +211,28 @@ select {
 
 .lang-controls {
 	display: flex;
-	gap: 0.4rem;
+	gap: 1.2rem;
+}
+
+.lang-controls > div {
+	display: flex;
+	gap: 0.2rem;
+	align-items: baseline;
+}
+
+.element-presentation {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 135px;
+	background-color: red;
+	background-image: linear-gradient(rgb(24, 24, 24), rgb(26, 27, 27) 10%, rgb(26, 27, 27) 80%, rgb(24, 24, 24));
+	border-radius: 1rem;
+}
+
+blocked-content {
+	font-family: Verdana;
+	font-size: 14px;
+	transform: translateX(-10px);
 }
 </style>

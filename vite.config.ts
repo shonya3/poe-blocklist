@@ -5,5 +5,17 @@ import manifest from './manifest.config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [vue(), crx({ manifest })],
+	plugins: [
+		vue({
+			template: {
+				compilerOptions: {
+					isCustomElement: (tag: string) => {
+						const tags = ['blocked-content'];
+						return tags.some(t => tag === t);
+					},
+				},
+			},
+		}),
+		crx({ manifest }),
+	],
 });
