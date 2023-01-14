@@ -11,6 +11,7 @@ import { useKeywords } from './useKeywords';
 import { getBrowserLang } from '../content-scripts/lib';
 import '../content-scripts/components/blocked-content/blocked-content';
 
+const postStyleSlider = ref<'1' | '2' | '3' | '4' | '5'>('1');
 const lang = ref<SupportedLang | null>(null);
 const { users, inputUser, addUser, deleteUser } = useUsers();
 const { keywords, inputKeyword, addKeyword, deleteKeyword } = useKeywords();
@@ -31,11 +32,51 @@ watch(
 onMounted(async () => {
 	try {
 		postStyle.value = await Storage.getOrDefault('postStyle', 'normal');
+		switch (postStyle.value) {
+			case 'none':
+				postStyleSlider.value = '1';
+				break;
+			case 'min':
+				postStyleSlider.value = '2';
+				break;
+			case 'strict':
+				postStyleSlider.value = '3';
+				break;
+			case 'normal':
+				postStyleSlider.value = '4';
+				break;
+			case 'full':
+				postStyleSlider.value = '5';
+				break;
+		}
 		lang.value = await Storage.getOrDefault('lang', getBrowserLang());
 	} catch (err) {
 		console.log(err);
 	}
 });
+
+watch(
+	() => postStyleSlider.value,
+	val => {
+		switch (val) {
+			case '1':
+				postStyle.value = 'none';
+				break;
+			case '2':
+				postStyle.value = 'min';
+				break;
+			case '3':
+				postStyle.value = 'strict';
+				break;
+			case '4':
+				postStyle.value = 'normal';
+				break;
+			case '5':
+				postStyle.value = 'full';
+				break;
+		}
+	}
+);
 
 watch(
 	() => lang.value,
@@ -90,9 +131,20 @@ watch(
 				</div>
 				<div class="post-style">
 					<label for="styleSelect" class="settings-name">Post style</label>
-					<select id="styleSelect" v-model="postStyle">
-						<option v-for="option in postStyleOptions" :value="option.value">{{ option.text }}</option>
-					</select>
+					<div style="flex: 1">
+						<input
+							type="range"
+							min="1"
+							max="5"
+							step="1"
+							id="styleSelect"
+							list="my-datalist"
+							v-model="postStyleSlider"
+						/>
+						<datalist id="my-datalist" style="--list-length: 5">
+							<option v-for="option in postStyleOptions" :value="option.value">{{ option.text }}</option>
+						</datalist>
+					</div>
 				</div>
 				<div class="lang">
 					<span class="">Language</span>
@@ -115,6 +167,37 @@ watch(
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
+
+/* style range */
+input[type='range'] {
+	width: 100%;
+	max-width: 100%;
+	margin-left: 0;
+}
+
+/* style datalist */
+input[type='range'] + datalist {
+	display: block;
+	margin-top: -4px;
+}
+input[type='range'] + datalist option {
+	display: inline-block;
+	width: calc((100% - 12px) / (var(--list-length) - 1));
+	text-align: center;
+}
+input[type='range'] + datalist option:first-child {
+	width: calc((100% - 12px) / ((var(--list-length) - 1) * 2) + 6px);
+	text-align: left;
+}
+input[type='range'] + datalist option:last-child {
+	width: calc((100% - 12px) / ((var(--list-length) - 1) * 2) + 6px);
+	text-align: right;
+}
+
+option {
+	display: block;
+	font-size: 16px;
+}
 
 * {
 	box-sizing: border-box;
