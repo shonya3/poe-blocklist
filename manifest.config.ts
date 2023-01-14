@@ -1,6 +1,6 @@
 import { defineManifest, ManifestV3Export } from '@crxjs/vite-plugin';
 
-const manifest: ManifestV3Export = {
+const manifest = {
 	name: 'Path of exile blocklist',
 	version: '0.3.1',
 	manifest_version: 3,
@@ -26,5 +26,5 @@ const manifest: ManifestV3Export = {
 			matches: ['https://*.pathofexile.com/*'],
 		},
 	],
-};
+} satisfies ManifestV3Export;
 export default defineManifest(manifest);
