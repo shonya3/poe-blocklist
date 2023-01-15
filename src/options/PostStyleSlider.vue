@@ -27,7 +27,6 @@ const postStyleSlider = computed(() => options.findIndex(option => option === pr
 		min="0"
 		max="4"
 		step="1"
-		id="styleSelect"
 		list="post-style-datalist"
 		:value="postStyleSlider"
 	/>
