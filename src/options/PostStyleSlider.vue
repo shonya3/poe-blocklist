@@ -12,7 +12,6 @@ const emit = defineEmits<{
 
 const onInput = (e: Event) => {
 	const value = Number((e.target as HTMLInputElement).value);
-	console.log(options[value]);
 	emit('post-style-changed', options[value]);
 };
 
@@ -29,10 +28,10 @@ const postStyleSlider = computed(() => options.findIndex(option => option === pr
 		max="4"
 		step="1"
 		id="styleSelect"
-		list="my-datalist"
+		list="post-style-datalist"
 		:value="postStyleSlider"
 	/>
-	<datalist id="my-datalist" style="--list-length: 5">
+	<datalist id="post-style-datalist" style="--list-length: 5">
 		<option v-for="option in options">{{ option }}</option>
 	</datalist>
 </template>
