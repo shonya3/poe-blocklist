@@ -27,6 +27,9 @@ export class BlockedContent extends LitElement {
 	@property({ reflect: true, type: String, attribute: 'lang' })
 	lang: 'ru' | 'en' = 'en';
 
+	@property({ reflect: true, type: Boolean, attribute: 'with-icons' })
+	withIcons: boolean = false;
+
 	get tooltip(): string {
 		return [this.userTooltip, this.keywordTooltip].filter(s => Boolean(s)).join('   |   ');
 	}
@@ -39,6 +42,7 @@ export class BlockedContent extends LitElement {
 		this.userTooltip = props?.userTooltip ?? this.userTooltip;
 		this.keywordTooltip = props?.keywordTooltip ?? this.keywordTooltip;
 		this.lang = props?.lang ?? this.lang;
+		this.withIcons = props?.withIcons ?? this.withIcons;
 	}
 
 	override render() {
@@ -59,7 +63,7 @@ export class BlockedContent extends LitElement {
 		}
 
 		return html`
-			${icons}
+			${this.withIcons ? icons : ''}
 			<button part="button" @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button">
 				${buttonText}
 			</button>

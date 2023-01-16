@@ -10,6 +10,7 @@ export type BlockedContentProps = {
 	lang: SupportedLang;
 	userTooltip?: string;
 	keywordTooltip?: string;
+	withIcons: boolean;
 };
 
 export interface SearchData {

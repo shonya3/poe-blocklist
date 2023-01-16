@@ -14,6 +14,7 @@ export default {
 		lang: 'en',
 		userTooltip: 'SHONYA3',
 		keywordTooltip: 'harvest',
+		withIcons: true,
 	},
 	argTypes: {
 		kind: {
@@ -38,16 +39,21 @@ export default {
 		keywordTooltip: {
 			control: { type: 'text' },
 		},
+
+		withIcons: {
+			control: { control: 'boolean' },
+		},
 	},
 } satisfies Meta<BlockedContent>;
 
 export const Default = {
-	render: ({ userTooltip, keywordTooltip, kind, postStyle, lang }: BlockedContentProps) =>
+	render: ({ userTooltip, keywordTooltip, kind, postStyle, lang, withIcons }: BlockedContentProps) =>
 		html`<blocked-content
 			lang="${lang}"
 			kind="${kind}"
 			post-style="${postStyle}"
 			user-tooltip="${ifDefined(userTooltip)}"
 			keyword-tooltip="${ifDefined(keywordTooltip)}"
+			?with-icons=${withIcons}
 		></blocked-content>`,
 };
