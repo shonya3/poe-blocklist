@@ -2,10 +2,6 @@
 	display: none;
 }
 
-blocked-content {
-	font-size: 14px;
-}
-
 .blocklist-ext-user-icon {
 	margin-left: 5px;
 	cursor: pointer;

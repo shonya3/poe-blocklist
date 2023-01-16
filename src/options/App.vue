@@ -222,7 +222,7 @@ select {
 
 blocked-content {
 	font-family: Verdana;
-	font-size: 14px;
+	font-size: 13px;
 	transform: translateX(-10px);
 }
 </style>
