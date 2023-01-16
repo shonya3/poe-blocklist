@@ -14,6 +14,7 @@ import '../content-scripts/components/blocked-content/blocked-content';
 
 const lang = ref<SupportedLang | null>(null);
 const postStyle = ref<PostStyle>('normal');
+const withIcons = ref(true);
 const { users, inputUser, addUser, deleteUser } = useUsers();
 const { keywords, inputKeyword, addKeyword, deleteKeyword } = useKeywords();
 
@@ -26,6 +27,7 @@ onMounted(async () => {
 	try {
 		postStyle.value = await Storage.getOrDefault('postStyle', 'normal');
 		lang.value = await Storage.getOrDefault('lang', getBrowserLang());
+		withIcons.value = await Storage.getOrDefault('withIcons', true);
 	} catch (err) {
 		console.log(err);
 	}
@@ -37,6 +39,11 @@ watch(
 		if (val !== 'en' && val !== 'ru') return;
 		Storage.set('lang', val);
 	}
+);
+
+watch(
+	() => withIcons.value,
+	val => Storage.set('withIcons', val)
 );
 </script>
 
@@ -80,10 +87,11 @@ watch(
 						keyword-tooltip="harvest"
 						:post-style="postStyle"
 						:lang="lang"
+						:withIcons="withIcons"
 					></blocked-content>
 				</div>
 				<div class="post-style">
-					<label for="styleSelect" class="settings-name">Post style</label>
+					<label for="styleSelect" class="settings-name">post style</label>
 					<div style="flex: 1">
 						<post-style-slider
 							@post-style-changed="style => (postStyle = style)"
@@ -92,7 +100,7 @@ watch(
 					</div>
 				</div>
 				<div class="lang">
-					<span class="">Language</span>
+					<span class="">language</span>
 					<div class="lang-controls">
 						<div>
 							<label for="radio-lang-ru">ru</label>
@@ -104,6 +112,10 @@ watch(
 							<input id="radio-lang-en" type="radio" value="en" v-model="lang" />
 						</div>
 					</div>
+				</div>
+				<div class="with-icons">
+					<label for="with-icons-control">with icons</label>
+					<input type="checkbox" name="with-icons-control" id="with-icons-control" v-model="withIcons" />
 				</div>
 			</main>
 		</div>
@@ -224,5 +236,11 @@ blocked-content {
 	font-family: Verdana;
 	font-size: 13px;
 	transform: translateX(-10px);
+}
+
+.with-icons {
+	font-size: 1.2rem;
+	display: flex;
+	gap: 0.8rem;
 }
 </style>
