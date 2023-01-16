@@ -2,13 +2,27 @@ export class IconBlockedUser extends HTMLElement {
 	constructor() {
 		super();
 		const template = document.createElement('template');
-		template.innerHTML = `<svg class="text"
+		template.innerHTML = `
+                    <style>
+                        :host{
+                            display: inline-block;
+                            width: 1.33em;
+                            height: 1.33em;
+                            contain: strict;
+                            box-sizing: content-box !important;
+                        }
+
+                        svg{
+                            display: block;
+                            height: 100%;
+                            width: 100%;
+                        }
+                    </style>
+                    <svg class="text"
 					xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink"
 					aria-hidden="true"
 					role="img"
-					width="35"
-					height="35"
 					preserveAspectRatio="xMidYMid meet"
 					viewBox="0 0 24 24"
 				>

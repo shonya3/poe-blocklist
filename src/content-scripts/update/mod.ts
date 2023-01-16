@@ -9,15 +9,11 @@ const ICON_CLASS = 'blocklist-ext-user-icon';
 const iconBlocked = String.raw`
     <icon-blocked-user
         title="Hide messages from this user"
-        width="30"
-        height="30"
         class="${ICON_CLASS}">
     </icon-blocked-user>`;
 const iconUnblock = String.raw`
     <icon-unblock-user
         title="Unblock this user"
-        width="30"
-        height="30"
         class="${ICON_CLASS}">
     </icon-unblock-user>`;
 

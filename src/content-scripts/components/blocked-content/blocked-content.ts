@@ -53,7 +53,7 @@ export class BlockedContent extends LitElement {
 				return element.postStyle === 'full' && element.kind !== 'quote';
 			},
 			get icon() {
-				return element.postStyle === 'normal' || element.postStyle === 'full';
+				return true;
 			},
 			get userIcon() {
 				return element.conditions.icon && Boolean(element.userTooltip);
@@ -65,17 +65,9 @@ export class BlockedContent extends LitElement {
 	}
 
 	override render() {
-		const blockedUserIcon = html`<icon-blocked-user
-			title="${this.userTooltip ?? ''}"
-			width="35"
-			height="35"
-		></icon-blocked-user>`;
+		const blockedUserIcon = html`<icon-blocked-user title="${this.userTooltip ?? ''}"></icon-blocked-user>`;
 
-		const keywordIcon = html`<icon-monkey
-			title="${this.keywordTooltip ?? ''}"
-			width="28"
-			height="28"
-		></icon-monkey>`;
+		const keywordIcon = html`<icon-monkey title="${this.keywordTooltip ?? ''}"></icon-monkey>`;
 
 		const icons = html`
 			<div part="icons">

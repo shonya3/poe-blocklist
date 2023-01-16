@@ -3,7 +3,7 @@ import { css } from 'lit';
 export const styles = css`
 	:host {
 		display: flex;
-		gap: 20px;
+		gap: 0.5rem;
 		align-items: center;
 		justify-content: center;
 
@@ -12,6 +12,11 @@ export const styles = css`
 		--button-color-text: var(--color);
 
 		color: var(--color);
+	}
+
+	:host([post-style='normal']),
+	:host([post-style='full']) {
+		gap: 1.2rem;
 	}
 
 	.text {
@@ -48,11 +53,13 @@ export const styles = css`
 	}
 
 	:host([post-style='strict']) [part='button'] {
+		padding: 0;
 		padding-block: 0;
 		border: none;
 	}
 
 	:host([post-style='min']) [part='button'] {
+		padding: 0;
 		padding-block: 0;
 		border: none;
 		opacity: 90%;
@@ -66,7 +73,19 @@ export const styles = css`
 	[part='icons'] {
 		display: flex;
 		align-items: center;
-		gap: 5px;
+		gap: 2px;
 		justify-content: center;
+	}
+
+	:host([post-style='normal']) [part='icons'] {
+		font-size: 27px;
+	}
+
+	:host([post-style='full']) [part='icons'] {
+		font-size: 27px;
+	}
+
+	[part='icons']:not(:has(icon-monkey)) {
+		transform: translateX(3px);
 	}
 `;

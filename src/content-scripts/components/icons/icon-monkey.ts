@@ -2,7 +2,23 @@ export class IconMonkey extends HTMLElement {
 	constructor() {
 		super();
 		const template = document.createElement('template');
-		template.innerHTML = `<svg width="28" height="28" viewBox="0 0 36 36">
+		template.innerHTML = `
+         <style>
+                        :host{
+                            display: inline-block;
+                            width: 1em;
+                            height: 1em;
+                            contain: strict;
+                            box-sizing: content-box !important;
+                        }
+
+                        svg{
+                            display: block;
+                            height: 100%;
+                            width: 100%;
+                        }
+        </style>
+        <svg viewBox="0 0 36 36">
 		<title></title>
 		<ellipse cx="5.801" cy="17" fill="#D79E84" rx="3.678" ry="5.335" transform="rotate(-14.3 5.8 17)" />
 		<ellipse cx="30.199" cy="17" fill="#D79E84" rx="5.335" ry="3.678" transform="rotate(-75.7 30.2 17)" />
