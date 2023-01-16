@@ -27,12 +27,6 @@ export class BlockedContent extends LitElement {
 	@property({ reflect: true, type: String, attribute: 'lang' })
 	lang: 'ru' | 'en' = 'en';
 
-	conditions: {
-		icon: boolean;
-		userIcon: boolean;
-		keywordIcon: boolean;
-	};
-
 	get tooltip(): string {
 		return [this.userTooltip, this.keywordTooltip].filter(s => Boolean(s)).join('   |   ');
 	}
@@ -45,19 +39,6 @@ export class BlockedContent extends LitElement {
 		this.userTooltip = props?.userTooltip ?? this.userTooltip;
 		this.keywordTooltip = props?.keywordTooltip ?? this.keywordTooltip;
 		this.lang = props?.lang ?? this.lang;
-
-		const element = this;
-		this.conditions = {
-			get icon() {
-				return true;
-			},
-			get userIcon() {
-				return element.conditions.icon && Boolean(element.userTooltip);
-			},
-			get keywordIcon() {
-				return element.conditions.icon && Boolean(element.keywordTooltip);
-			},
-		};
 	}
 
 	override render() {
@@ -65,11 +46,7 @@ export class BlockedContent extends LitElement {
 
 		const keywordIcon = html`<icon-monkey title="${this.keywordTooltip ?? ''}"></icon-monkey>`;
 
-		const icons = html`
-			<div part="icons">
-				${this.conditions.userIcon ? blockedUserIcon : ''} ${this.conditions.keywordIcon ? keywordIcon : ''}
-			</div>
-		`;
+		const icons = html` <div part="icons">${blockedUserIcon} ${keywordIcon}</div> `;
 
 		let buttonText = '';
 		switch (this.lang) {
@@ -82,7 +59,7 @@ export class BlockedContent extends LitElement {
 		}
 
 		return html`
-			${this.conditions.userIcon || this.conditions.keywordIcon ? icons : ''}
+			${icons}
 			<button part="button" @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button">
 				${buttonText}
 			</button>
