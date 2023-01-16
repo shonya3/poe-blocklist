@@ -36,6 +36,8 @@ const buildQuotes = (
 		const quotationMarks = $.quote.quotationMarks(quote);
 		if (header) hideElement(header);
 		if (quotationMarks) hideElement(quotationMarks);
+		const { padding } = window.getComputedStyle(quote);
+		quote.style.setProperty('padding', '0');
 
 		render(
 			html`<blocked-content
@@ -48,6 +50,7 @@ const buildQuotes = (
 					revealElement(content);
 					if (header) revealElement(header);
 					if (quotationMarks) revealElement(quotationMarks);
+					quote.style.setProperty('padding', padding);
 				}}
 			></blocked-content>`,
 			quote
