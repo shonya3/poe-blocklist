@@ -50,7 +50,9 @@ export class BlockedContent extends LitElement {
 
 		const keywordIcon = html`<icon-monkey title="${this.keywordTooltip ?? ''}"></icon-monkey>`;
 
-		const icons = html` <div part="icons">${blockedUserIcon} ${keywordIcon}</div> `;
+		const icons = html`
+			<div part="icons">${this.userTooltip ? blockedUserIcon : ''} ${this.keywordTooltip ? keywordIcon : ''}</div>
+		`;
 
 		let buttonText = '';
 		switch (this.lang) {
