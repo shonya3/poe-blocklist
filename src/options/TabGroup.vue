@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import { useSlots, ref, provide } from 'vue';
+import { useSlots, ref, provide, computed } from 'vue';
 
 const tabElements = useSlots().default?.()!;
-const tabTitles = ref<string[]>(tabElements.map(el => el.props?.title));
-const selectedTabTitle = ref(tabTitles.value[0]);
-provide('selected-tab-title', selectedTabTitle);
+const tabTitles = ref<string[]>(tabElements.map(el => el.props?.tab));
+
+const tabProps = computed<{ tab: string; title: string }[]>(() =>
+	tabElements.map(el => ({
+		tab: el.props?.tab,
+		title: el.props?.title,
+	}))
+);
+
+const selectedTab = ref(tabTitles.value[0]);
+provide('selected-tab', selectedTab);
 </script>
 
 <template>
@@ -12,10 +20,10 @@ provide('selected-tab-title', selectedTabTitle);
 		<header class="header">
 			<ul class="tab-titles-list">
 				<li
-					:class="{ 'tab-titles-list__item--active': title === selectedTabTitle }"
+					:class="{ 'tab-titles-list__item--active': tab === selectedTab }"
 					class="tab-titles-list__item"
-					@click="selectedTabTitle = title"
-					v-for="(title, index) in tabTitles"
+					@click="selectedTab = tab"
+					v-for="({ title, tab }, index) in tabProps"
 				>
 					{{ title }}
 				</li>
@@ -31,7 +39,6 @@ provide('selected-tab-title', selectedTabTitle);
 .tab-group {
 	max-width: 1200px;
 	font-size: 20px;
-	/* background-color: red; */
 }
 
 .tab-titles-list {

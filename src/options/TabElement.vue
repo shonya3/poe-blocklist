@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 
-defineProps<{ title: string }>();
+defineProps<{ title: string; tab: string }>();
 
-const selectedTitle = inject('selected-tab-title');
+const selectedTab = inject('selected-tab');
 </script>
 
 <template>
-	<div v-show="selectedTitle === title" class="tab">
+	<div v-show="selectedTab === tab" class="tab">
 		<slot></slot>
 	</div>
 </template>

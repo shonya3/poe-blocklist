@@ -61,6 +61,10 @@ form.add-item {
 	font-size: 1.4rem;
 }
 
+.label-block::first-letter {
+	text-transform: capitalize;
+}
+
 .blocked-items {
 	max-width: 80%;
 	min-width: 400px;

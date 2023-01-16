@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { Storage } from '../Storage';
 import { PostStyle, SupportedLang } from '../types';
 import TabElement from './TabElement.vue';
@@ -11,8 +11,10 @@ import { useUsers } from './useUsers';
 import { useKeywords } from './useKeywords';
 import { getBrowserLang } from '../content-scripts/lib';
 import '../content-scripts/components/blocked-content/blocked-content';
+import { translate } from '../translate';
 
-const lang = ref<SupportedLang | null>(null);
+const lang = ref<SupportedLang>(getBrowserLang());
+const t = computed(() => translate(lang.value));
 const postStyle = ref<PostStyle>('normal');
 const withIcons = ref(true);
 const { users, inputUser, addUser, deleteUser } = useUsers();
@@ -49,22 +51,22 @@ watch(
 
 <template>
 	<div class="container">
-		<tab-group class="lists">
-			<tab-element title="users">
+		<tab-group class="lists" :key="t('users')">
+			<tab-element tab="users" :title="t('users')">
 				<block-list
 					@add-item="addUser"
 					@delete-item="deleteUser"
 					:items="users"
-					label-block="Block User"
+					:label-block="t('blockUser')"
 					v-model="inputUser"
 				></block-list>
 			</tab-element>
 
-			<tab-element title="keywords">
+			<tab-element tab="keywords" :title="t('keywords')">
 				<block-list
 					@add-item="addKeyword"
 					@delete-item="deleteKeyword"
-					label-block="Add Keywords"
+					:label-block="t('addKeyword')"
 					:items="keywords"
 					v-model="inputKeyword"
 				></block-list>
@@ -75,7 +77,7 @@ watch(
 			<header>
 				<h2 class="heading-secondary settings-header">
 					<icon-settings></icon-settings>
-					<span>Settings</span>
+					<span>{{ t('settings') }}</span>
 				</h2>
 			</header>
 
@@ -91,7 +93,7 @@ watch(
 					></blocked-content>
 				</div>
 				<div class="post-style">
-					<label for="styleSelect" class="settings-name">post style</label>
+					<label for="styleSelect" class="settings-name">{{ t('postStyle') }}</label>
 					<div style="flex: 1">
 						<post-style-slider
 							@post-style-changed="style => (postStyle = style)"
@@ -100,21 +102,21 @@ watch(
 					</div>
 				</div>
 				<div class="lang">
-					<span class="">language</span>
+					<span class="">{{ t('language') }}</span>
 					<div class="lang-controls">
 						<div>
-							<label for="radio-lang-ru">ru</label>
+							<label for="radio-lang-ru">{{ t('ru') }}</label>
 							<input id="radio-lang-ru" type="radio" value="ru" v-model="lang" />
 						</div>
 
 						<div>
-							<label for="radio-lang-en">en</label>
+							<label for="radio-lang-en">{{ t('en') }}</label>
 							<input id="radio-lang-en" type="radio" value="en" v-model="lang" />
 						</div>
 					</div>
 				</div>
 				<div class="with-icons">
-					<label for="with-icons-control">with icons</label>
+					<label for="with-icons-control">{{ t('withIcons') }}</label>
 					<input type="checkbox" name="with-icons-control" id="with-icons-control" v-model="withIcons" />
 				</div>
 			</main>
@@ -203,6 +205,7 @@ select {
 	align-items: center;
 	gap: 0.4rem;
 	margin-top: 0.8rem;
+	text-transform: capitalize;
 }
 
 .lang {
