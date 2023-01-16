@@ -18,7 +18,8 @@ const buildQuotes = (
 	quotes: HTMLElement[],
 	tooltipMap: TooltipMap,
 	postStyle: PostStyle,
-	lang: SupportedLang
+	lang: SupportedLang,
+	withIcons: boolean
 ): void => {
 	for (const quote of quotes) {
 		const content = $.quote.content(quote);
@@ -44,6 +45,7 @@ const buildQuotes = (
 				lang="${lang}"
 				post-style="${postStyle}"
 				kind="quote"
+				?with-icons=${withIcons}
 				user-tooltip="${userTooltip ?? nothing}"
 				keyword-tooltip="${keywordTooltip ?? nothing}"
 				@button-clicked=${() => {

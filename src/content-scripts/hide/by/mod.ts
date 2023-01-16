@@ -5,7 +5,7 @@ import { Quotes } from './Quotes';
 
 export const ELEMENT_ID_ATTR = 'data-blocklist-id';
 
-export const by = (searchData: SearchData, postStyle: PostStyle, lang: SupportedLang): void => {
+export const by = (searchData: SearchData, postStyle: PostStyle, lang: SupportedLang, withIcons: boolean): void => {
 	const { posts, quotes } = $;
 
 	addIdAttrToElements(...posts, ...quotes);
@@ -13,8 +13,8 @@ export const by = (searchData: SearchData, postStyle: PostStyle, lang: Supported
 	const postsTooltips = createTooltips(posts, Posts.tooltippers, searchData);
 	const quotesTooltips = createTooltips(quotes, Quotes.tooltippers, searchData);
 
-	Posts.buildPosts(posts, postsTooltips, postStyle, lang);
-	Quotes.buildQuotes(quotes, quotesTooltips, postStyle, lang);
+	Posts.buildPosts(posts, postsTooltips, postStyle, lang, withIcons);
+	Quotes.buildQuotes(quotes, quotesTooltips, postStyle, lang, withIcons);
 };
 
 const createTooltips = (

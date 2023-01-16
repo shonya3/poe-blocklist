@@ -14,7 +14,13 @@ import { getElementDirectText, hideElement, revealElement } from '../mod';
 import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
 
-const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: PostStyle, lang: SupportedLang) => {
+const buildPosts = (
+	posts: HTMLElement[],
+	tooltipMap: TooltipMap,
+	postStyle: PostStyle,
+	lang: SupportedLang,
+	withIcons: boolean
+) => {
 	for (const post of posts) {
 		const id = post.getAttribute(ELEMENT_ID_ATTR);
 		if (!id) continue;
@@ -33,6 +39,7 @@ const buildPosts = (posts: HTMLElement[], tooltipMap: TooltipMap, postStyle: Pos
 						lang="${lang}"
 						post-style="${postStyle}"
 						kind="post"
+						?with-icons=${withIcons}
 						user-tooltip="${userTooltip ?? nothing}"
 						keyword-tooltip="${keywordTooltip ?? nothing}"
 						@button-clicked=${() => {

@@ -23,6 +23,7 @@ export interface StorageItems {
 	keywords: string[];
 	postStyle: PostStyle;
 	lang: SupportedLang;
+	withIcons: boolean;
 }
 
 export type Option<T> = T | null;

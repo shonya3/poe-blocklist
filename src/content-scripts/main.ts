@@ -6,15 +6,16 @@ import { getBrowserLang } from './lib';
 
 async function main(): Promise<void> {
 	try {
-		const [users, keywords, postStyle, lang] = await Promise.all([
+		const [users, keywords, postStyle, lang, withIcons] = await Promise.all([
 			Storage.getOrDefault('users', []),
 			Storage.getOrDefault('keywords', []),
 			Storage.getOrDefault('postStyle', 'normal'),
 			Storage.getOrDefault('lang', getBrowserLang()),
+			Storage.getOrDefault('withIcons', true),
 		]);
 
 		Update.posts.addBlockUserIcon();
-		Hide.by({ keywords, users }, postStyle, lang);
+		Hide.by({ keywords, users }, postStyle, lang, withIcons);
 	} catch (err) {
 		console.log(err);
 	}
