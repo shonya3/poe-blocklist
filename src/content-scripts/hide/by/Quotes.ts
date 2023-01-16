@@ -65,18 +65,20 @@ const tQuoteByUsers = (quote: HTMLElement, users: SearchData['users']): Option<T
 	return username;
 };
 
-const tQuotesByKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Option<Tooltip> => {
+const tQuoteByKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Option<Tooltip> => {
 	const content = $.quote.content(quote);
 	if (!content) return null;
 
 	const text = getElementDirectText(content);
 
-	return keywords.filter(word => text.includes(word)).join(', ');
+	const foundKeywords = keywords.filter(word => text.includes(word));
+	if (!foundKeywords.length) return null;
+	return foundKeywords.join(', ');
 };
 
 const tooltippers = {
 	users: tQuoteByUsers,
-	keywords: tQuotesByKeywords,
+	keywords: tQuoteByKeywords,
 } satisfies Record<BanCategory, Tooltipper>;
 
 export const Quotes = {
