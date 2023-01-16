@@ -28,7 +28,6 @@ export class BlockedContent extends LitElement {
 	lang: 'ru' | 'en' = 'en';
 
 	conditions: {
-		text: boolean;
 		icon: boolean;
 		userIcon: boolean;
 		keywordIcon: boolean;
@@ -49,9 +48,6 @@ export class BlockedContent extends LitElement {
 
 		const element = this;
 		this.conditions = {
-			get text() {
-				return element.postStyle === 'full' && element.kind !== 'quote';
-			},
 			get icon() {
 				return true;
 			},
@@ -87,7 +83,6 @@ export class BlockedContent extends LitElement {
 
 		return html`
 			${this.conditions.userIcon || this.conditions.keywordIcon ? icons : ''}
-			<!-- ${this.conditions.text ? html`<p class="text">Blocked user</p>` : ''} -->
 			<button part="button" @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button">
 				${buttonText}
 			</button>

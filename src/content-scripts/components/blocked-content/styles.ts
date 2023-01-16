@@ -19,13 +19,6 @@ export const styles = css`
 		gap: 1.2rem;
 	}
 
-	.text {
-		margin-bottom: 0px;
-		color: var(--color);
-		font-size: 1.6rem;
-		margin-top: 0;
-	}
-
 	[part='button'] {
 		padding: 0.4rem 0.8rem;
 		color: var(--button-color-text);
