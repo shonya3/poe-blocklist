@@ -173,12 +173,6 @@ watch(
 	padding: 0.4rem;
 }
 
-select {
-	border-radius: 0.2rem;
-	padding: 0.3rem 0.6rem;
-	font-size: large;
-}
-
 .post-style {
 	display: flex;
 	gap: 20px;
