@@ -94,9 +94,10 @@ watch(
 
 			<div class="settings-list">
 				<div class="post-style">
-					<label for="styleSelect" class="settings-name">{{ t('postStyle') }}</label>
+					<label for="post-style-control" class="settings-name">{{ t('postStyle') }}</label>
 					<div style="flex: 1">
 						<post-style-slider
+							id="post-style-control"
 							@post-style-changed="style => (postStyle = style)"
 							:post-style="postStyle"
 						></post-style-slider>
@@ -218,9 +219,13 @@ blocked-content {
 	gap: 1.2rem;
 }
 
-.lang-controls > div {
+.lang-controls > * {
 	display: flex;
 	gap: 0.25rem;
 	align-items: baseline;
+}
+
+.lang-controls label {
+	cursor: pointer;
 }
 </style>

@@ -19,7 +19,16 @@ const postStyleSlider = computed(() => options.findIndex(option => option === pr
 </script>
 
 <template>
-	<input @input="onInput" type="range" min="0" max="4" step="1" list="post-style-datalist" :value="postStyleSlider" />
+	<input
+		v-bind="$attrs"
+		@input="onInput"
+		type="range"
+		min="0"
+		max="4"
+		step="1"
+		list="post-style-datalist"
+		:value="postStyleSlider"
+	/>
 	<datalist id="post-style-datalist" style="--list-length: 5">
 		<option v-for="option in options">{{ option }}</option>
 	</datalist>
