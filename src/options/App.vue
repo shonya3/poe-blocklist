@@ -81,17 +81,18 @@ watch(
 				</h2>
 			</header>
 
-			<main class="settings-main">
-				<div class="element-presentation">
-					<blocked-content
-						kind="post"
-						user-tooltip="Chris"
-						keyword-tooltip="harvest"
-						:post-style="postStyle"
-						:lang="lang"
-						:withIcons="withIcons"
-					></blocked-content>
-				</div>
+			<div class="element-presentation">
+				<blocked-content
+					kind="post"
+					user-tooltip="Chris"
+					keyword-tooltip="harvest"
+					:post-style="postStyle"
+					:lang="lang"
+					:withIcons="withIcons"
+				></blocked-content>
+			</div>
+
+			<div class="settings-list">
 				<div class="post-style">
 					<label for="styleSelect" class="settings-name">{{ t('postStyle') }}</label>
 					<div style="flex: 1">
@@ -119,13 +120,19 @@ watch(
 					<label for="with-icons-control">{{ t('withIcons') }}</label>
 					<input type="checkbox" name="with-icons-control" id="with-icons-control" v-model="withIcons" />
 				</div>
-			</main>
+			</div>
 		</div>
 	</div>
 </template>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
+
+blocked-content {
+	font-family: Verdana;
+	font-size: 13px;
+	transform: translateX(-10px);
+}
 
 * {
 	box-sizing: border-box;
@@ -162,36 +169,19 @@ watch(
 	}
 }
 
+/* === Settings === */
+
 .settings {
-	padding: 0.5rem 1rem;
-}
-
-.options-btn {
-	border: none;
-	background: none;
-	cursor: pointer;
-	padding: 0.4rem;
-}
-
-.post-style {
 	display: flex;
-	gap: 20px;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 0.5rem 1rem;
+	font-size: 1.2rem;
 }
 
 .heading-secondary {
 	font-weight: 500;
 	font-size: 1.4rem;
-}
-
-.settings-main {
-	margin-top: 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.4rem;
-}
-
-.settings-name {
-	font-size: 1.2rem;
 }
 
 .settings-header {
@@ -202,10 +192,25 @@ watch(
 	text-transform: capitalize;
 }
 
-.lang {
-	font-size: 1.2rem;
+.element-presentation {
 	display: flex;
-	gap: 1rem;
+	align-items: center;
+	justify-content: center;
+	height: 135px;
+	background-image: linear-gradient(rgb(24, 24, 24), rgb(26, 27, 27) 10%, rgb(26, 27, 27) 80%, rgb(24, 24, 24));
+	border-radius: 1rem;
+}
+
+.settings-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.settings-list > * {
+	display: grid;
+	grid-template-columns: 8rem 1fr;
+	justify-content: start;
 }
 
 .lang-controls {
@@ -215,29 +220,7 @@ watch(
 
 .lang-controls > div {
 	display: flex;
-	gap: 0.2rem;
+	gap: 0.25rem;
 	align-items: baseline;
-}
-
-.element-presentation {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 135px;
-	background-color: red;
-	background-image: linear-gradient(rgb(24, 24, 24), rgb(26, 27, 27) 10%, rgb(26, 27, 27) 80%, rgb(24, 24, 24));
-	border-radius: 1rem;
-}
-
-blocked-content {
-	font-family: Verdana;
-	font-size: 13px;
-	transform: translateX(-10px);
-}
-
-.with-icons {
-	font-size: 1.2rem;
-	display: flex;
-	gap: 0.8rem;
 }
 </style>
