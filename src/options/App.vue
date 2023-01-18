@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from 'vue';
-import { Storage } from '../Storage';
-import { PostStyle, SupportedLang } from '../types';
+import { computed } from 'vue';
+import '../content-scripts/components/blocked-content/blocked-content';
 import TabElement from './TabElement.vue';
 import TabGroup from './TabGroup.vue';
 import IconSettings from './icons/IconSettings.vue';
@@ -9,44 +8,13 @@ import BlockList from './BlockList.vue';
 import PostStyleSlider from './PostStyleSlider.vue';
 import { useUsers } from './useUsers';
 import { useKeywords } from './useKeywords';
-import { getBrowserLang } from '../content-scripts/lib';
-import '../content-scripts/components/blocked-content/blocked-content';
 import { translate } from '../translate';
+import { useSettings } from './useSettings';
 
-const lang = ref<SupportedLang>(getBrowserLang());
-const t = computed(() => translate(lang.value));
-const postStyle = ref<PostStyle>('normal');
-const withIcons = ref(true);
 const { users, inputUser, addUser, deleteUser } = useUsers();
 const { keywords, inputKeyword, addKeyword, deleteKeyword } = useKeywords();
-
-watch(
-	() => postStyle.value,
-	val => Storage.set('postStyle', val)
-);
-
-onMounted(async () => {
-	try {
-		postStyle.value = await Storage.getOrDefault('postStyle', 'normal');
-		lang.value = await Storage.getOrDefault('lang', getBrowserLang());
-		withIcons.value = await Storage.getOrDefault('withIcons', true);
-	} catch (err) {
-		console.log(err);
-	}
-});
-
-watch(
-	() => lang.value,
-	val => {
-		if (val !== 'en' && val !== 'ru') return;
-		Storage.set('lang', val);
-	}
-);
-
-watch(
-	() => withIcons.value,
-	val => Storage.set('withIcons', val)
-);
+const { postStyle, lang, withIcons } = useSettings();
+const t = computed(() => translate(lang.value));
 </script>
 
 <template>
