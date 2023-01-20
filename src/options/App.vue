@@ -87,7 +87,13 @@ const t = computed(() => translate(lang.value));
 				</div>
 				<div class="with-icons">
 					<label for="with-icons-control">{{ t('withIcons') }}</label>
-					<input type="checkbox" name="with-icons-control" id="with-icons-control" v-model="withIcons" />
+					<input
+						class="with-icons-control"
+						type="checkbox"
+						name="with-icons-control"
+						id="with-icons-control"
+						v-model="withIcons"
+					/>
 				</div>
 			</div>
 		</div>
@@ -195,5 +201,10 @@ blocked-content {
 
 .lang-controls label {
 	cursor: pointer;
+}
+
+.with-icons-control {
+	justify-self: start;
+	width: 1.2rem;
 }
 </style>
