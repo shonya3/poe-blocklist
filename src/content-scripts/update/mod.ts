@@ -8,18 +8,17 @@ import '../components/icons/icon-unblock-user';
 
 const ICON_CLASS = 'blocklist-ext-user-icon';
 
-const addBlockUserIcon = async (post: Element, lang: SupportedLang) => {
-	const t = translate(lang);
-	const iconBlocked = String.raw`
+const iconBlocked = String.raw`
     <icon-blocked-user
-        title="${t('hideMessages')}"
         class="${ICON_CLASS}">
     </icon-blocked-user>`;
-	const iconUnblock = String.raw`
+const iconUnblock = String.raw`
     <icon-unblock-user
-        title="${t('unblockUser')}"
         class="${ICON_CLASS}">
     </icon-unblock-user>`;
+
+const addBlockUserIcon = async (post: Element, lang: SupportedLang) => {
+	const t = translate(lang);
 
 	const buttons = $.post.buttons(post);
 	const username = $.post.username(post);
@@ -31,8 +30,9 @@ const addBlockUserIcon = async (post: Element, lang: SupportedLang) => {
 	const svgHtml = isUserBlocked ? iconUnblock : iconBlocked;
 	buttons.insertAdjacentHTML('beforeend', svgHtml);
 
-	const blockedUserIcon = buttons.querySelector(`.${ICON_CLASS}`) as SVGElement;
-	blockedUserIcon.addEventListener('click', async () => {
+	const icon = buttons.querySelector(`.${ICON_CLASS}`) as SVGElement;
+	icon.setAttribute('title', `${isUserBlocked ? t('unblockUser') : t('hideMessages')}`);
+	icon.addEventListener('click', async () => {
 		isUserBlocked ? await Storage.removeUser(username) : await Storage.addUser(username);
 		location.reload();
 	});
