@@ -41,6 +41,14 @@ const dictionary = {
 		en: 'english',
 		ru: 'английский',
 	},
+	hideMessages: {
+		en: 'Hide messages from this user',
+		ru: 'Скрыть сообщения этого пользователя',
+	},
+	unblockUser: {
+		en: 'Unblock this user',
+		ru: 'Разблокировать этого пользователя',
+	},
 } as const;
 
 export const translate = <Lang extends SupportedLang>(lang: Lang) => {

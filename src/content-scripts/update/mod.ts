@@ -1,23 +1,26 @@
 import { $ } from '../$';
 import { Storage } from '../../Storage';
+import { translate } from '../../translate';
+import { SupportedLang } from '../../types';
 
 import '../components/icons/icon-blocked-user';
 import '../components/icons/icon-unblock-user';
 
 const ICON_CLASS = 'blocklist-ext-user-icon';
 
-const iconBlocked = String.raw`
+const addBlockUserIcon = async (post: Element, lang: SupportedLang) => {
+	const t = translate(lang);
+	const iconBlocked = String.raw`
     <icon-blocked-user
-        title="Hide messages from this user"
+        title="${t('hideMessages')}"
         class="${ICON_CLASS}">
     </icon-blocked-user>`;
-const iconUnblock = String.raw`
+	const iconUnblock = String.raw`
     <icon-unblock-user
-        title="Unblock this user"
+        title="${t('unblockUser')}"
         class="${ICON_CLASS}">
     </icon-unblock-user>`;
 
-const addBlockUserIcon = async (post: Element) => {
 	const buttons = $.post.buttons(post);
 	const username = $.post.username(post);
 	if (!buttons || !username) return;
@@ -36,7 +39,7 @@ const addBlockUserIcon = async (post: Element) => {
 };
 
 const posts = {
-	addBlockUserIcon: () => $.posts.forEach(post => addBlockUserIcon(post)),
+	addBlockUserIcon: (lang: SupportedLang) => $.posts.forEach(post => addBlockUserIcon(post, lang)),
 };
 
 export const Update = {

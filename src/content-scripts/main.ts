@@ -14,7 +14,7 @@ async function main(): Promise<void> {
 			Storage.getOrDefault('withIcons', true),
 		]);
 
-		Update.posts.addBlockUserIcon();
+		Update.posts.addBlockUserIcon(lang);
 		Hide.by({ keywords, users }, postStyle, lang, withIcons);
 	} catch (err) {
 		console.log(err);
