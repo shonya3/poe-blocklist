@@ -17,12 +17,14 @@ defineEmits<{
 <template>
 	<div class="blocklist">
 		<form class="add-item" @submit.prevent="$emit('add-item', modelValue)">
-			<label class="label-block" for="user">{{ labelBlock }}</label>
-			<input
-				type="text"
-				:value="modelValue"
-				@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-			/>
+			<label class="label-block"
+				>{{ labelBlock }}
+				<input
+					type="text"
+					:value="modelValue"
+					@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+				/>
+			</label>
 			<button class="options-btn">
 				<icon-plus class="icon icon-plus"></icon-plus>
 			</button>
@@ -126,6 +128,7 @@ form.add-item {
 }
 
 input {
+	margin-left: 0.8rem;
 	border: 1px solid;
 	border-radius: 0.2rem;
 	/* height: 1.5rem; */
