@@ -20,6 +20,7 @@ defineEmits<{
 			<label class="label-block"
 				>{{ labelBlock }}
 				<input
+					required
 					type="text"
 					:value="modelValue"
 					@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
