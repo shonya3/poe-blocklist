@@ -31,6 +31,10 @@ export const styles = css`
 		transition: all 0.3s ease;
 	}
 
+	[part='button']::first-letter {
+		text-transform: capitalize;
+	}
+
 	:host [part='button']:hover {
 		--button-color-text: var(--color-hover);
 	}
