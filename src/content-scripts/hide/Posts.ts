@@ -10,7 +10,7 @@ const build = (
 	postStyle: PostStyle,
 	lang: SupportedLang,
 	withIcons: boolean
-) => {
+): void => {
 	for (const post of posts) {
 		const userTooltip = byUsers(post, users);
 		const keywordTooltip = byKeywords(post, keywords);

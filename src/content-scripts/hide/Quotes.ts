@@ -10,7 +10,7 @@ export const build = (
 	postStyle: PostStyle,
 	lang: SupportedLang,
 	withIcons: boolean
-) => {
+): void => {
 	for (const quote of quotes) {
 		const content = $.quote.content(quote);
 		if (!content) continue;
