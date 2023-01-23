@@ -1,34 +1,22 @@
 import { html, nothing, render } from 'lit-html';
 import { $ } from '../../$';
-import {
-	SearchData,
-	Tooltipper,
-	PostStyle,
-	Tooltip,
-	TooltipMap,
-	BanCategory,
-	Option,
-	SupportedLang,
-} from '../../../types';
+import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../../types';
 import { getElementDirectText, hideElement, revealElement } from '../mod';
-import { ELEMENT_ID_ATTR } from './mod';
 import '../../components/blocked-content/blocked-content';
 
-const buildQuotes = (
+export const build = (
 	quotes: HTMLElement[],
-	tooltipMap: TooltipMap,
+	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
 	lang: SupportedLang,
 	withIcons: boolean
-): void => {
+) => {
 	for (const quote of quotes) {
 		const content = $.quote.content(quote);
-		const id = quote.getAttribute(ELEMENT_ID_ATTR);
-		if (!content || !id) continue;
+		if (!content) continue;
 
-		const tooltipsByCategory = tooltipMap.get(id);
-		const userTooltip = tooltipsByCategory?.users;
-		const keywordTooltip = tooltipsByCategory?.keywords;
+		const userTooltip = byUsers(quote, users);
+		const keywordTooltip = byKeywords(quote, keywords);
 
 		if (!userTooltip && !keywordTooltip) continue;
 
@@ -60,14 +48,14 @@ const buildQuotes = (
 	}
 };
 
-const tQuoteByUsers = (quote: HTMLElement, users: SearchData['users']): Option<Tooltip> => {
+const byUsers = (quote: HTMLElement, users: SearchData['users']): Option<Tooltip> => {
 	const username = $.quote.username(quote);
 	if (!username || !users.includes(username)) return null;
 
 	return username;
 };
 
-const tQuoteByKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Option<Tooltip> => {
+const byKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Option<Tooltip> => {
 	const content = $.quote.content(quote);
 	if (!content) return null;
 
@@ -78,12 +66,6 @@ const tQuoteByKeywords = (quote: HTMLElement, keywords: SearchData['keywords']):
 	return foundKeywords.join(', ');
 };
 
-const tooltippers = {
-	users: tQuoteByUsers,
-	keywords: tQuoteByKeywords,
-} satisfies Record<BanCategory, Tooltipper>;
-
 export const Quotes = {
-	buildQuotes,
-	tooltippers,
+	build,
 };
