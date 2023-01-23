@@ -4,7 +4,7 @@ import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../typ
 import { getElementDirectText, hideElement, revealElement } from './mod';
 import '../components/blocked-content/blocked-content';
 
-export const build = (
+const build = (
 	quotes: HTMLElement[],
 	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
