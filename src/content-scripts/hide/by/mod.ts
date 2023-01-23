@@ -30,9 +30,9 @@ const createTooltips = (
 		tooltips.set(id, elementTooltips);
 
 		for (const [category, tooltipper] of Object.entries(tooltippers) as [BanCategory, Tooltipper][]) {
-			const maybeTooltip = tooltipper(element, searchData[category]);
-			if (maybeTooltip) {
-				elementTooltips[category] = maybeTooltip;
+			const tooltip = tooltipper(element, searchData[category]);
+			if (tooltip) {
+				elementTooltips[category] = tooltip;
 			}
 		}
 	}
