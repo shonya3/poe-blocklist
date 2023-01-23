@@ -1,4 +1,4 @@
-import { html, render, nothing } from 'lit-html';
+import { html, render, nothing } from 'lit';
 import { $ } from '../$';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText, hideElement, revealElement } from './mod';

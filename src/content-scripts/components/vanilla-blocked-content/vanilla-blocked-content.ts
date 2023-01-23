@@ -1,7 +1,7 @@
 import { BlockedContentProps, PostOrQuote, PostStyle } from '../../../types';
 export { IconBlockedUser } from '../icons/icon-blocked-user';
 export { IconMonkey } from '../icons/icon-monkey';
-import { html, render } from 'lit-html';
+import { html, render } from 'lit';
 
 export const css = new CSSStyleSheet();
 import styles from './styles.css?inline';
