@@ -1,5 +1,5 @@
 import { ref, watch, onMounted } from 'vue';
-import { getBrowserLang } from '../content-scripts/lib';
+import { getBrowserLang } from '../lib';
 import { PostStyle, SupportedLang } from '../types';
 import { Storage } from '../Storage';
 

@@ -2,7 +2,7 @@ import './index.css';
 import { Hide } from './hide/mod';
 import { Storage } from '../Storage';
 import { Update } from './update/mod';
-import { getBrowserLang } from './lib';
+import { getBrowserLang } from '../lib';
 
 async function main(): Promise<void> {
 	try {

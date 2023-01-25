@@ -1,4 +1,4 @@
-import { SupportedLang } from '../types';
+import { SupportedLang } from './types';
 
 export const getBrowserLang = (): SupportedLang => {
 	let lang = navigator.language.split('-')[0];
