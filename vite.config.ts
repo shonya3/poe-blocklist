@@ -11,7 +11,7 @@ export default defineConfig({
 				compilerOptions: {
 					isCustomElement: (tag: string) => {
 						const tags = ['blocked-content'];
-						return tags.some(t => tag === t);
+						return tags.includes(tag);
 					},
 				},
 			},
