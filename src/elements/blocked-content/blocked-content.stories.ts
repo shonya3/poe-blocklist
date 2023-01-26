@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './blocked-content';
 import { Meta } from '@storybook/web-components';
 import { BlockedContent } from './blocked-content';
-import { BlockedContentProps } from '../../../types';
+import { BlockedContentProps } from '../../types';
 
 export default {
 	title: 'Elements/blocked-content',

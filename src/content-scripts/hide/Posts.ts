@@ -2,7 +2,7 @@ import { html, render, nothing } from 'lit';
 import { $ } from '../$';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText, hideElement, revealElement } from './mod';
-import '../components/blocked-content/blocked-content';
+import '../../elements/blocked-content/blocked-content';
 
 const build = (
 	posts: HTMLElement[],

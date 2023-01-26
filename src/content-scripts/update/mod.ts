@@ -3,8 +3,8 @@ import { Storage } from '../../Storage';
 import { translate } from '../../translate';
 import { SupportedLang } from '../../types';
 
-import '../components/icons/icon-blocked-user';
-import '../components/icons/icon-unblock-user';
+import '../../elements/icons/icon-blocked-user';
+import '../../elements/icons/icon-unblock-user';
 
 const ICON_CLASS = 'blocklist-ext-user-icon';
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import '../content-scripts/components/blocked-content/blocked-content';
+import '../elements/blocked-content/blocked-content';
 import '../elements/tabs/mod';
 import IconSettings from './icons/IconSettings.vue';
 import BlockList from './BlockList.vue';

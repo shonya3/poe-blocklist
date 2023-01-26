@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { BlockedContentProps, PostOrQuote, PostStyle } from '../../../types';
+import { BlockedContentProps, PostOrQuote, PostStyle } from '../../types';
 import { styles } from './styles';
 
 import '../icons/icon-monkey';
