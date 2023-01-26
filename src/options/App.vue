@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import '../content-scripts/components/blocked-content/blocked-content';
-import TabElement from './TabElement.vue';
-import TabGroup from './TabGroup.vue';
+import '../elements/tabs/mod';
 import IconSettings from './icons/IconSettings.vue';
 import BlockList from './BlockList.vue';
 import PostStyleSlider from './PostStyleSlider.vue';
@@ -19,8 +18,11 @@ const t = computed(() => translate(lang.value));
 
 <template>
 	<div class="container">
-		<tab-group class="lists" :key="t('users')">
-			<tab-element tab="users" :title="t('users')">
+		<my-tab-group>
+			<my-tab slot="nav" panel="users" active>{{ t('users') }}</my-tab>
+			<my-tab slot="nav" panel="keywords">{{ t('keywords') }}</my-tab>
+
+			<my-tab-panel name="users" active>
 				<block-list
 					@add-item="addUser"
 					@delete-item="deleteUser"
@@ -28,9 +30,8 @@ const t = computed(() => translate(lang.value));
 					:label-block="t('blockUser')"
 					v-model="inputUser"
 				></block-list>
-			</tab-element>
-
-			<tab-element tab="keywords" :title="t('keywords')">
+			</my-tab-panel>
+			<my-tab-panel name="keywords">
 				<block-list
 					@add-item="addKeyword"
 					@delete-item="deleteKeyword"
@@ -38,8 +39,8 @@ const t = computed(() => translate(lang.value));
 					:items="keywords"
 					v-model="inputKeyword"
 				></block-list>
-			</tab-element>
-		</tab-group>
+			</my-tab-panel>
+		</my-tab-group>
 
 		<div class="settings">
 			<header>
@@ -142,6 +143,10 @@ blocked-content {
 	.lists {
 		order: 2;
 	}
+}
+
+my-tab {
+	padding: 1rem 2rem;
 }
 
 /* === Settings === */

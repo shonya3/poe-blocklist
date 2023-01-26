@@ -10,7 +10,7 @@ export default defineConfig({
 			template: {
 				compilerOptions: {
 					isCustomElement: (tag: string) => {
-						const tags = ['blocked-content'];
+						const tags = ['blocked-content', 'my-tab', 'my-tab-group', 'my-tab-panel'];
 						return tags.includes(tag);
 					},
 				},
