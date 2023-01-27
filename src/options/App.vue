@@ -19,10 +19,10 @@ const t = computed(() => translate(lang.value));
 <template>
 	<div class="container">
 		<my-tab-group>
-			<my-tab slot="nav" panel="users" active>{{ t('users') }}</my-tab>
+			<my-tab slot="nav" panel="users">{{ t('users') }}</my-tab>
 			<my-tab slot="nav" panel="keywords">{{ t('keywords') }}</my-tab>
 
-			<my-tab-panel name="users" active>
+			<my-tab-panel name="users">
 				<block-list
 					@add-item="addUser"
 					@delete-item="deleteUser"

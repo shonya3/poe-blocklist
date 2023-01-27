@@ -6,3 +6,5 @@ export const getBrowserLang = (): SupportedLang => {
 	if (lang !== 'ru' && lang !== 'en') throw new Error('Not supported language');
 	return lang;
 };
+
+export const nextTick = (): Promise<void> => new Promise(r => setTimeout(r));
