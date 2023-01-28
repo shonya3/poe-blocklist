@@ -40,18 +40,16 @@ export class MyTabGroup extends HTMLElement {
 		if (!(slot instanceof HTMLSlotElement)) return null;
 		return Array.from(slot.assignedElements()).filter(e => e instanceof MyTabPanel) as MyTabPanel[];
 	}
-	get activeTab(): string {
+	get activeTabName(): string {
 		return this.getAttribute('active-tab') ?? '';
 	}
-	set activeTab(name: string) {
+	set activeTabName(name: string) {
 		this.setAttribute('active-tab', name);
 	}
 	static observedAttributes = ['active-tab'];
 	attributeChangedCallback(name: 'active-tab', oldVal: string, val: string) {
 		switch (name) {
 			case 'active-tab': {
-				console.log('attributeChanged', name, val);
-
 				if (!oldVal) {
 					nextTick().then(() => {
 						this.setActiveTab(val);
@@ -68,15 +66,60 @@ export class MyTabGroup extends HTMLElement {
 		this.attachShadow({ mode: 'open' }).innerHTML = markup;
 		this.addEventListener('click', e => {
 			if (e.target instanceof MyTab) {
-				this.activeTab = e.target.panel;
+				this.activeTabName = e.target.panel;
 			}
 		});
 
-		if (!this.activeTab) {
+		this.addEventListener('keydown', e => {
+			if (!(e.target instanceof MyTab)) return;
+			const { key } = e;
+			if (key === 'ArrowLeft') this.toLeft();
+			if (key === 'ArrowRight') this.toRight();
+		});
+
+		if (!this.activeTabName) {
 			if (this.tabs) {
-				this.activeTab = this.tabs[0].panel;
+				this.activeTabName = this.tabs[0].panel;
 			}
 		}
+	}
+
+	#switchTab(currentPanelName: string, direction: 'left' | 'right'): void {
+		const tabs = this.tabs;
+		if (!tabs) {
+			console.warn('no tabs to switch');
+			return;
+		}
+
+		const currentTabIndex = tabs.findIndex(tab => tab.panel === currentPanelName);
+		if (currentTabIndex === -1) return;
+
+		const minIndex = 0;
+		const maxIndex = tabs.length - 1;
+
+		let newIndex;
+		switch (direction) {
+			case 'left':
+				newIndex = currentTabIndex === minIndex ? maxIndex : currentTabIndex - 1;
+				break;
+			case 'right':
+				newIndex = currentTabIndex === maxIndex ? minIndex : currentTabIndex + 1;
+				break;
+			default:
+				throw new Error('invalid case');
+		}
+
+		const newTab = tabs[newIndex];
+		newTab.focus();
+		this.activeTabName = newTab.panel;
+	}
+
+	toRight() {
+		if (this.activeTabName) this.#switchTab(this.activeTabName, 'right');
+	}
+
+	toLeft() {
+		if (this.activeTabName) this.#switchTab(this.activeTabName, 'left');
 	}
 
 	#getTab(panel: string): Option<MyTab> {

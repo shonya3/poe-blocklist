@@ -9,8 +9,8 @@ export default {
 export const Default = {
 	render: () =>
 		html`<my-tab-group>
-			<my-tab slot="nav" panel="users">General</my-tab>
-			<my-tab slot="nav" panel="keywords">Custom</my-tab>
+			<my-tab slot="nav" panel="users">users</my-tab>
+			<my-tab slot="nav" panel="keywords">keywords</my-tab>
 
 			<my-tab-panel name="users">List of users</my-tab-panel>
 			<my-tab-panel name="keywords">List of keywords</my-tab-panel>
@@ -21,8 +21,8 @@ export const ActiveTab = {
 	render: () =>
 		html`
 			<my-tab-group active-tab="keywords">
-				<my-tab slot="nav" panel="users">General</my-tab>
-				<my-tab slot="nav" panel="keywords">Custom</my-tab>
+				<my-tab slot="nav" panel="users">users</my-tab>
+				<my-tab slot="nav" panel="keywords">keywords</my-tab>
 
 				<my-tab-panel name="users">List of users</my-tab-panel>
 				<my-tab-panel name="keywords">List of keywords</my-tab-panel>

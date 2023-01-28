@@ -14,6 +14,10 @@ export class MyTab extends HTMLElement {
 		this.setAttribute('panel', val);
 	}
 
+	focus() {
+		this.shadowRoot?.querySelector('button')?.focus();
+	}
+
 	static template = String.raw`
             <style>
                 button{
