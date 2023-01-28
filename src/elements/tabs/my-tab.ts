@@ -36,7 +36,7 @@ export class MyTab extends HTMLElement {
                     color: #fff;
                 }
             </style>
-            <button>
+            <button part="button">
                 <slot></slot>
             </button>
         `;

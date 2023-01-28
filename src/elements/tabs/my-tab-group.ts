@@ -72,9 +72,9 @@ export class MyTabGroup extends HTMLElement {
 
 		this.addEventListener('keydown', e => {
 			if (!(e.target instanceof MyTab)) return;
-			const { key } = e;
-			if (key === 'ArrowLeft') this.toLeft();
-			if (key === 'ArrowRight') this.toRight();
+			const { code } = e;
+			if (code === 'ArrowLeft' || code === 'KeyA') this.toLeft();
+			if (code === 'ArrowRight' || code === 'KeyD') this.toRight();
 		});
 
 		if (!this.activeTabName) {
