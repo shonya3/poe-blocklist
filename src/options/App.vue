@@ -145,10 +145,6 @@ blocked-content {
 	}
 }
 
-my-tab {
-	padding: 1rem 2rem;
-}
-
 /* === Settings === */
 
 .settings {
