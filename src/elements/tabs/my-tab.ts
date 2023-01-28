@@ -16,21 +16,25 @@ export class MyTab extends HTMLElement {
 
 	static template = String.raw`
             <style>
-                :host{
+                button{
                     background-color: #eee;
 					padding: 1rem 2rem;
 					border-radius: 0.4rem;
 					cursor: pointer;
 					transition: 0.2s ease-in;
 					transition-property: background-color, color, opacity, filter;
+                    border: none;
+                    font: inherit;
                 }
 
-                :host([active]){
+                :host([active]) button{
                     background-color: #3b82f6;
                     color: #fff;
                 }
             </style>
-            <slot></slot>
+            <button>
+                <slot></slot>
+            </button>
         `;
 	connectedCallback() {
 		this.attachShadow({ mode: 'open' }).innerHTML = MyTab.template;
