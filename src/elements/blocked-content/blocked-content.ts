@@ -65,7 +65,7 @@ export class BlockedContent extends LitElement {
 		}
 
 		return html`
-			${this.withIcons ? icons : ''}
+			${this.withIcons && this.tooltip ? icons : ''}
 			<button part="button" @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button">
 				${buttonText}
 			</button>
