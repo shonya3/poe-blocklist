@@ -12,16 +12,11 @@ const css = new CSSStyleSheet();
 css.replaceSync(styles);
 
 export class VanillaContent extends HTMLElement {
-	constructor(props?: BlockedContentProps) {
+	constructor(props?: Partial<BlockedContentProps>) {
 		super();
 
 		if (props) {
-			this.kind = props?.kind;
-			this.postStyle = props?.postStyle;
-			this.userTooltip = props?.userTooltip ?? this.userTooltip;
-			this.keywordTooltip = props?.keywordTooltip ?? this.keywordTooltip;
-			this.lang = props?.lang ?? this.lang;
-			this.withIcons = props?.withIcons ?? this.withIcons;
+			Object.assign(this, { ...this, ...props });
 		}
 
 		const shadowRoot = this.attachShadow({ mode: 'open' });
