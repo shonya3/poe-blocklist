@@ -34,6 +34,17 @@ export class BlockedContent extends LitElement {
 		return [this.userTooltip, this.keywordTooltip].filter(s => Boolean(s)).join('   |   ');
 	}
 
+	get buttonText() {
+		switch (this.lang) {
+			case 'en': {
+				return `show ${this.kind}`;
+			}
+			case 'ru': {
+				return `Показать ${this.kind === 'post' ? 'сообщение' : 'цитату'}`;
+			}
+		}
+	}
+
 	constructor(props?: BlockedContentProps) {
 		super();
 
@@ -54,20 +65,10 @@ export class BlockedContent extends LitElement {
 			<div part="icons">${this.userTooltip ? blockedUserIcon : ''} ${this.keywordTooltip ? keywordIcon : ''}</div>
 		`;
 
-		let buttonText = '';
-		switch (this.lang) {
-			case 'ru':
-				buttonText = `Показать ${this.kind === 'post' ? 'сообщение' : 'цитату'}`;
-				break;
-			case 'en':
-			default:
-				buttonText = `show ${this.kind}`;
-		}
-
 		return html`
 			${this.withIcons && this.tooltip ? icons : ''}
 			<button part="button" @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button">
-				${buttonText}
+				${this.buttonText}
 			</button>
 		`;
 	}
