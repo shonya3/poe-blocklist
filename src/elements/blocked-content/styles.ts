@@ -72,14 +72,11 @@ export const styles = css`
 		align-items: center;
 		gap: 2px;
 		justify-content: center;
-	}
-
-	:host([post-style='normal']) [part='icons'] {
 		font-size: 27px;
 	}
 
-	:host([post-style='full']) [part='icons'] {
-		font-size: 27px;
+	:host(:is([post-style='min'], [post-style='strict'])) [part='icons'] {
+		font-size: inherit;
 	}
 
 	[part='icons']:not(:has(icon-monkey)) {
