@@ -8,6 +8,8 @@ const hide = (el: HTMLElement) => el.classList.add('hidden');
 const unHide = (el: HTMLElement) => el.classList.remove('hidden');
 
 import styles from './styles.css?inline';
+import { IconMonkey } from '../icons/icon-monkey';
+import { IconBlockedUser } from '../icons/icon-blocked-user';
 const css = new CSSStyleSheet();
 css.replaceSync(styles);
 
@@ -100,70 +102,76 @@ export class VanillaContent extends HTMLElement {
 		}
 	}
 
-	get $iconBlockedUser() {
-		return this.shadowRoot?.querySelector('icon-blocked-user')!;
+	get $iconBlockedUser(): Option<IconBlockedUser> {
+		return this.shadowRoot?.querySelector('icon-blocked-user') ?? null;
 	}
 
-	get $iconMonkey() {
-		return this.shadowRoot?.querySelector('icon-monkey')!;
+	get $iconMonkey(): Option<IconMonkey> {
+		return this.shadowRoot?.querySelector('icon-monkey') ?? null;
 	}
 
-	get $icons(): HTMLElement {
-		return this.shadowRoot?.querySelector('[part="icons"]')!;
+	get $icons(): Option<HTMLElement> {
+		return this.shadowRoot?.querySelector('[part="icons"]') ?? null;
 	}
 
-	get $button(): HTMLButtonElement {
-		return this.shadowRoot?.querySelector('button')!;
+	get $button(): Option<HTMLButtonElement> {
+		return this.shadowRoot?.querySelector('button') ?? null;
 	}
 
-	attributeChangedCallback(
+	async attributeChangedCallback(
 		name: 'post-style' | 'kind' | 'user-tooltip' | 'keyword-tooltip' | 'lang' | 'with-icons',
 		oldVal: Option<string>,
 		val: Option<string>
 	) {
+		// console.log(`attribute changed: ${name}`);
 		switch (name) {
 			case 'lang':
 				if (!this.$button) return;
 				this.$button.textContent = this.buttonText;
 				break;
 			case 'kind':
+				if (!this.$button) return;
 				this.$button.textContent = this.buttonText;
 				break;
 			case 'with-icons':
+				if (!this.$icons) return;
 				const withIcons = typeof val === 'string';
 				withIcons ? unHide(this.$icons) : hide(this.$icons);
 				break;
 			case 'keyword-tooltip':
+				if (!this.$iconMonkey || !this.$icons || !this.$button) return;
 				if (val) {
 					this.$iconMonkey.title = val;
 					unHide(this.$iconMonkey);
 				}
 				if (!val) hide(this.$iconMonkey);
 				this.tooltip ? unHide(this.$icons) : hide(this.$icons);
+				this.$button.title = this.tooltip;
 				break;
 			case 'user-tooltip':
-				console.log('user tooltip', val);
+				if (!this.$iconBlockedUser || !this.$icons || !this.$button) return;
 				if (val) {
 					this.$iconBlockedUser.title = val;
 					unHide(this.$iconBlockedUser);
 				}
 				if (!val) hide(this.$iconBlockedUser);
-				console.log(this.tooltip);
 				this.tooltip ? unHide(this.$icons) : hide(this.$icons);
+				this.$button.title = this.tooltip;
 				break;
 		}
 	}
 
-	connectedCallback() {
+	async connectedCallback() {
 		this.#initialRendering();
 	}
 
 	#initialRendering() {
-		if (!this.withIcons) hide(this.$icons);
-		if (!this.keywordTooltip) hide(this.$iconMonkey);
-		if (!this.userTooltip) hide(this.$iconBlockedUser);
-		if (!this.keywordTooltip && !this.userTooltip) hide(this.$icons);
-		this.$button.textContent = this.buttonText;
+		if (!this.withIcons) hide(this.$icons!);
+		if (!this.keywordTooltip) hide(this.$iconMonkey!);
+		if (!this.userTooltip) hide(this.$iconBlockedUser!);
+		if (!this.keywordTooltip && !this.userTooltip) hide(this.$icons!);
+		this.$button!.textContent = this.buttonText;
+		this.$button!.title = this.tooltip;
 	}
 
 	#onButtonClicked() {
