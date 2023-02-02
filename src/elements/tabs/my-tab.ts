@@ -21,7 +21,6 @@ export class MyTab extends HTMLElement {
 	static template = String.raw`
             <style>
                 button{
-                    background-color: #eee;
 					padding: 1rem 2rem;
 					border-radius: 0.4rem;
 					cursor: pointer;
