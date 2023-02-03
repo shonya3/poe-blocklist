@@ -45,15 +45,12 @@ export class BlockedContent extends LitElement {
 		}
 	}
 
-	constructor(props?: BlockedContentProps) {
+	constructor(props?: Partial<BlockedContentProps>) {
 		super();
 
-		this.kind = props?.kind ?? this.kind;
-		this.postStyle = props?.postStyle ?? this.postStyle;
-		this.userTooltip = props?.userTooltip ?? this.userTooltip;
-		this.keywordTooltip = props?.keywordTooltip ?? this.keywordTooltip;
-		this.lang = props?.lang ?? this.lang;
-		this.withIcons = props?.withIcons ?? this.withIcons;
+		if (props) {
+			Object.assign(this, { ...this, ...props });
+		}
 	}
 
 	override render() {
