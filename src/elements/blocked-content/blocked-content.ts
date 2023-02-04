@@ -61,7 +61,8 @@ export class BlockedContent extends LitElement {
 			? html`<icon-monkey title="${this.keywordTooltip}"></icon-monkey>`
 			: nothing;
 
-		const icons = this.withIcons && this.tooltip ? html`${userIcon}${keywordIcon}` : nothing;
+		const icons =
+			this.withIcons && this.tooltip ? html`<div part="icons">${userIcon}${keywordIcon}</div>` : nothing;
 
 		return html`
 			${icons}
