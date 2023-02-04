@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { BlockedContentProps, PostOrQuote, PostStyle } from '../../types';
@@ -54,16 +54,17 @@ export class BlockedContent extends LitElement {
 	}
 
 	override render() {
-		const blockedUserIcon = html`<icon-blocked-user title="${this.userTooltip ?? ''}"></icon-blocked-user>`;
+		const userIcon = this.userTooltip
+			? html`<icon-blocked-user title="${this.userTooltip}"></icon-blocked-user>`
+			: nothing;
+		const keywordIcon = this.keywordTooltip
+			? html`<icon-monkey title="${this.keywordTooltip}"></icon-monkey>`
+			: nothing;
 
-		const keywordIcon = html`<icon-monkey title="${this.keywordTooltip ?? ''}"></icon-monkey>`;
-
-		const icons = html`
-			<div part="icons">${this.userTooltip ? blockedUserIcon : ''} ${this.keywordTooltip ? keywordIcon : ''}</div>
-		`;
+		const icons = this.withIcons && this.tooltip ? html`${userIcon}${keywordIcon}` : nothing;
 
 		return html`
-			${this.withIcons && this.tooltip ? icons : ''}
+			${icons}
 			<button part="button" @click=${this.#onButtonClicked} title=${ifDefined(this.tooltip)} type="button">
 				${this.buttonText}
 			</button>
