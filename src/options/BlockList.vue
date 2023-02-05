@@ -70,7 +70,6 @@ form.add-item {
 .blocked-items {
 	max-width: 80%;
 	min-width: 400px;
-	/* margin: 0 auto; */
 	margin-top: 2rem;
 	padding: 1rem 3rem;
 
