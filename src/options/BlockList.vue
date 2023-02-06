@@ -31,7 +31,7 @@ defineEmits<{
 			</button>
 		</form>
 		<ul class="blocked-items">
-			<li v-for="item in items" class="blocked-items_item">
+			<li v-for="item in items" class="blocked-items_item" :key="item">
 				<p class="blocked-items_itemname">{{ item }}</p>
 				<button @click="$emit('delete-item', item)" class="options-btn">
 					<icon-close class="icon icon-minus"></icon-close>
