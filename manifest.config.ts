@@ -2,7 +2,7 @@ import { defineManifest, ManifestV3Export } from '@crxjs/vite-plugin';
 
 const manifest = {
 	name: 'Path of exile blocklist',
-	version: '0.6.2',
+	version: '0.6.3',
 	manifest_version: 3,
 	permissions: ['storage'],
 	description: 'Hide posts from unwanted users on PoE Forum',
