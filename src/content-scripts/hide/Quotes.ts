@@ -25,8 +25,11 @@ const build = (
 		const quotationMarks = $.quote.quotationMarks(quote);
 		if (header) hideElement(header);
 		if (quotationMarks) hideElement(quotationMarks);
-		const { padding } = window.getComputedStyle(quote);
+		const { padding, backgroundColor, border, boxShadow } = window.getComputedStyle(quote);
 		quote.style.setProperty('padding', '0');
+		quote.style.setProperty('border-color', 'rgba(52, 54, 48, 0.3)');
+		quote.style.setProperty('background-color', 'inherit');
+		quote.style.setProperty('box-shadow', 'none');
 
 		render(
 			html`<blocked-content
@@ -41,6 +44,9 @@ const build = (
 					if (header) revealElement(header);
 					if (quotationMarks) revealElement(quotationMarks);
 					quote.style.setProperty('padding', padding);
+					quote.style.setProperty('border', border);
+					quote.style.setProperty('background-color', backgroundColor);
+					quote.style.setProperty('box-shadow', boxShadow);
 				}}
 			></blocked-content>`,
 			quote
