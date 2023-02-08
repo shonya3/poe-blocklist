@@ -2,16 +2,16 @@ import './index.css';
 import { Hide } from './hide/mod';
 import { Storage } from '../Storage';
 import { Update } from './update/mod';
-import { getBrowserLang } from '../lib';
+import { Default } from '../Default';
 
 async function main(): Promise<void> {
 	try {
 		const [users, keywords, postStyle, lang, withIcons] = await Promise.all([
 			Storage.getOrDefault('users', []),
 			Storage.getOrDefault('keywords', []),
-			Storage.getOrDefault('postStyle', 'normal'),
-			Storage.getOrDefault('lang', getBrowserLang()),
-			Storage.getOrDefault('withIcons', true),
+			Storage.getOrDefault('postStyle', Default.postStyle),
+			Storage.getOrDefault('lang', Default.lang()),
+			Storage.getOrDefault('withIcons', Default.withIcons),
 		]);
 
 		Update.posts.addBlockUserIcon(lang);
