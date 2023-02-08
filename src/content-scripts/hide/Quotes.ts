@@ -4,6 +4,13 @@ import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../typ
 import { getElementDirectText, hideElement, revealElement } from './mod';
 import '../../elements/blocked-content/blocked-content';
 
+const HIDDEN_QUOTE_STYLES = {
+	padding: '0',
+	'border-color': 'rgba(52, 54, 48, 0.3)',
+	'background-color': 'inherit',
+	'box-shadow': 'none',
+};
+
 const build = (
 	quotes: HTMLElement[],
 	{ users, keywords }: SearchData,
@@ -25,11 +32,8 @@ const build = (
 		const quotationMarks = $.quote.quotationMarks(quote);
 		if (header) hideElement(header);
 		if (quotationMarks) hideElement(quotationMarks);
-		const { padding, backgroundColor, border, boxShadow } = window.getComputedStyle(quote);
-		quote.style.setProperty('padding', '0');
-		quote.style.setProperty('border-color', 'rgba(52, 54, 48, 0.3)');
-		quote.style.setProperty('background-color', 'inherit');
-		quote.style.setProperty('box-shadow', 'none');
+
+		const { recoverPreviousStyles } = setStyles(quote, HIDDEN_QUOTE_STYLES);
 
 		const br = quote.nextElementSibling;
 		const brExists = br?.tagName === 'BR';
@@ -44,13 +48,10 @@ const build = (
 				user-tooltip="${userTooltip ?? nothing}"
 				keyword-tooltip="${keywordTooltip ?? nothing}"
 				@button-clicked=${() => {
+					recoverPreviousStyles();
 					revealElement(content);
 					if (header) revealElement(header);
 					if (quotationMarks) revealElement(quotationMarks);
-					quote.style.setProperty('padding', padding);
-					quote.style.setProperty('border', border);
-					quote.style.setProperty('background-color', backgroundColor);
-					quote.style.setProperty('box-shadow', boxShadow);
 					if (brExists) quote.after(br);
 				}}
 			></blocked-content>`,
@@ -75,6 +76,25 @@ const byKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Optio
 	const foundKeywords = keywords.filter(word => text.includes(word));
 	if (!foundKeywords.length) return null;
 	return foundKeywords.join(', ');
+};
+
+const setCss = (el: HTMLElement, styles: Record<string, string>): void => {
+	Object.entries(styles).forEach(([key, value]) => el.style.setProperty(key, value));
+};
+
+const setStyles = (el: HTMLElement, styles: Record<string, string>) => {
+	const computed = window.getComputedStyle(el);
+	const previousStyles: Record<string, string> = {};
+
+	for (const key of Object.keys(styles)) {
+		previousStyles[key] = computed.getPropertyValue(key);
+	}
+
+	setCss(el, styles);
+
+	return {
+		recoverPreviousStyles: (): void => setCss(el, previousStyles),
+	};
 };
 
 export const Quotes = {
