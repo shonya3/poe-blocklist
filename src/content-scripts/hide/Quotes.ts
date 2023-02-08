@@ -31,6 +31,10 @@ const build = (
 		quote.style.setProperty('background-color', 'inherit');
 		quote.style.setProperty('box-shadow', 'none');
 
+		const br = quote.nextElementSibling;
+		const brExists = br?.tagName === 'BR';
+		if (brExists) br.remove();
+
 		render(
 			html`<blocked-content
 				lang="${lang}"
@@ -47,6 +51,7 @@ const build = (
 					quote.style.setProperty('border', border);
 					quote.style.setProperty('background-color', backgroundColor);
 					quote.style.setProperty('box-shadow', boxShadow);
+					if (brExists) quote.after(br);
 				}}
 			></blocked-content>`,
 			quote
