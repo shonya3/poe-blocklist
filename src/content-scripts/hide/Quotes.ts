@@ -4,12 +4,12 @@ import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../typ
 import { getElementDirectText, hideElement, revealElement } from './mod';
 import '../../elements/blocked-content/blocked-content';
 
-const HIDDEN_QUOTE_STYLES = {
+const HIDDEN_QUOTE_STYLES = Object.freeze({
 	padding: '0',
 	'border-color': 'rgba(52, 54, 48, 0.3)',
 	'background-color': 'inherit',
 	'box-shadow': 'none',
-};
+});
 
 const build = (
 	quotes: HTMLElement[],
