@@ -1,9 +1,8 @@
 import { SupportedLang } from './types';
 
 export const getBrowserLang = (): SupportedLang => {
-	let lang = navigator.language.split('-')[0];
-	if (lang !== 'ru' && lang !== 'en') lang = 'en';
-	if (lang !== 'ru' && lang !== 'en') throw new Error('Not supported language');
+	const lang = navigator.language.split('-')[0];
+	if (lang !== 'ru' && lang !== 'en') return 'en';
 	return lang;
 };
 
