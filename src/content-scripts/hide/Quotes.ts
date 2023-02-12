@@ -4,13 +4,6 @@ import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../typ
 import { getElementDirectText, hideElement, revealElement } from './mod';
 import '../../elements/blocked-content/blocked-content';
 
-const HIDDEN_QUOTE_STYLES = Object.freeze({
-	padding: '0',
-	'border-color': 'rgba(52, 54, 48, 0.3)',
-	'background-color': 'inherit',
-	'box-shadow': 'none',
-});
-
 const build = (
 	quotes: HTMLElement[],
 	{ users, keywords }: SearchData,
@@ -33,7 +26,7 @@ const build = (
 		if (header) hideElement(header);
 		if (quotationMarks) hideElement(quotationMarks);
 
-		const { recoverPreviousStyles } = setStyles(quote, HIDDEN_QUOTE_STYLES);
+		quote.classList.add($.cssClass.hiddenQuote);
 
 		const br = quote.nextElementSibling;
 		const brExists = br?.tagName === 'BR';
@@ -48,7 +41,7 @@ const build = (
 				user-tooltip="${userTooltip ?? nothing}"
 				keyword-tooltip="${keywordTooltip ?? nothing}"
 				@button-clicked=${() => {
-					recoverPreviousStyles();
+					quote.classList.remove($.cssClass.hiddenQuote);
 					revealElement(content);
 					if (header) revealElement(header);
 					if (quotationMarks) revealElement(quotationMarks);
@@ -76,25 +69,6 @@ const byKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Optio
 	const foundKeywords = keywords.filter(word => text.includes(word));
 	if (!foundKeywords.length) return null;
 	return foundKeywords.join(', ');
-};
-
-const setCss = (el: HTMLElement, styles: Record<string, string>): void => {
-	Object.entries(styles).forEach(([key, value]) => el.style.setProperty(key, value));
-};
-
-const setStyles = (el: HTMLElement, styles: Record<string, string>) => {
-	const computed = window.getComputedStyle(el);
-	const previousStyles: Record<string, string> = {};
-
-	for (const key of Object.keys(styles)) {
-		previousStyles[key] = computed.getPropertyValue(key);
-	}
-
-	setCss(el, styles);
-
-	return {
-		recoverPreviousStyles: (): void => setCss(el, previousStyles),
-	};
 };
 
 export const Quotes = {

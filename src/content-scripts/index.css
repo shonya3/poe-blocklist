@@ -7,3 +7,10 @@
 	cursor: pointer;
 	margin-left: 5px;
 }
+
+.blocklist-ext-hidden-quote {
+	padding: 0 !important;
+	border-color: rgba(52, 54, 48, 0.3) !important;
+	background-color: inherit !important;
+	box-shadow: none !important;
+}

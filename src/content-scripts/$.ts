@@ -41,6 +41,14 @@ const quote = {
 	},
 };
 
+const PREFIX = 'blocklist-ext-';
+
+const cssClass = Object.freeze({
+	hiddenQuote: `${PREFIX}hidden-quote`,
+	userIcon: `${PREFIX}user-icon`,
+	hidden: `${PREFIX}hidden`,
+});
+
 export const $ = {
 	get posts(): HTMLElement[] {
 		return Array.from(document.querySelectorAll('tr:has(.content)'));
@@ -52,4 +60,5 @@ export const $ = {
 
 	post,
 	quote,
+	cssClass,
 };
