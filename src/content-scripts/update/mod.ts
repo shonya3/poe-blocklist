@@ -6,8 +6,6 @@ import { SupportedLang } from '../../types';
 import '../../elements/icons/icon-blocked-user';
 import '../../elements/icons/icon-unblock-user';
 
-const ICON_CLASS = 'blocklist-ext-user-icon';
-
 const addBlockUserIcon = async (post: Element, lang: SupportedLang) => {
 	const buttons = $.post.buttons(post);
 	const username = $.post.username(post);
@@ -29,7 +27,7 @@ const addBlockUserIcon = async (post: Element, lang: SupportedLang) => {
 	}
 
 	icon.addEventListener('click', () => location.reload());
-	icon.classList.add(ICON_CLASS);
+	icon.classList.add($.cssClass.userIcon);
 	buttons.append(icon);
 };
 

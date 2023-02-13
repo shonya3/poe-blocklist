@@ -15,8 +15,8 @@ export const getElementDirectText = (el: HTMLElement): string => {
 		.join(' ');
 };
 
-export const hideElement = (element: HTMLElement): void => element.classList.add('blocklist-ext-hidden');
-export const revealElement = (element: HTMLElement): void => element.classList.remove('blocklist-ext-hidden');
+export const hideElement = (element: HTMLElement): void => element.classList.add($.cssClass.hidden);
+export const revealElement = (element: HTMLElement): void => element.classList.remove($.cssClass.hidden);
 
 export const Hide = {
 	by,
