@@ -46,18 +46,14 @@
 	background-color: transparent;
 }
 
-:host([post-style='strict']) [part='button'] {
-	padding: 0;
-	padding-block: 0;
-	border: none;
-}
-
 :host([post-style='min']) [part='button'] {
-	padding: 0;
-	padding-block: 0;
-	border: none;
 	opacity: 90%;
 	text-transform: none;
+}
+
+:host(:is([post-style='min'], [post-style='strict'])) [part='button'] {
+	padding: 0;
+	border: none;
 }
 
 :host([post-style='none']) {
