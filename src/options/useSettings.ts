@@ -10,9 +10,11 @@ export const useSettings = () => {
 
 	onMounted(async () => {
 		try {
-			postStyle.value = await Storage.getOrDefault('postStyle', Default.postStyle);
-			lang.value = await Storage.getOrDefault('lang', Default.lang());
-			withIcons.value = await Storage.getOrDefault('withIcons', Default.withIcons);
+			Promise.all([
+				(postStyle.value = await Storage.getOrDefault('postStyle', Default.postStyle)),
+				(lang.value = await Storage.getOrDefault('lang', Default.lang())),
+				(withIcons.value = await Storage.getOrDefault('withIcons', Default.withIcons)),
+			]);
 		} catch (err) {
 			console.log(err);
 		}
