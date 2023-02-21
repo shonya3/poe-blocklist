@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import IconClose from './icons/IconClose.vue';
 import IconPlus from './icons/IconPlus.vue';
-import { onMounted, ref } from 'vue';
-import autoAnimate from '@formkit/auto-animate';
-
-const listEl = ref<null | HTMLElement>(null);
 
 defineProps<{
 	items: string[];
@@ -16,12 +12,6 @@ defineEmits<{
 	(event: 'delete-item', item: string): void;
 	(event: 'update:modelValue', value: string): void;
 }>();
-
-onMounted(() => {
-	if (listEl.value) {
-		autoAnimate(listEl.value);
-	}
-});
 
 const moveUp = <T>(A: T[], i: number) => {
 	console.log('move up');
@@ -51,7 +41,7 @@ const moveDown = <T>(A: T[], i: number) => {
 				<icon-plus class="icon icon-plus"></icon-plus>
 			</button>
 		</form>
-		<ul ref="listEl" class="blocked-items">
+		<TransitionGroup tag="ul" name="list" class="blocked-items">
 			<li v-for="(item, index) in items" class="blocked-items_item" :key="item">
 				<p class="blocked-items_itemname">{{ item }}</p>
 
@@ -84,11 +74,15 @@ const moveDown = <T>(A: T[], i: number) => {
 					</button>
 				</div>
 			</li>
-		</ul>
+		</TransitionGroup>
 	</div>
 </template>
 
 <style scoped>
+.list-move {
+	transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
 .move-controls {
 	display: flex;
 }
