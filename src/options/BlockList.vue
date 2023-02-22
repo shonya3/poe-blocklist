@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import IconClose from './icons/IconClose.vue';
 import IconPlus from './icons/IconPlus.vue';
 
 defineProps<{
@@ -14,7 +13,6 @@ defineEmits<{
 }>();
 
 const moveUp = <T>(A: T[], i: number) => {
-	console.log('move up');
 	if (i === 0) return;
 	[A[i], A[i - 1]] = [A[i - 1], A[i]];
 };
@@ -64,7 +62,6 @@ const moveDown = <T>(A: T[], i: number) => {
 					</div>
 
 					<button @click="$emit('delete-item', item)" class="icon-btn">
-						<!-- <icon-close class="icon icon-minus"></icon-close> -->
 						<svg class="icon" width="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
 							<path
 								fill="currentColor"
@@ -79,8 +76,24 @@ const moveDown = <T>(A: T[], i: number) => {
 </template>
 
 <style scoped>
-.list-move {
+/* 1. declare transition */
+.list-move,
+.list-enter-active,
+.list-leave-active {
 	transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* 2. declare enter from and leave to state */
+.list-enter-from,
+.list-leave-to {
+	opacity: 0;
+	transform: scaleY(0.01) translate(30px, 0);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.list-leave-active {
+	position: absolute;
 }
 
 .move-controls {
@@ -133,17 +146,9 @@ form.add-item {
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
-
-	/* border: 1px solid rgba(0, 0, 0, 0.14); */
-
 	padding: 0.5rem 1rem;
-
 	box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% / 0.075), 0 3px 3px hsl(0deg 0% 0% / 0.075),
 		0 4px 4px hsl(0deg 0% 0% / 0.075);
-}
-
-.blocked-items_item:hover {
-	background-color: hsl(0, 14%, 99%);
 }
 
 .blocked-items_itermname {
@@ -158,11 +163,9 @@ form.add-item {
 
 .icon:hover {
 	transform: scale(1.5);
-	color: #72634c;
 }
 
 .icon-plus {
-	color: #72634c;
 	font-size: 2.5rem;
 }
 

@@ -43,6 +43,7 @@ const t = computed(() => translate(lang.value));
 		</my-tab-group>
 
 		<div class="settings">
+			<theme-toggle></theme-toggle>
 			<header>
 				<h2 class="heading-secondary settings-header">
 					<icon-settings></icon-settings>
@@ -108,17 +109,6 @@ blocked-content {
 	font-family: Verdana;
 	font-size: 13px;
 	transform: translateX(-10px);
-}
-
-* {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-}
-
-:root {
-	font-family: 'Open Sans', sans-serif;
-	color: #374151;
 }
 
 .container {
