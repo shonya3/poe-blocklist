@@ -130,7 +130,7 @@ blocked-content {
 		grid-template-columns: 1fr;
 		margin-inline: 1rem;
 	}
-	.lists {
+	my-tab-group {
 		order: 2;
 	}
 }
