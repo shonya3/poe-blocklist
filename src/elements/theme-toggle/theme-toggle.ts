@@ -7,7 +7,7 @@ import styles2 from './sw.css?inline';
 const css2 = new CSSStyleSheet();
 css2.replaceSync(styles2);
 
-const themeUtils = {
+const themeUtils = Object.freeze({
 	LOCAL_STORAGE_KEY: 'theme-preference',
 	getSystemPreference() {
 		return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
@@ -33,7 +33,7 @@ const themeUtils = {
 	setStorageValue(val: 'dark' | 'light') {
 		localStorage.setItem(this.LOCAL_STORAGE_KEY, val);
 	},
-};
+});
 
 export class ThemeToggle extends HTMLElement {
 	get theme() {
