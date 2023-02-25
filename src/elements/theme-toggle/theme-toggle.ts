@@ -3,9 +3,9 @@ import styles from './styles.css?inline';
 const css = new CSSStyleSheet();
 css.replaceSync(styles);
 
-import styles2 from './sw.css?inline';
-const css2 = new CSSStyleSheet();
-css2.replaceSync(styles2);
+import sunmoonStyles from './sunmoon.css?inline';
+const sunmoonCss = new CSSStyleSheet();
+sunmoonCss.replaceSync(sunmoonStyles);
 
 const themeUtils = Object.freeze({
 	LOCAL_STORAGE_KEY: 'theme-preference',
@@ -94,7 +94,7 @@ export class ThemeToggle extends HTMLElement {
         `;
 
 		this.#shadowRoot = this.attachShadow({ mode: 'open' });
-		this.#shadowRoot.adoptedStyleSheets = [css, css2];
+		this.#shadowRoot.adoptedStyleSheets = [css, sunmoonCss];
 		this.#shadowRoot.append(template.content.cloneNode(true));
 	}
 	connectedCallback() {
