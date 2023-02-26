@@ -96,10 +96,11 @@ export class ThemeToggle extends HTMLElement {
 		this.#shadowRoot = this.attachShadow({ mode: 'open' });
 		this.#shadowRoot.adoptedStyleSheets = [css, sunmoonCss];
 		this.#shadowRoot.append(template.content.cloneNode(true));
+
+		this.$button?.addEventListener('click', this.toggleTheme.bind(this));
 	}
 	connectedCallback() {
 		this.theme = themeUtils.getTheme();
-		this.$button?.addEventListener('click', this.toggleTheme.bind(this));
 	}
 
 	toggleTheme() {
