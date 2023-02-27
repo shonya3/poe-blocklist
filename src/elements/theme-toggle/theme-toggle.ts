@@ -9,10 +9,10 @@ sunmoonCss.replaceSync(sunmoonStyles);
 
 const themeUtils = Object.freeze({
 	LOCAL_STORAGE_KEY: 'theme-preference',
-	getSystemPreference() {
+	getSystemPreference(): 'light' | 'dark' {
 		return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 	},
-	getStorageValue() {
+	getStorageValue(): Option<string> {
 		return localStorage.getItem(this.LOCAL_STORAGE_KEY);
 	},
 
@@ -26,11 +26,11 @@ const themeUtils = Object.freeze({
 		return storagePreference;
 	},
 
-	addRootThemeAttr(theme: 'light' | 'dark') {
+	addRootThemeAttr(theme: 'light' | 'dark'): void {
 		document.documentElement.setAttribute('data-theme', theme);
 	},
 
-	setStorageValue(val: 'dark' | 'light') {
+	setStorageValue(val: 'light' | 'dark'): void {
 		localStorage.setItem(this.LOCAL_STORAGE_KEY, val);
 	},
 });
