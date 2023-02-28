@@ -36,7 +36,7 @@ const themeUtils = Object.freeze({
 });
 
 export class ThemeToggle extends HTMLElement {
-	get theme() {
+	get theme(): 'light' | 'dark' {
 		const theme = this.getAttribute('theme');
 		if (theme !== 'dark' && theme !== 'light') return 'dark';
 		return theme;
@@ -57,7 +57,7 @@ export class ThemeToggle extends HTMLElement {
 		}
 	}
 
-	get $button() {
+	get $button(): Option<HTMLButtonElement> {
 		return this.#shadowRoot.querySelector('button');
 	}
 
@@ -103,7 +103,7 @@ export class ThemeToggle extends HTMLElement {
 		this.theme = themeUtils.getTheme();
 	}
 
-	toggleTheme() {
+	toggleTheme(): void {
 		this.theme = this.theme === 'dark' ? 'light' : 'dark';
 	}
 }
