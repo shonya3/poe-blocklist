@@ -7,16 +7,18 @@ import sunmoonStyles from './sunmoon.css?inline';
 const sunmoonCss = new CSSStyleSheet();
 sunmoonCss.replaceSync(sunmoonStyles);
 
+type ColorTheme = 'light' | 'dark';
+
 const themeUtils = Object.freeze({
 	LOCAL_STORAGE_KEY: 'theme-preference',
-	getSystemPreference(): 'light' | 'dark' {
+	getSystemPreference(): ColorTheme {
 		return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 	},
 	getStorageValue(): Option<string> {
 		return localStorage.getItem(this.LOCAL_STORAGE_KEY);
 	},
 
-	getTheme(): 'light' | 'dark' {
+	getTheme(): ColorTheme {
 		const storagePreference = this.getStorageValue();
 		if (!storagePreference) {
 			return this.getSystemPreference();
@@ -26,23 +28,23 @@ const themeUtils = Object.freeze({
 		return storagePreference;
 	},
 
-	addRootThemeAttr(theme: 'light' | 'dark'): void {
+	addRootThemeAttr(theme: ColorTheme): void {
 		document.documentElement.setAttribute('data-theme', theme);
 	},
 
-	setStorageValue(val: 'light' | 'dark'): void {
+	setStorageValue(val: ColorTheme): void {
 		localStorage.setItem(this.LOCAL_STORAGE_KEY, val);
 	},
 });
 
 export class ThemeToggle extends HTMLElement {
-	get theme(): 'light' | 'dark' {
+	get theme(): ColorTheme {
 		const theme = this.getAttribute('theme');
 		if (theme !== 'dark' && theme !== 'light') return 'dark';
 		return theme;
 	}
 
-	set theme(val: 'light' | 'dark') {
+	set theme(val: ColorTheme) {
 		this.setAttribute('theme', val);
 	}
 
