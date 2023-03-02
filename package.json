@@ -9,7 +9,6 @@
 		"storybook": "storybook dev -p 6006"
 	},
 	"dependencies": {
-		"@formkit/auto-animate": "^1.0.0-beta.6",
 		"@webcomponents/custom-elements": "^1.5.1",
 		"lit": "^2.5.0",
 		"vue": "^3.2.41"
