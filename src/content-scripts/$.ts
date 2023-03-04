@@ -58,6 +58,16 @@ export const $ = {
 		return Array.from(document.querySelectorAll('blockquote'));
 	},
 
+	usernames(): string[] {
+		const posts = $.posts;
+		const usernames = posts.map(postEl => post.username(postEl)).filter(name => Boolean(name)) as string[];
+		return usernames;
+	},
+
+	uniqueUsernames(): string[] {
+		return Array.from(new Set($.usernames()));
+	},
+
 	post,
 	quote,
 	cssClass,
