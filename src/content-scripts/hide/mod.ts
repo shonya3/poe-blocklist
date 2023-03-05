@@ -4,8 +4,8 @@ import { Posts } from './Posts';
 import { Quotes } from './Quotes';
 
 const by = (searchData: SearchData, postStyle: PostStyle, lang: SupportedLang, withIcons: boolean): void => {
-	Posts.build($.posts, searchData, postStyle, lang, withIcons);
-	Quotes.build($.quotes, searchData, postStyle, lang, withIcons);
+	Posts.build($.posts(), searchData, postStyle, lang, withIcons);
+	Quotes.build($.quotes(), searchData, postStyle, lang, withIcons);
 };
 
 export const getElementDirectText = (el: HTMLElement): string => {

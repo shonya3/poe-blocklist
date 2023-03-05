@@ -32,7 +32,7 @@ const addBlockUserIcon = async (post: Element, lang: SupportedLang) => {
 };
 
 const posts = {
-	addBlockUserIcon: (lang: SupportedLang) => $.posts.forEach(post => addBlockUserIcon(post, lang)),
+	addBlockUserIcon: (lang: SupportedLang) => $.posts().forEach(post => addBlockUserIcon(post, lang)),
 };
 
 export const Update = {

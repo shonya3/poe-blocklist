@@ -50,17 +50,18 @@ const cssClass = Object.freeze({
 });
 
 export const $ = {
-	get posts(): HTMLElement[] {
+	posts(): HTMLElement[] {
 		return Array.from(document.querySelectorAll('tr:has(.content)'));
 	},
 
-	get quotes(): HTMLQuoteElement[] {
+	quotes(): HTMLQuoteElement[] {
 		return Array.from(document.querySelectorAll('blockquote'));
 	},
 
 	usernames(): string[] {
-		const posts = $.posts;
-		const usernames = posts.map(postEl => post.username(postEl)).filter(name => Boolean(name)) as string[];
+		const usernames = $.posts()
+			.map(postEl => post.username(postEl))
+			.filter(name => Boolean(name)) as string[];
 		return usernames;
 	},
 
