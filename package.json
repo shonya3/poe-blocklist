@@ -10,8 +10,8 @@
 	},
 	"dependencies": {
 		"@webcomponents/custom-elements": "^1.5.1",
-		"lit": "^2.5.0",
-		"vue": "^3.2.41"
+		"lit": "^2.6.1",
+		"vue": "^3.2.47"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.12",
