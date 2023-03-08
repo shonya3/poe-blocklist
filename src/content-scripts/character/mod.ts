@@ -1,3 +1,4 @@
+import { $ } from '../$';
 import { Option } from '../../types';
 import { CharacterInfo, InventoryItem } from './types';
 const getCharacterInfo = async (account: string, character: string) => {
@@ -7,8 +8,8 @@ const getCharacterInfo = async (account: string, character: string) => {
 		url.searchParams.append('accountName', account);
 		url.searchParams.append('character', character);
 		const response = await fetch(url);
-		const items = (await response.json()) as Promise<InventoryItem>;
-		return items;
+		const items = await response.json();
+		return items as InventoryItem;
 		// return items;
 	} catch (err) {
 		console.log(`ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR`, err);
@@ -23,7 +24,7 @@ const loadActiveCharNames = async (profiles: string[]) => {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ profiles: $.uniqueUsernames }),
+		body: JSON.stringify({ profiles: $.uniqueUsernames() }),
 	});
 	const data = await res.json();
 };
