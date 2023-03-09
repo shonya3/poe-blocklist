@@ -1,5 +1,7 @@
 import { Option } from '../types';
 
+const EXTENSION_PREFIX = 'blocklist-ext';
+
 const post = {
 	buttons(post: Element): Option<HTMLElement> {
 		return post.querySelector('div.buttons');
@@ -23,6 +25,10 @@ const post = {
 	children(post: Element): HTMLTableCellElement[] {
 		return Array.from(post.querySelectorAll('td'));
 	},
+
+	isPostHidden(post: Element) {
+		return Boolean(post.querySelector(':has(blocked-content)'));
+	},
 };
 
 const quote = {
@@ -41,12 +47,10 @@ const quote = {
 	},
 };
 
-const PREFIX = 'blocklist-ext-';
-
 const cssClass = Object.freeze({
-	hiddenQuote: `${PREFIX}hidden-quote`,
-	userIcon: `${PREFIX}user-icon`,
-	hidden: `${PREFIX}hidden`,
+	hiddenQuote: `${EXTENSION_PREFIX}-hidden-quote`,
+	userIcon: `${EXTENSION_PREFIX}-user-icon`,
+	hidden: `${EXTENSION_PREFIX}-hidden`,
 });
 
 export const $ = {
@@ -58,15 +62,17 @@ export const $ = {
 		return Array.from(document.querySelectorAll('blockquote'));
 	},
 
-	usernames(): string[] {
-		const usernames = $.posts()
-			.map(postEl => post.username(postEl))
-			.filter(name => Boolean(name)) as string[];
+	notHiddenPosts(): HTMLElement[] {
+		return $.posts().filter(post => !$.post.isPostHidden(post));
+	},
+
+	usernames(posts: HTMLElement[]): string[] {
+		const usernames = posts.map(postEl => post.username(postEl)).filter(name => Boolean(name)) as string[];
 		return usernames;
 	},
 
-	uniqueUsernames(): string[] {
-		return Array.from(new Set($.usernames()));
+	uniqueUsernames(posts: HTMLElement[]): string[] {
+		return Array.from(new Set($.usernames(posts)));
 	},
 
 	post,
