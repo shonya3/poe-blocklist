@@ -12,11 +12,11 @@ const getCharacterInfo = async (account: string, character: string) => {
 		return items as InventoryItem;
 		// return items;
 	} catch (err) {
-		console.log(`ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR`, err);
+		console.log(err);
 	}
 };
 
-const loadActiveCharNames = async (profiles: string[]) => {
+const loadActiveCharacters = async (profiles: string[]) => {
 	console.time('user');
 	const res = await fetch(`https://poe-blocklist-service.onrender.com/active-character-names`, {
 		method: 'POST',
@@ -24,13 +24,29 @@ const loadActiveCharNames = async (profiles: string[]) => {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ profiles: $.uniqueUsernames() }),
+		body: JSON.stringify({ profiles }),
+	});
+	const data = (await res.json()) as Record<string, string>[];
+	return data;
+};
+
+const info = async (profiles: string[]) => {
+	const res = await fetch(`https://poe-blocklist-service.onrender.com/info`, {
+		method: 'POST',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ profiles }),
 	});
 	const data = await res.json();
+	return data;
 };
 
 export const Character = {
 	getCharacterInfo,
+	loadActiveCharacters,
+	info,
 };
 
 const findGemWithMostLinks = (items: InventoryItem[]) => {
