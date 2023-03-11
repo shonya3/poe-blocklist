@@ -62,8 +62,8 @@ export const $ = {
 		return Array.from(document.querySelectorAll('blockquote'));
 	},
 
-	notHiddenPosts(): HTMLElement[] {
-		return $.posts().filter(post => !$.post.isPostHidden(post));
+	hiddenPosts(): HTMLElement[] {
+		return $.posts().filter(post => $.post.isPostHidden(post));
 	},
 
 	usernames(posts: HTMLElement[]): string[] {
