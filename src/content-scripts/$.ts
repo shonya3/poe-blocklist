@@ -66,6 +66,10 @@ export const $ = {
 		return $.posts().filter(post => $.post.isPostHidden(post));
 	},
 
+	visiblePosts(): HTMLElement[] {
+		return $.posts().filter(post => !$.post.isPostHidden(post));
+	},
+
 	usernames(posts: HTMLElement[]): string[] {
 		const usernames = posts.map(postEl => post.username(postEl)).filter(name => Boolean(name)) as string[];
 		return usernames;
