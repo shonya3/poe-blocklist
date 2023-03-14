@@ -143,14 +143,7 @@ html[data-theme='dark'] {
 		background: #111;
 	}
 }
-body {
-	min-block-size: 100%;
-	font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
-	display: grid;
-	align-content: center;
-	justify-content: center;
-	place-content: center;
-}
+
 .github-corner {
 	fill: #ff69b4;
 	color: Canvas;
