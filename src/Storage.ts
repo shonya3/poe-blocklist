@@ -23,7 +23,7 @@ const addUser = async (user: string): Promise<void> => {
 	const users = await getOrDefault('users', []);
 	const hasThisUser = users.some(u => u.toLowerCase() === user.toLowerCase());
 	if (hasThisUser) return;
-	users.push(user);
+	users.unshift(user);
 	set('users', users);
 };
 
