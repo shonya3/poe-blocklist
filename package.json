@@ -15,7 +15,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.21.3",
-		"@crxjs/vite-plugin": "^2.0.0-beta.7",
+		"@crxjs/vite-plugin": "^2.0.0-beta.15",
 		"@custom-elements-manifest/analyzer": "^0.6.6",
 		"@storybook/addon-actions": "^7.0.0-rc.7",
 		"@storybook/addon-essentials": "^7.0.0-rc.7",
