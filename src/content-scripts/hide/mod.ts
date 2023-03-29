@@ -17,6 +17,13 @@ export const getElementDirectText = (el: HTMLElement): string => {
 
 export const hideElement = (element: HTMLElement): void => element.classList.add($.cssClass.hidden);
 export const revealElement = (element: HTMLElement): void => element.classList.remove($.cssClass.hidden);
+export const removeFollowingLineBreaks = (element: HTMLElement): void => {
+	while (true) {
+		const next = element.nextElementSibling;
+		if (next?.tagName === 'BR') next.remove();
+		else break;
+	}
+};
 
 export const Hide = {
 	by,

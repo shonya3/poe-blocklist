@@ -1,7 +1,7 @@
 import { html, nothing, render } from 'lit';
 import { $ } from '../$';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
-import { getElementDirectText, hideElement, revealElement } from './mod';
+import { getElementDirectText, hideElement, removeFollowingLineBreaks, revealElement } from './mod';
 import '../../elements/blocked-content/blocked-content';
 
 const build = (
@@ -28,9 +28,7 @@ const build = (
 
 		quote.classList.add($.cssClass.hiddenQuote);
 
-		const br = quote.nextElementSibling;
-		const brExists = br?.tagName === 'BR';
-		if (brExists) br.remove();
+		removeFollowingLineBreaks(quote);
 
 		render(
 			html`<blocked-content
@@ -45,7 +43,6 @@ const build = (
 					revealElement(content);
 					if (header) revealElement(header);
 					if (quotationMarks) revealElement(quotationMarks);
-					if (brExists) quote.after(br);
 				}}
 			></blocked-content>`,
 			quote
