@@ -1,44 +1,47 @@
-import { StorageItems } from './types';
+import { PostStyle, SupportedLang } from './types';
 
-const get = async (): Promise<Record<string, any>> => chrome.storage.sync.get();
+export interface ExtensionStorage<T> {
+	get: () => Promise<Record<string, any>>;
+	set: <Key extends keyof T>(key: Key, value: T[Key]) => Promise<void>;
+	getOrDefault: <Key extends keyof T>(key: Key, defaultValue: T[Key]) => Promise<T[Key]>;
+	clearAll: () => Promise<void>;
+	delete: (key: keyof T) => Promise<void>;
+}
 
-const set = <TKey extends keyof StorageItems>(key: TKey, value: StorageItems[TKey]): Promise<void> =>
-	chrome.storage.sync.set({ [`${key}`]: value });
-
-const getOrDefault = async <TKey extends keyof StorageItems>(
-	key: TKey,
-	defaultValue: StorageItems[TKey]
-): Promise<StorageItems[TKey]> => {
-	const resultObject = await chrome.storage.sync.get(key);
-	if (!Object.hasOwn(resultObject, key)) {
-		return defaultValue;
-	}
-
-	return resultObject[key];
-};
-
-const clearAll = async (): Promise<void> => chrome.storage.sync.clear();
-
-const addUser = async (user: string): Promise<void> => {
-	const users = await getOrDefault('users', []);
-	const hasThisUser = users.some(u => u.toLowerCase() === user.toLowerCase());
-	if (hasThisUser) return;
-	users.unshift(user);
-	set('users', users);
-};
-
-const removeUser = async (user: string): Promise<void> => {
-	let users = await getOrDefault('users', []);
-	users = users.filter(u => u !== user);
-	set('users', users);
-};
+export interface StorageItems {
+	users: string[];
+	keywords: string[];
+	postStyle: PostStyle;
+	lang: SupportedLang;
+	withIcons: boolean;
+}
 
 export const Storage = {
-	getOrDefault,
-	get,
-	set,
-	clearAll,
-	delete: async (key: keyof StorageItems): Promise<void> => chrome.storage.sync.remove(key),
-	addUser,
-	removeUser,
+	async getOrDefault(key, defaultValue) {
+		const resultObject = await chrome.storage.sync.get(key);
+		if (!Object.hasOwn(resultObject, key)) {
+			return defaultValue;
+		}
+		return resultObject[key];
+	},
+	get: () => chrome.storage.sync.get(),
+	set: (key, value) => chrome.storage.sync.set({ [`${key}`]: value }),
+	clearAll: () => chrome.storage.sync.clear(),
+	delete: async key => chrome.storage.sync.remove(key),
+	async addUser(user) {
+		console.log('add user');
+		const users = await this.getOrDefault('users', []);
+		const userExists = users.some(u => u.toLowerCase() === user.toLowerCase());
+		if (!userExists) {
+			this.set('users', [user, ...users]);
+		}
+	},
+	async removeUser(user) {
+		let users = await this.getOrDefault('users', []);
+		users = users.filter(u => u !== user);
+		this.set('users', users);
+	},
+} satisfies ExtensionStorage<StorageItems> & {
+	addUser: (user: string) => Promise<void>;
+	removeUser: (user: string) => Promise<void>;
 };

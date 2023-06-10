@@ -18,14 +18,6 @@ export interface SearchData {
 	keywords: string[];
 }
 
-export interface StorageItems {
-	users: string[];
-	keywords: string[];
-	postStyle: PostStyle;
-	lang: SupportedLang;
-	withIcons: boolean;
-}
-
 export type Option<T> = T | null;
 export type Tooltip = string;
 export type Tooltipper = (el: HTMLElement, searchData: SearchData[BanCategory]) => Option<Tooltip>;

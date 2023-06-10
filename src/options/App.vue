@@ -9,6 +9,7 @@ import { useUsers } from './useUsers';
 import { useKeywords } from './useKeywords';
 import { translate } from '../translate';
 import { useSettings } from './useSettings';
+import { PostStyle } from '../types';
 
 const { users, inputUser, addUser, deleteUser } = useUsers();
 const { keywords, inputKeyword, addKeyword, deleteKeyword } = useKeywords();
@@ -68,7 +69,7 @@ const t = computed(() => translate(lang.value));
 					<div style="flex: 1">
 						<post-style-slider
 							id="post-style-control"
-							@post-style-changed="style => (postStyle = style)"
+							@post-style-changed="(style: PostStyle) => (postStyle = style)"
 							:post-style="postStyle"
 						></post-style-slider>
 					</div>
