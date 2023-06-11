@@ -9,7 +9,6 @@ export const useUsers = () => {
 		if (users.value.includes(user)) return;
 		users.value.unshift(user);
 		inputUser.value = '';
-		console.log(inputUser.value);
 	};
 
 	const deleteUser = (user: string) => {

@@ -1,5 +1,13 @@
 import { PostStyle, SupportedLang } from './types';
 
+export interface StorageItems {
+	users: string[];
+	keywords: string[];
+	postStyle: PostStyle;
+	lang: SupportedLang;
+	withIcons: boolean;
+}
+
 export interface ExtensionStorage<T> {
 	get: () => Promise<Record<string, any>>;
 	set: <Key extends keyof T>(key: Key, value: T[Key]) => Promise<void>;
@@ -8,12 +16,9 @@ export interface ExtensionStorage<T> {
 	delete: (key: keyof T) => Promise<void>;
 }
 
-export interface StorageItems {
-	users: string[];
-	keywords: string[];
-	postStyle: PostStyle;
-	lang: SupportedLang;
-	withIcons: boolean;
+export interface UserFunctions {
+	addUser: (user: string) => Promise<void>;
+	removeUser: (user: string) => Promise<void>;
 }
 
 export const Storage = {
@@ -24,10 +29,18 @@ export const Storage = {
 		}
 		return resultObject[key];
 	},
-	get: () => chrome.storage.sync.get(),
-	set: (key, value) => chrome.storage.sync.set({ [`${key}`]: value }),
-	clearAll: () => chrome.storage.sync.clear(),
-	delete: async key => chrome.storage.sync.remove(key),
+	async get() {
+		return chrome.storage.sync.get();
+	},
+	async set(key, value) {
+		return chrome.storage.sync.set({ [`${key}`]: value });
+	},
+	async clearAll() {
+		return chrome.storage.sync.clear();
+	},
+	async delete(key) {
+		return chrome.storage.sync.remove(key);
+	},
 	async addUser(user) {
 		console.log('add user');
 		const users = await this.getOrDefault('users', []);
@@ -41,7 +54,4 @@ export const Storage = {
 		users = users.filter(u => u !== user);
 		this.set('users', users);
 	},
-} satisfies ExtensionStorage<StorageItems> & {
-	addUser: (user: string) => Promise<void>;
-	removeUser: (user: string) => Promise<void>;
-};
+} satisfies ExtensionStorage<StorageItems> & UserFunctions;

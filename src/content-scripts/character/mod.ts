@@ -1,19 +1,18 @@
 import { $ } from '../$';
 import { Option } from '../../types';
 import { CharacterInfo, InventoryItem } from './types';
-const getCharacterInfo = async (account: string, character: string) => {
+
+export const getCharacterInfo = async (accountName: string, character: string) => {
 	const { origin } = window.location;
-	try {
-		const url = new URL(`${origin}/character-window/get-items`);
-		url.searchParams.append('accountName', account);
-		url.searchParams.append('character', character);
-		const response = await fetch(url);
-		const items = await response.json();
-		return items as InventoryItem;
-		// return items;
-	} catch (err) {
-		console.log(err);
-	}
+	const href = `${origin}/character-window/get-characters`;
+	const url = new URL(href);
+
+	url.searchParams.append('accountName', accountName);
+	url.searchParams.append('character', character);
+
+	const response = await fetch(url);
+	const data = await response.json();
+	return data;
 };
 
 const loadActiveCharacters = async (profiles: string[]) => {
