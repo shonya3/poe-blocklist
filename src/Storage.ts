@@ -21,7 +21,7 @@ export interface UserFunctions {
 	removeUser: (user: string) => Promise<void>;
 }
 
-export const Storage = {
+export const Storage: ExtensionStorage<StorageItems> & UserFunctions = {
 	async getOrDefault(key, defaultValue) {
 		const resultObject = await chrome.storage.sync.get(key);
 		if (!Object.hasOwn(resultObject, key)) {
@@ -54,4 +54,4 @@ export const Storage = {
 		users = users.filter(u => u !== user);
 		this.set('users', users);
 	},
-} satisfies ExtensionStorage<StorageItems> & UserFunctions;
+};
