@@ -49,6 +49,10 @@ const dictionary = {
 		en: 'Unblock this user',
 		ru: 'Разблокировать этого пользователя',
 	},
+	shouldHideThreads: {
+		en: 'Hide threads created by blocked users',
+		ru: 'Спрятать темы, созданные заблокированными пользователями',
+	},
 } as const;
 
 export const translate = <Lang extends SupportedLang>(lang: Lang) => {

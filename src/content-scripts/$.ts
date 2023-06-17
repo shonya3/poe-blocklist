@@ -2,6 +2,17 @@ import { Option } from '../types';
 
 const EXTENSION_PREFIX = 'blocklist-ext';
 
+const thread = {
+	createdBy(thread: Element): Option<string> {
+		return thread.querySelector('.postBy a')?.textContent ?? null;
+	},
+
+	isThreadsView(): boolean {
+		const { pathname } = new URL(window.location.href);
+		return pathname.includes('view-forum');
+	},
+};
+
 const post = {
 	buttons(post: Element): Option<HTMLElement> {
 		return post.querySelector('div.buttons');
@@ -62,6 +73,11 @@ export const $ = {
 		return Array.from(document.querySelectorAll('blockquote'));
 	},
 
+	threads(): HTMLElement[] {
+		if (!thread.isThreadsView()) return [];
+		return Array.from(document.querySelectorAll('tr:has(.thread)'));
+	},
+
 	hiddenPosts(): HTMLElement[] {
 		return $.posts().filter(post => $.post.isPostHidden(post));
 	},
@@ -81,5 +97,6 @@ export const $ = {
 
 	post,
 	quote,
+	thread,
 	cssClass,
 };

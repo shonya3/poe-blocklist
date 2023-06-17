@@ -6,6 +6,7 @@ export interface StorageItems {
 	postStyle: PostStyle;
 	lang: SupportedLang;
 	withIcons: boolean;
+	hideThreadsCreatedByBlockedUsers: boolean;
 }
 
 export interface ExtensionStorage<T> {

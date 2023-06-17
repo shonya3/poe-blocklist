@@ -13,7 +13,7 @@ import { PostStyle } from '../types';
 
 const { users, inputUser, addUser, deleteUser } = useUsers();
 const { keywords, inputKeyword, addKeyword, deleteKeyword } = useKeywords();
-const { postStyle, lang, withIcons } = useSettings();
+const { postStyle, lang, withIcons, shouldHideThreads } = useSettings();
 const t = computed(() => translate(lang.value));
 </script>
 
@@ -96,6 +96,15 @@ const t = computed(() => translate(lang.value));
 						name="with-icons-control"
 						id="with-icons-control"
 						v-model="withIcons"
+					/>
+				</div>
+				<div class="should-hide-threads">
+					<label for="should-hide-threads-control">{{ t('shouldHideThreads') }}</label>
+					<input
+						type="checkbox"
+						name="should-hide-threads-control"
+						id="should-hide-threads-control"
+						v-model="shouldHideThreads"
 					/>
 				</div>
 			</div>
@@ -198,5 +207,17 @@ blocked-content {
 .with-icons-control {
 	justify-self: start;
 	width: 1.2rem;
+}
+
+.should-hide-threads {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+
+	> input {
+		flex-basis: 20%;
+		width: 1.2rem;
+		height: 1.2rem;
+	}
 }
 </style>
