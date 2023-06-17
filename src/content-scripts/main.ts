@@ -3,7 +3,6 @@ import { Hide } from './hide/mod';
 import { Storage } from '../Storage';
 import { Update } from './update/mod';
 import { Default } from '../Default';
-import { hideThreads } from './hide/Threads';
 
 async function main(): Promise<void> {
 	try {
@@ -16,11 +15,11 @@ async function main(): Promise<void> {
 			Storage.getOrDefault('hideThreadsCreatedByBlockedUsers', Default.hideThreadsCreatedByBlockedUsers),
 		]);
 
-		Update.posts.addBlockUserIcon(lang);
+		Update.posts.addBlockIcon(lang);
+		Update.threads.names(users);
+
 		Hide.by({ keywords, users }, postStyle, lang, withIcons);
-		if (shouldHideThreads) {
-			hideThreads(users);
-		}
+		if (shouldHideThreads) Hide.threads(users);
 	} catch (err) {
 		console.log(err);
 	}

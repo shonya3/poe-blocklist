@@ -7,6 +7,18 @@ const thread = {
 		return thread.querySelector('.postBy a')?.textContent ?? null;
 	},
 
+	elementCreatedBy(thread: Element): Option<HTMLLinkElement> {
+		return thread.querySelector('.postBy a') ?? null;
+	},
+
+	elementLastPosted(thread: Element): Option<HTMLLinkElement> {
+		return thread.querySelector('.last_post a');
+	},
+
+	lastPosted(thread: Element): Option<string> {
+		return thread.querySelector('.last_post a')?.textContent ?? null;
+	},
+
 	isThreadsView(): boolean {
 		const { pathname } = new URL(window.location.href);
 		return pathname.includes('view-forum');
@@ -59,6 +71,7 @@ const quote = {
 };
 
 const cssClass = Object.freeze({
+	fontWeight300: `${EXTENSION_PREFIX}-font-weight-300`,
 	hiddenQuote: `${EXTENSION_PREFIX}-hidden-quote`,
 	userIcon: `${EXTENSION_PREFIX}-user-icon`,
 	hidden: `${EXTENSION_PREFIX}-hidden`,

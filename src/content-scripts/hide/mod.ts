@@ -3,6 +3,16 @@ import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { Posts } from './Posts';
 import { Quotes } from './Quotes';
 
+export const threads = (users: SearchData['users'] = []): void => {
+	if (!$.thread.isThreadsView()) return;
+	for (const thread of $.threads()) {
+		const createdBy = $.thread.createdBy(thread);
+		if (createdBy && users.includes(createdBy)) {
+			hideElement(thread);
+		}
+	}
+};
+
 const by = (searchData: SearchData, postStyle: PostStyle, lang: SupportedLang, withIcons: boolean): void => {
 	Posts.build($.posts(), searchData, postStyle, lang, withIcons);
 	Quotes.build($.quotes(), searchData, postStyle, lang, withIcons);
@@ -27,4 +37,5 @@ export const removeFollowingLineBreaks = (element: HTMLElement): void => {
 
 export const Hide = {
 	by,
+	threads,
 };
