@@ -21,11 +21,11 @@ const posts = {
 			if (isUserBlocked) {
 				icon = document.createElement('icon-unblock-user');
 				icon.setAttribute('title', t('unblockUser'));
-				icon.addEventListener('click', () => Storage.removeUser(username));
+				icon.addEventListener('click', () => Storage.unblockUser(username));
 			} else {
 				icon = document.createElement('icon-blocked-user');
 				icon.setAttribute('title', t('hideMessages'));
-				icon.addEventListener('click', () => Storage.addUser(username));
+				icon.addEventListener('click', () => Storage.blockUser(username));
 			}
 
 			icon.addEventListener('click', () => location.reload());

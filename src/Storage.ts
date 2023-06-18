@@ -18,8 +18,8 @@ export interface ExtensionStorage<T> {
 }
 
 export interface UserFunctions {
-	addUser: (user: string) => Promise<void>;
-	removeUser: (user: string) => Promise<void>;
+	blockUser: (user: string) => Promise<void>;
+	unblockUser: (user: string) => Promise<void>;
 }
 
 export const Storage: ExtensionStorage<StorageItems> & UserFunctions = {
@@ -42,15 +42,14 @@ export const Storage: ExtensionStorage<StorageItems> & UserFunctions = {
 	async delete(key) {
 		return chrome.storage.sync.remove(key);
 	},
-	async addUser(user) {
-		console.log('add user');
+	async blockUser(user) {
 		const users = await this.getOrDefault('users', []);
 		const userExists = users.some(u => u.toLowerCase() === user.toLowerCase());
 		if (!userExists) {
 			this.set('users', [user, ...users]);
 		}
 	},
-	async removeUser(user) {
+	async unblockUser(user) {
 		let users = await this.getOrDefault('users', []);
 		users = users.filter(u => u !== user);
 		this.set('users', users);
