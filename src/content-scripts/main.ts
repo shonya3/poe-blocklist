@@ -17,7 +17,7 @@ async function main(): Promise<void> {
 
 		Update.posts.addBlockButton(lang);
 		Update.threads.editNames(users);
-		Update.page.addSettingsButton();
+		Update.page.addSettingsButton(lang);
 
 		Hide.postsAndQuotes({ keywords, users }, postStyle, lang, withIcons);
 		if (shouldHideThreads) Hide.threads(users);

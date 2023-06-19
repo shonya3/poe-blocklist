@@ -53,6 +53,10 @@ const dictionary = {
 		en: 'Hide threads created by blocked users',
 		ru: 'Спрятать темы, созданные заблокированными пользователями',
 	},
+	openBlocklistSettings: {
+		en: 'Open Blocklist Settings',
+		ru: 'Открыть Настройки Блоклиста',
+	},
 } as const;
 
 export const translate = <Lang extends SupportedLang>(lang: Lang) => {

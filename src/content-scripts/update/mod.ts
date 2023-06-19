@@ -60,13 +60,14 @@ const threads = {
 };
 
 const page = {
-	addSettingsButton() {
+	addSettingsButton(lang: SupportedLang) {
 		IconSettings.define();
+		const t = translate(lang);
 		const iconSettings = document.createElement('icon-settings');
 		iconSettings.addEventListener('click', () => {
 			chrome.runtime.sendMessage<Message>({ type: 'open-options-page' });
 		});
-		iconSettings.title = 'Blocklist settings';
+		iconSettings.title = t('openBlocklistSettings');
 		document.querySelector('#statusBar')?.append(iconSettings);
 	},
 };
