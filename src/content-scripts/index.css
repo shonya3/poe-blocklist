@@ -18,3 +18,14 @@
 .blocklist-ext-font-weight-300 {
 	font-weight: 300 !important;
 }
+
+icon-settings {
+	position: absolute;
+	right: 4rem;
+	top: 0.33rem;
+	cursor: pointer;
+
+	&:hover {
+		scale: 1.1;
+	}
+}

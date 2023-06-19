@@ -1,13 +1,14 @@
 import { $ } from '../$';
 import { Storage } from '../../Storage';
 import { translate } from '../../translate';
-import { SearchData, SupportedLang } from '../../types';
+import { Message, SearchData, SupportedLang } from '../../types';
 
 import '../../elements/icons/icon-blocked-user';
 import '../../elements/icons/icon-unblock-user';
+import { IconSettings } from '../../elements/icons/icon-settings';
 
 const posts = {
-	async addBlockIcon(lang: SupportedLang) {
+	async addBlockButton(lang: SupportedLang) {
 		for (const post of $.posts()) {
 			const buttons = $.post.buttons(post);
 			const username = $.post.username(post);
@@ -36,7 +37,7 @@ const posts = {
 };
 
 const threads = {
-	names(users: SearchData['users']) {
+	editNames(users: SearchData['users']) {
 		if (!$.thread.isThreadsView()) return;
 		for (const thread of $.threads()) {
 			const createdByEl = $.thread.elementCreatedBy(thread);
@@ -58,7 +59,20 @@ const threads = {
 	},
 };
 
+const page = {
+	addSettingsButton() {
+		IconSettings.define();
+		const iconSettings = document.createElement('icon-settings');
+		iconSettings.addEventListener('click', () => {
+			chrome.runtime.sendMessage<Message>({ type: 'open-options-page' });
+		});
+		iconSettings.title = 'Blocklist settings';
+		document.querySelector('#statusBar')?.append(iconSettings);
+	},
+};
+
 export const Update = {
 	posts,
 	threads,
+	page,
 };

@@ -13,7 +13,12 @@ export const threads = (users: SearchData['users'] = []): void => {
 	}
 };
 
-const by = (searchData: SearchData, postStyle: PostStyle, lang: SupportedLang, withIcons: boolean): void => {
+const postsAndQuotes = (
+	searchData: SearchData,
+	postStyle: PostStyle,
+	lang: SupportedLang,
+	withIcons: boolean
+): void => {
 	Posts.build($.posts(), searchData, postStyle, lang, withIcons);
 	Quotes.build($.quotes(), searchData, postStyle, lang, withIcons);
 };
@@ -36,6 +41,6 @@ export const removeFollowingLineBreaks = (element: HTMLElement): void => {
 };
 
 export const Hide = {
-	by,
+	postsAndQuotes,
 	threads,
 };

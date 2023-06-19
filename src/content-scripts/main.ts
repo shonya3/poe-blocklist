@@ -15,10 +15,11 @@ async function main(): Promise<void> {
 			Storage.getOrDefault('hideThreadsCreatedByBlockedUsers', Default.hideThreadsCreatedByBlockedUsers),
 		]);
 
-		Update.posts.addBlockIcon(lang);
-		Update.threads.names(users);
+		Update.posts.addBlockButton(lang);
+		Update.threads.editNames(users);
+		Update.page.addSettingsButton();
 
-		Hide.by({ keywords, users }, postStyle, lang, withIcons);
+		Hide.postsAndQuotes({ keywords, users }, postStyle, lang, withIcons);
 		if (shouldHideThreads) Hide.threads(users);
 	} catch (err) {
 		console.log(err);
