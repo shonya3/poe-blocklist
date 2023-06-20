@@ -34,9 +34,10 @@ export const hideElement = (element: HTMLElement): void => element.classList.add
 export const revealElement = (element: HTMLElement): void => element.classList.remove($.cssClass.hidden);
 export const removeFollowingLineBreaks = (element: HTMLElement): void => {
 	while (true) {
-		const next = element.nextElementSibling;
-		if (next?.tagName === 'BR') next.remove();
-		else break;
+		const node = element.nextSibling;
+		if (node instanceof HTMLBRElement) {
+			node.remove();
+		} else break;
 	}
 };
 
