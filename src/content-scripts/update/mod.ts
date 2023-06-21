@@ -12,7 +12,7 @@ const posts = {
 		for (const post of $.posts()) {
 			const buttons = $.post.buttons(post);
 			const username = $.post.username(post);
-			if (!buttons || !username) return;
+			if (!buttons || !username) continue;
 
 			const users = await Storage.getOrDefault('users', []);
 			const isUserBlocked = users.includes(username);
