@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import '../elements/blocked-content/blocked-content';
-import '../elements/tabs/mod';
+import { computed, ref } from 'vue';
+import { BlockedContent } from '../elements/blocked-content/blocked-content';
+import { MyTab, MyTabGroup, MyTabPanel } from '../elements/tabs/mod';
+import { ThemeToggle } from '../elements/theme-toggle/mod';
+MyTab.define();
+MyTabGroup.define();
+MyTabPanel.define();
+ThemeToggle.define();
+
 import IconSettings from './icons/IconSettings.vue';
 import BlockList from './BlockList.vue';
 import PostStyleSlider from './PostStyleSlider.vue';

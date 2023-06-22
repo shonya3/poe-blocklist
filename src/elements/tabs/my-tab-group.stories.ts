@@ -1,4 +1,7 @@
-import './mod';
+import { MyTab, MyTabGroup, MyTabPanel } from './mod';
+MyTab.define();
+MyTabGroup.define();
+MyTabPanel.define();
 import { html } from 'lit';
 
 export default {

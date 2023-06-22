@@ -1,4 +1,16 @@
+declare global {
+	interface HTMLElementTagNameMap {
+		'my-tab': MyTab;
+	}
+}
+
 export class MyTab extends HTMLElement {
+	static define(tag = 'my-tab') {
+		if (!customElements.get(tag)) {
+			customElements.define(tag, MyTab);
+		}
+	}
+
 	set active(val: boolean) {
 		val ? this.setAttribute('active', '') : this.removeAttribute('active');
 	}
@@ -43,11 +55,3 @@ export class MyTab extends HTMLElement {
 		this.attachShadow({ mode: 'open' }).innerHTML = MyTab.template;
 	}
 }
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'my-tab': MyTab;
-	}
-}
-
-customElements.define('my-tab', MyTab);

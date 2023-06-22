@@ -1,4 +1,16 @@
+declare global {
+	interface HTMLElementTagNameMap {
+		'my-tab-panel': MyTabPanel;
+	}
+}
+
 export class MyTabPanel extends HTMLElement {
+	static define(tag = 'my-tab-panel') {
+		if (!customElements.get(tag)) {
+			customElements.define(tag, MyTabPanel);
+		}
+	}
+
 	get name() {
 		return this.getAttribute('name') ?? '';
 	}
@@ -25,11 +37,3 @@ export class MyTabPanel extends HTMLElement {
 		this.attachShadow({ mode: 'open' }).innerHTML = MyTabPanel.template;
 	}
 }
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'my-tab-panel': MyTabPanel;
-	}
-}
-
-customElements.define('my-tab-panel', MyTabPanel);

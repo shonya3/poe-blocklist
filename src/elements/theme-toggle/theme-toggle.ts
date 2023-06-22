@@ -39,6 +39,12 @@ const themeUtils = Object.freeze({
 });
 
 export class ThemeToggle extends HTMLElement {
+	static define(tag = 'theme-toggle') {
+		if (!customElements.get(tag)) {
+			customElements.define('theme-toggle', ThemeToggle);
+		}
+	}
+
 	get theme(): ColorTheme {
 		const theme = this.getAttribute('theme');
 		if (theme !== 'dark' && theme !== 'light') return 'dark';
@@ -50,7 +56,7 @@ export class ThemeToggle extends HTMLElement {
 	}
 
 	static observedAttributes = ['theme'];
-	attributeChangedCallback(name: 'theme', oldVal: Option<string>, val: Option<string>) {
+	attributeChangedCallback(name: 'theme', _: Option<string>, val: Option<string>) {
 		switch (name) {
 			case 'theme':
 				if (val !== 'dark' && val !== 'light') return;
@@ -95,5 +101,3 @@ declare global {
 		'theme-toggle': ThemeToggle;
 	}
 }
-
-customElements.define('theme-toggle', ThemeToggle);

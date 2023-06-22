@@ -1,3 +1,3 @@
-export * from './my-tab';
-export * from './my-tab-group';
-export * from './my-tab-panel';
+export { MyTabGroup } from './my-tab-group';
+export { MyTabPanel } from './my-tab-panel';
+export { MyTab } from './my-tab';

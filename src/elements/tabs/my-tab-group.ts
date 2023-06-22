@@ -28,7 +28,19 @@ const markup = String.raw`
     </div>
 `;
 
+declare global {
+	interface HTMLElementTagNameMap {
+		'my-tab-group': MyTabGroup;
+	}
+}
+
 export class MyTabGroup extends HTMLElement {
+	static define(tag = 'my-tab-group') {
+		if (!customElements.get(tag)) {
+			customElements.define(tag, MyTabGroup);
+		}
+	}
+
 	get tabs(): Option<MyTab[]> {
 		const navSlot = this.shadowRoot?.querySelector('slot[name="nav"]');
 		if (!(navSlot instanceof HTMLSlotElement)) return null;
@@ -152,11 +164,3 @@ export class MyTabGroup extends HTMLElement {
 		);
 	}
 }
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'my-tab-group': MyTabGroup;
-	}
-}
-
-customElements.define('my-tab-group', MyTabGroup);
