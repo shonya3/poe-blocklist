@@ -46,6 +46,8 @@ const threads = {
 				createdByEl.textContent = 'blocked';
 				createdByEl.href = '';
 				createdByEl.classList.add($.cssClass.fontWeight300);
+
+				createdByEl.parentElement?.setAttribute('data-hide-challenges', '');
 			}
 
 			const lastPostedEl = $.thread.elementLastPosted(thread);
@@ -54,6 +56,8 @@ const threads = {
 				lastPostedEl.textContent = 'blocked';
 				lastPostedEl.href = '';
 				lastPostedEl.classList.add($.cssClass.fontWeight300);
+
+				lastPostedEl.parentElement?.setAttribute('data-hide-challenges', '');
 			}
 		}
 	},

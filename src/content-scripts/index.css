@@ -29,3 +29,9 @@ icon-settings {
 		scale: 1.1;
 	}
 }
+
+[data-hide-challenges]::before {
+	background-image: none !important;
+	width: 0 !important;
+	margin: 0 !important;
+}
