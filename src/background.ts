@@ -1,5 +1,9 @@
 import { Message } from './types';
 
+const getActiveTab = async () => {
+	return chrome.tabs.query({ active: true, lastFocusedWindow: true });
+};
+
 chrome.action.onClicked.addListener(() => {
 	chrome.runtime.openOptionsPage();
 });
