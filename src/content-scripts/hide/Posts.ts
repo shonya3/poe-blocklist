@@ -2,7 +2,7 @@ import { html, render, nothing } from 'lit';
 import { $ } from '../$';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText, hideElement, revealElement } from './mod';
-import '../../elements/blocked-content/blocked-content';
+import { BlockedContent } from '../../elements/blocked-content/blocked-content';
 
 const build = (
 	posts: HTMLElement[],
@@ -11,6 +11,7 @@ const build = (
 	lang: SupportedLang,
 	withIcons: boolean
 ): void => {
+	BlockedContent.define();
 	for (const post of posts) {
 		const userTooltip = byUsers(post, users);
 		const keywordTooltip = byKeywords(post, keywords);

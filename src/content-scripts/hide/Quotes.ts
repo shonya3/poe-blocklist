@@ -2,7 +2,7 @@ import { html, nothing, render } from 'lit';
 import { $ } from '../$';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText, hideElement, removeFollowingLineBreaks, revealElement } from './mod';
-import '../../elements/blocked-content/blocked-content';
+import { BlockedContent } from '../../elements/blocked-content/blocked-content';
 
 const build = (
 	quotes: HTMLElement[],
@@ -11,6 +11,7 @@ const build = (
 	lang: SupportedLang,
 	withIcons: boolean
 ): void => {
+	BlockedContent.define();
 	for (const quote of quotes) {
 		const content = $.quote.content(quote);
 		if (!content) continue;

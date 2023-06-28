@@ -7,8 +7,12 @@ import { styles } from './styles';
 import '../icons/icon-monkey';
 import '../icons/icon-blocked-user';
 
-@customElement('blocked-content')
 export class BlockedContent extends LitElement {
+	static define(tag = 'blocked-content') {
+		if (!customElements.get(tag)) {
+			customElements.define(tag, BlockedContent);
+		}
+	}
 	static styles = styles;
 
 	/** Visual style of element rendering */
