@@ -7,6 +7,7 @@ export interface StorageItems {
 	lang: SupportedLang;
 	withIcons: boolean;
 	hideThreadsCreatedByBlockedUsers: boolean;
+	showSettingsPopover: boolean;
 }
 
 export interface ExtensionStorage<T> {

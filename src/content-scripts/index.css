@@ -35,3 +35,23 @@ icon-settings {
 	width: 0 !important;
 	margin: 0 !important;
 }
+
+my-popover {
+	transform: translate(100%, 0%);
+	right: 3.6rem;
+	position: absolute;
+	top: 0;
+	z-index: 1;
+	animation: popoverFadeIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes popoverFadeIn {
+	0% {
+		transform: translate(100%, -100%);
+		opacity: 0;
+	}
+	100% {
+		transform: translate(100%, 0);
+		opacity: 1;
+	}
+}
