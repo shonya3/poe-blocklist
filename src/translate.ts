@@ -65,7 +65,7 @@ const dictionary = {
 } as const;
 
 export const translate = <Lang extends SupportedLang>(lang: Lang) => {
-	return function t<Key extends keyof typeof dictionary>(key: Key): (typeof dictionary)[Key][Lang] {
+	return function <Key extends keyof typeof dictionary>(key: Key): (typeof dictionary)[Key][Lang] {
 		return dictionary[key][lang];
 	};
 };
