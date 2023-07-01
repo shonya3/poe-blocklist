@@ -4,6 +4,8 @@ import { Storage } from '../Storage';
 import { Update } from './update/mod';
 import { Default } from '../Default';
 
+const onSettingsPopoverClose = () => Storage.set('showSettingsPopover', false);
+
 async function main(): Promise<void> {
 	try {
 		const [users, keywords, postStyle, lang, withIcons, shouldHideThreads, showSettingsPopover] = await Promise.all(
@@ -20,9 +22,7 @@ async function main(): Promise<void> {
 
 		Update.posts.addBlockButton(lang);
 		Update.threads.editNames(users);
-		Update.page.addSettingsButton(lang, showSettingsPopover, () => {
-			Storage.set('showSettingsPopover', false);
-		});
+		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
 
 		Hide.postsAndQuotes({ keywords, users }, postStyle, lang, withIcons);
 		if (shouldHideThreads) Hide.threads(users);
