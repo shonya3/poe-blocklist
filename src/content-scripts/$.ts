@@ -1,17 +1,32 @@
-import { Option } from '../types';
+import { translate } from '../translate';
+import { Option, SupportedLang } from '../types';
 
 const EXTENSION_PREFIX = 'blocklist-ext';
+
+const consts = Object.freeze({
+	attr: Object.freeze({
+		HIDE_CHALLENGES: 'data-hide-challenges',
+		CREATOR_BLOCKED: 'data-creator-blocked',
+	}),
+
+	class: Object.freeze({
+		fontWeight300: `${EXTENSION_PREFIX}-font-weight-300`,
+		hiddenQuote: `${EXTENSION_PREFIX}-hidden-quote`,
+		userIcon: `${EXTENSION_PREFIX}-user-icon`,
+		hidden: `${EXTENSION_PREFIX}-hidden`,
+	}),
+});
 
 const thread = {
 	createdBy(thread: Element): Option<string> {
 		return thread.querySelector('.postBy a')?.textContent ?? null;
 	},
 
-	elementCreatedBy(thread: Element): Option<HTMLLinkElement> {
+	elementCreatedBy(thread: Element): Option<HTMLAnchorElement> {
 		return thread.querySelector('.postBy a') ?? null;
 	},
 
-	elementLastPosted(thread: Element): Option<HTMLLinkElement> {
+	elementLastPosted(thread: Element): Option<HTMLAnchorElement> {
 		return thread.querySelector('.last_post a');
 	},
 
@@ -19,9 +34,57 @@ const thread = {
 		return thread.querySelector('.last_post a')?.textContent ?? null;
 	},
 
+	blockName(el: HTMLAnchorElement, lang: SupportedLang = 'en'): void {
+		el.textContent = translate(lang)('blocked');
+		el.href = '';
+		el.classList.add($.consts.class.fontWeight300);
+	},
+
+	hideChallenges(el: Element): void {
+		el.parentElement?.setAttribute($.consts.attr.HIDE_CHALLENGES, '');
+	},
+
+	isCreatorBlocked(thread: Element): Option<boolean> {
+		return thread.hasAttribute($.consts.attr.CREATOR_BLOCKED) ?? null;
+	},
+
+	setCreatorBlocked(thread: Element): void {
+		thread.setAttribute($.consts.attr.CREATOR_BLOCKED, '');
+	},
+
 	isThreadsView(): boolean {
 		const { pathname } = new URL(window.location.href);
 		return pathname.includes('view-forum');
+	},
+};
+
+const forums = {
+	isForumsView(): boolean {
+		const { pathname } = new URL(window.location.href);
+		return pathname === '/forum';
+	},
+
+	elementLastPosted(thread: Element): Option<HTMLAnchorElement> {
+		return thread.querySelector('.last_post a');
+	},
+
+	lastPosted(thread: Element): Option<string> {
+		return thread.querySelector('.last_post a')?.textContent ?? null;
+	},
+
+	forums() {
+		if (!forums.isForumsView()) return [];
+		return Array.from(document.querySelectorAll('tr:has(.last_post a)'));
+	},
+
+	blockName(el: HTMLAnchorElement, lang: SupportedLang): void {
+		el.textContent = translate(lang)('blocked');
+		el.href = '';
+		el.classList.add($.consts.class.fontWeight300);
+	},
+
+	hideChallenges(el: Element): void {
+		el.parentElement?.setAttribute($.consts.attr.HIDE_CHALLENGES, '');
 	},
 };
 
@@ -70,13 +133,6 @@ const quote = {
 	},
 };
 
-const cssClass = Object.freeze({
-	fontWeight300: `${EXTENSION_PREFIX}-font-weight-300`,
-	hiddenQuote: `${EXTENSION_PREFIX}-hidden-quote`,
-	userIcon: `${EXTENSION_PREFIX}-user-icon`,
-	hidden: `${EXTENSION_PREFIX}-hidden`,
-});
-
 export const $ = {
 	posts(): HTMLElement[] {
 		return Array.from(document.querySelectorAll('tr:has(.content)'));
@@ -111,5 +167,6 @@ export const $ = {
 	post,
 	quote,
 	thread,
-	cssClass,
+	forums,
+	consts,
 };

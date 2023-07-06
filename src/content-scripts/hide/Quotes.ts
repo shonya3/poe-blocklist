@@ -27,7 +27,7 @@ const build = (
 		if (header) hideElement(header);
 		if (quotationMarks) hideElement(quotationMarks);
 
-		quote.classList.add($.cssClass.hiddenQuote);
+		quote.classList.add($.consts.class.hiddenQuote);
 
 		removeFollowingLineBreaks(quote);
 
@@ -40,7 +40,7 @@ const build = (
 				user-tooltip="${userTooltip ?? nothing}"
 				keyword-tooltip="${keywordTooltip ?? nothing}"
 				@button-clicked=${() => {
-					quote.classList.remove($.cssClass.hiddenQuote);
+					quote.classList.remove($.consts.class.hiddenQuote);
 					revealElement(content);
 					if (header) revealElement(header);
 					if (quotationMarks) revealElement(quotationMarks);

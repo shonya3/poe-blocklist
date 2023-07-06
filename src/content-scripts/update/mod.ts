@@ -31,34 +31,44 @@ const posts = {
 			}
 
 			icon.addEventListener('click', () => location.reload());
-			icon.classList.add($.cssClass.userIcon);
+			icon.classList.add($.consts.class.userIcon);
 			buttons.append(icon);
 		}
 	},
 };
 
 const threads = {
-	editNames(users: SearchData['users']) {
+	editNames(users: SearchData['users'], lang: SupportedLang) {
 		if (!$.thread.isThreadsView()) return;
 		for (const thread of $.threads()) {
 			const createdByEl = $.thread.elementCreatedBy(thread);
 			const createdBy = $.thread.createdBy(thread);
 			if (createdByEl && createdBy && users.includes(createdBy)) {
-				createdByEl.textContent = 'blocked';
-				createdByEl.href = '';
-				createdByEl.classList.add($.cssClass.fontWeight300);
-
-				createdByEl.parentElement?.setAttribute('data-hide-challenges', '');
+				$.thread.blockName(createdByEl, lang);
+				$.thread.hideChallenges(createdByEl);
+				$.thread.setCreatorBlocked(thread);
 			}
 
 			const lastPostedEl = $.thread.elementLastPosted(thread);
 			const lastPosted = $.thread.lastPosted(thread);
 			if (lastPostedEl && lastPosted && users.includes(lastPosted)) {
-				lastPostedEl.textContent = 'blocked';
-				lastPostedEl.href = '';
-				lastPostedEl.classList.add($.cssClass.fontWeight300);
+				$.thread.blockName(lastPostedEl, lang);
+				$.thread.hideChallenges(lastPostedEl);
+			}
+		}
+	},
+};
 
-				lastPostedEl.parentElement?.setAttribute('data-hide-challenges', '');
+const forums = {
+	editNames(users: SearchData['users'], lang: SupportedLang) {
+		if (!$.forums.isForumsView()) return;
+		for (const forum of $.forums.forums()) {
+			const lastPostedEl = $.forums.elementLastPosted(forum);
+			const lastPosted = $.forums.lastPosted(forum);
+
+			if (lastPostedEl && lastPosted && users.includes(lastPosted)) {
+				$.forums.blockName(lastPostedEl, lang);
+				$.forums.hideChallenges(lastPostedEl);
 			}
 		}
 	},
@@ -96,4 +106,5 @@ export const Update = {
 	posts,
 	threads,
 	page,
+	forums,
 };

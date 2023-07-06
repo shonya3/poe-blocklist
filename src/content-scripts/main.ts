@@ -20,9 +20,10 @@ async function main(): Promise<void> {
 			]
 		);
 
-		Update.posts.addBlockButton(lang);
-		Update.threads.editNames(users);
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
+		Update.posts.addBlockButton(lang);
+		Update.threads.editNames(users, lang);
+		Update.forums.editNames(users, lang);
 
 		Hide.postsAndQuotes({ keywords, users }, postStyle, lang, withIcons);
 		if (shouldHideThreads) Hide.threads(users);

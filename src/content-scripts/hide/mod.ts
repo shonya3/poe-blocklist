@@ -7,7 +7,8 @@ export const threads = (users: SearchData['users'] = []): void => {
 	if (!$.thread.isThreadsView()) return;
 	for (const thread of $.threads()) {
 		const createdBy = $.thread.createdBy(thread);
-		if ((createdBy && users.includes(createdBy)) || createdBy === 'blocked') {
+
+		if ((createdBy && users.includes(createdBy)) || $.thread.isCreatorBlocked(thread)) {
 			hideElement(thread);
 		}
 	}
@@ -30,8 +31,8 @@ export const getElementDirectText = (el: HTMLElement): string => {
 		.join(' ');
 };
 
-export const hideElement = (element: HTMLElement): void => element.classList.add($.cssClass.hidden);
-export const revealElement = (element: HTMLElement): void => element.classList.remove($.cssClass.hidden);
+export const hideElement = (element: HTMLElement): void => element.classList.add($.consts.class.hidden);
+export const revealElement = (element: HTMLElement): void => element.classList.remove($.consts.class.hidden);
 export const removeFollowingLineBreaks = (element: HTMLElement): void => {
 	while (true) {
 		const node = element.nextSibling;

@@ -62,6 +62,11 @@ const dictionary = {
 		en: 'Here is blocklist settings',
 		ru: 'Настройки блоклиста здесь',
 	},
+
+	blocked: {
+		en: 'Blocked',
+		ru: 'Заблокирован',
+	},
 } as const;
 
 export const translate = <Lang extends SupportedLang>(lang: Lang) => {
