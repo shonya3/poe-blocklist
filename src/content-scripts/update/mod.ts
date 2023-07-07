@@ -1,4 +1,4 @@
-import { $ } from '../$';
+import { $ } from '../Dom/mod';
 import { Storage } from '../../Storage';
 import { translate } from '../../translate';
 import { Message, SearchData, SupportedLang } from '../../types';
@@ -41,21 +41,18 @@ const posts = {
 
 const threads = {
 	editNames(users: SearchData['users'], lang: SupportedLang) {
-		if (!$.thread.isThreadsView()) return;
-		for (const thread of $.threads()) {
-			const createdByEl = $.thread.elementCreatedBy(thread);
-			const createdBy = $.thread.createdBy(thread);
-			if (createdByEl && createdBy && users.includes(createdBy)) {
-				$.thread.blockName(createdByEl, lang);
-				$.thread.hideChallenges(createdByEl);
-				$.thread.setCreatorBlocked(thread);
+		if (!$.Thread.isThreadsView()) return;
+		for (const theadElement of $.threads()) {
+			const thread = new $.Thread(theadElement);
+			const lastPostedName = thread.lastPostedBy.name;
+			const createdByName = thread.createdBy.name;
+
+			if (users.includes(lastPostedName)) {
+				thread.lastPostedBy.block(lang);
 			}
 
-			const lastPostedEl = $.thread.elementLastPosted(thread);
-			const lastPosted = $.thread.lastPosted(thread);
-			if (lastPostedEl && lastPosted && users.includes(lastPosted)) {
-				$.thread.blockName(lastPostedEl, lang);
-				$.thread.hideChallenges(lastPostedEl);
+			if (users.includes(createdByName)) {
+				thread.createdBy.block(lang);
 			}
 		}
 	},

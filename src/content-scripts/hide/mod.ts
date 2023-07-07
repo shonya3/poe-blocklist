@@ -1,15 +1,16 @@
-import { $ } from '../$';
+import { $ } from '../Dom/mod';
 import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { Posts } from './Posts';
 import { Quotes } from './Quotes';
 
 export const threads = (users: SearchData['users'] = []): void => {
-	if (!$.thread.isThreadsView()) return;
-	for (const thread of $.threads()) {
-		const createdBy = $.thread.createdBy(thread);
+	if (!$.Thread.isThreadsView()) return;
+	for (const threadElement of $.threads()) {
+		const thread = new $.Thread(threadElement);
+		const { name } = thread.createdBy;
 
-		if ((createdBy && users.includes(createdBy)) || $.thread.isCreatorBlocked(thread)) {
-			hideElement(thread);
+		if (users.includes(name) || thread.createdBy.blocked) {
+			hideElement(threadElement);
 		}
 	}
 };
