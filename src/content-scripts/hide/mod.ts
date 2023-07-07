@@ -1,4 +1,4 @@
-import { $ } from '../Dom/mod';
+import { $ } from '../dom/mod';
 import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { Posts } from './Posts';
 import { Quotes } from './Quotes';

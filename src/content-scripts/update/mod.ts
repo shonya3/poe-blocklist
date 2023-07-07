@@ -1,4 +1,4 @@
-import { $ } from '../Dom/mod';
+import { $ } from '../dom/mod';
 import { Storage } from '../../Storage';
 import { translate } from '../../translate';
 import { Message, SearchData, SupportedLang } from '../../types';

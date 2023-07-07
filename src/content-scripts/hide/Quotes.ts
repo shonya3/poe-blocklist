@@ -1,5 +1,5 @@
 import { html, nothing, render } from 'lit';
-import { $ } from '../Dom/mod';
+import { $ } from '../dom/mod';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText, hideElement, removeFollowingLineBreaks, revealElement } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
