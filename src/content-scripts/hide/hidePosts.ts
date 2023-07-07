@@ -1,6 +1,6 @@
 import { html, render, nothing } from 'lit';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
-import { getElementDirectText, hideElement, revealElement } from './mod';
+import { getElementDirectText } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
 import { Post } from '../dom/Post';
 
@@ -17,7 +17,7 @@ export const hidePosts = (
 		const keywordTooltip = byKeywords(post, keywords);
 		if (!userTooltip && !keywordTooltip) continue;
 
-		post.hideChildren();
+		post.hide();
 
 		render(
 			html`<td style="padding: 0" data-blocklist-ext-temp-td>
@@ -32,7 +32,7 @@ export const hidePosts = (
 							post.element
 								.querySelectorAll('[data-blocklist-ext-temp-td]')
 								.forEach(tempTd => tempTd.remove());
-							post.revealChildren();
+							post.show();
 						}}
 					></blocked-content>
 				</td>
@@ -50,7 +50,7 @@ const byUsers = (post: Post, users: SearchData['users']): Option<Tooltip> => {
 };
 
 const byKeywords = (post: Post, keywords: SearchData['keywords']): Option<Tooltip> => {
-	const contentElement = post.content();
+	const contentElement = post.content;
 	if (!contentElement) return null;
 
 	const text = getElementDirectText(contentElement);

@@ -1,7 +1,6 @@
 import { html, nothing, render } from 'lit';
-import { $ } from '../dom/mod';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
-import { getElementDirectText, hideElement, removeFollowingLineBreaks, revealElement } from './mod';
+import { getElementDirectText, removeFollowingLineBreaks } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
 import { Quote } from '../dom/Quote';
 

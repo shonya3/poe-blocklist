@@ -8,11 +8,19 @@ export class Post {
 		this.element = element;
 	}
 
-	isVisible() {
+	hide(): void {
+		this.cells.forEach(td => hideElement(td));
+	}
+
+	show(): void {
+		this.cells.forEach(td => revealElement(td));
+	}
+
+	get visible(): boolean {
 		return !Boolean(this.element.querySelector(':has(blocked-content)'));
 	}
 
-	buttons(): HTMLDivElement {
+	get buttons(): HTMLDivElement {
 		return this.element.querySelector('div.buttons') as HTMLDivElement;
 	}
 
@@ -20,27 +28,19 @@ export class Post {
 		return this.element.querySelector('span.profile-link.post_by_account > a')?.textContent ?? null;
 	}
 
-	content(): Option<HTMLElement> {
+	get content(): Option<HTMLElement> {
 		return this.element.querySelector('.content');
 	}
 
-	hideChildren(): void {
-		this.cells().forEach(td => hideElement(td));
-	}
-
-	revealChildren(): void {
-		this.cells().forEach(td => revealElement(td));
-	}
-
-	cells(): HTMLTableCellElement[] {
+	get cells(): HTMLTableCellElement[] {
 		return Array.from(this.element.querySelectorAll('td'));
 	}
 
-	contentCell(): Option<HTMLElement> {
+	get contentCell(): Option<HTMLElement> {
 		return this.element.querySelector('.content-container');
 	}
 
-	profileCell(): Option<HTMLElement> {
+	get profileCell(): Option<HTMLElement> {
 		return this.element.querySelector('.post_info');
 	}
 
@@ -61,10 +61,10 @@ export class Post {
 	}
 
 	static visiblePosts(posts: Post[] = Post.posts()): Post[] {
-		return posts.filter(post => post.isVisible());
+		return posts.filter(post => post.visible);
 	}
 
 	static hiddenPosts(posts: Post[] = Post.posts()): Post[] {
-		return posts.filter(post => !post.isVisible());
+		return posts.filter(post => !post.visible);
 	}
 }
