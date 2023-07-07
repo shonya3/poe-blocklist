@@ -12,9 +12,9 @@ const posts = {
 	async addBlockButton(lang: SupportedLang) {
 		IconBlockedUser.define();
 		IconUnblockUser.define();
-		for (const post of $.posts()) {
-			const buttons = $.post.buttons(post);
-			const username = $.post.username(post);
+		for (const post of $.Post.posts()) {
+			const buttons = post.buttons();
+			const username = post.username;
 			if (!buttons || !username) continue;
 
 			const users = await Storage.getOrDefault('users', []);

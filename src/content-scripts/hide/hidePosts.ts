@@ -1,11 +1,11 @@
 import { html, render, nothing } from 'lit';
-import { $ } from '../dom/mod';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText, hideElement, revealElement } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
+import { Post } from '../dom/Post';
 
 export const hidePosts = (
-	posts: HTMLElement[],
+	posts: Post[],
 	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
 	lang: SupportedLang,
@@ -17,7 +17,7 @@ export const hidePosts = (
 		const keywordTooltip = byKeywords(post, keywords);
 		if (!userTooltip && !keywordTooltip) continue;
 
-		$.post.children(post).forEach(td => hideElement(td));
+		post.hideChildren();
 
 		render(
 			html`<td style="padding: 0" data-blocklist-ext-temp-td>
@@ -29,26 +29,28 @@ export const hidePosts = (
 						user-tooltip="${userTooltip ?? nothing}"
 						keyword-tooltip="${keywordTooltip ?? nothing}"
 						@button-clicked=${() => {
-							post.querySelectorAll('[data-blocklist-ext-temp-td]').forEach(tempTd => tempTd.remove());
-							$.post.children(post).forEach(td => revealElement(td));
+							post.element
+								.querySelectorAll('[data-blocklist-ext-temp-td]')
+								.forEach(tempTd => tempTd.remove());
+							post.revealChildren();
 						}}
 					></blocked-content>
 				</td>
 				<td style="padding: 0" data-blocklist-ext-temp-td></td>`,
-			post
+			post.element
 		);
 	}
 };
 
-const byUsers = (post: HTMLElement, users: SearchData['users']): Option<Tooltip> => {
-	const postedBy = $.post.username(post);
+const byUsers = (post: Post, users: SearchData['users']): Option<Tooltip> => {
+	const postedBy = post.username;
 	if (!postedBy || !users.includes(postedBy)) return null;
 
 	return postedBy;
 };
 
-const byKeywords = (post: HTMLElement, keywords: SearchData['keywords']): Option<Tooltip> => {
-	const contentElement = $.post.content(post);
+const byKeywords = (post: Post, keywords: SearchData['keywords']): Option<Tooltip> => {
+	const contentElement = post.content();
 	if (!contentElement) return null;
 
 	const text = getElementDirectText(contentElement);

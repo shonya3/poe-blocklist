@@ -20,7 +20,7 @@ const postsAndQuotes = (
 	lang: SupportedLang,
 	withIcons: boolean
 ): void => {
-	hidePosts($.posts(), searchData, postStyle, lang, withIcons);
+	hidePosts($.Post.posts(), searchData, postStyle, lang, withIcons);
 	hideQuotes($.quotes(), searchData, postStyle, lang, withIcons);
 };
 

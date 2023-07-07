@@ -1,4 +1,5 @@
 import { Option } from '../../types';
+import { hideElement, revealElement } from '../hide/mod';
 
 export class Post {
 	static POST_SELECTOR = 'tr:has(.content)' as const;
@@ -21,6 +22,14 @@ export class Post {
 
 	content(): Option<HTMLElement> {
 		return this.element.querySelector('.content');
+	}
+
+	hideChildren(): void {
+		this.cells().forEach(td => hideElement(td));
+	}
+
+	revealChildren(): void {
+		this.cells().forEach(td => revealElement(td));
 	}
 
 	cells(): HTMLTableCellElement[] {
