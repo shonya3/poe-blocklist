@@ -4,14 +4,23 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { BlockedContentProps, PostOrQuote, PostStyle } from '../../types';
 import { styles } from './styles';
 
-import '../icons/icon-monkey';
-import '../icons/icon-blocked-user';
+import { IconMonkey } from '../icons/icon-monkey';
+import { IconBlockedUser } from '../icons/icon-blocked-user';
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'blocked-content': BlockedContent;
+	}
+}
 
 export class BlockedContent extends LitElement {
 	static define(tag = 'blocked-content') {
 		if (!customElements.get(tag)) {
 			customElements.define(tag, BlockedContent);
 		}
+
+		IconMonkey.define();
+		IconBlockedUser.define();
 	}
 	static styles = styles;
 
@@ -79,10 +88,5 @@ export class BlockedContent extends LitElement {
 	#onButtonClicked() {
 		this.remove();
 		this.dispatchEvent(new Event('button-clicked', { composed: true, bubbles: true }));
-	}
-}
-declare global {
-	interface HTMLElementTagNameMap {
-		'blocked-content': BlockedContent;
 	}
 }

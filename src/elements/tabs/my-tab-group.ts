@@ -39,6 +39,9 @@ export class MyTabGroup extends HTMLElement {
 		if (!customElements.get(tag)) {
 			customElements.define(tag, MyTabGroup);
 		}
+
+		MyTab.define();
+		MyTabPanel.define();
 	}
 
 	get tabs(): Option<MyTab[]> {

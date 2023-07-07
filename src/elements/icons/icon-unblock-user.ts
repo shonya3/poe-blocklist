@@ -1,4 +1,16 @@
+declare global {
+	interface HTMLElementTagNameMap {
+		'icon-unblock-user': IconUnblockUser;
+	}
+}
+
 export class IconUnblockUser extends HTMLElement {
+	static define(tag = 'icon-unblock-user') {
+		if (!customElements.get(tag)) {
+			customElements.define(tag, IconUnblockUser);
+		}
+	}
+
 	constructor() {
 		super();
 		const template = document.createElement('template');
@@ -89,12 +101,5 @@ export class IconUnblockUser extends HTMLElement {
 		const titleEl = this.$svg.querySelector('title');
 		if (!titleEl) throw new Error('no title element on icon element');
 		return titleEl;
-	}
-}
-
-customElements.define('icon-unblock-user', IconUnblockUser);
-declare global {
-	interface HTMLElementTagNameMap {
-		'icon-unblock-user': IconUnblockUser;
 	}
 }

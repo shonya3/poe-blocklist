@@ -1,4 +1,17 @@
+declare global {
+	interface HTMLElementTagNameMap {
+		'icon-settings': IconSettings;
+	}
+}
+
 export class IconSettings extends HTMLElement {
+	static define() {
+		const tag = 'icon-settings';
+		if (!customElements.get(tag)) {
+			customElements.define(tag, IconSettings);
+		}
+	}
+
 	constructor() {
 		super();
 		const template = document.createElement('template');
@@ -67,18 +80,5 @@ export class IconSettings extends HTMLElement {
 		const svg = root.querySelector('svg');
 		if (!svg) throw new Error('no svg element on root');
 		return svg;
-	}
-
-	static define() {
-		const tag = 'icon-settings';
-		if (!customElements.get(tag)) {
-			customElements.define(tag, IconSettings);
-		}
-	}
-}
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'icon-settings': IconSettings;
 	}
 }

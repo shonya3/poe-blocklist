@@ -3,13 +3,15 @@ import { Storage } from '../../Storage';
 import { translate } from '../../translate';
 import { Message, SearchData, SupportedLang } from '../../types';
 
-import '../../elements/icons/icon-blocked-user';
-import '../../elements/icons/icon-unblock-user';
 import { IconSettings } from '../../elements/icons/icon-settings';
 import { MyPopoverElement } from '../../elements/popover/my-popover';
+import { IconBlockedUser } from '../../elements/icons/icon-blocked-user';
+import { IconUnblockUser } from '../../elements/icons/icon-unblock-user';
 
 const posts = {
 	async addBlockButton(lang: SupportedLang) {
+		IconBlockedUser.define();
+		IconUnblockUser.define();
 		for (const post of $.posts()) {
 			const buttons = $.post.buttons(post);
 			const username = $.post.username(post);

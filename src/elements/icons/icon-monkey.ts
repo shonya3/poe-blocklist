@@ -1,4 +1,16 @@
+declare global {
+	interface HTMLElementTagNameMap {
+		'icon-monkey': IconMonkey;
+	}
+}
+
 export class IconMonkey extends HTMLElement {
+	static define(tag = 'icon-monkey') {
+		if (!customElements.get(tag)) {
+			customElements.define(tag, IconMonkey);
+		}
+	}
+
 	constructor() {
 		super();
 		const template = document.createElement('template');
@@ -121,12 +133,5 @@ export class IconMonkey extends HTMLElement {
 		const titleEl = this.$svg.querySelector('title');
 		if (!titleEl) throw new Error('no title element on icon element');
 		return titleEl;
-	}
-}
-
-customElements.define('icon-monkey', IconMonkey);
-declare global {
-	interface HTMLElementTagNameMap {
-		'icon-monkey': IconMonkey;
 	}
 }

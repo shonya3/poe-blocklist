@@ -1,4 +1,16 @@
+declare global {
+	interface HTMLElementTagNameMap {
+		'icon-blocked-user': IconBlockedUser;
+	}
+}
+
 export class IconBlockedUser extends HTMLElement {
+	static define(tag = 'icon-blocked-user') {
+		if (!customElements.get(tag)) {
+			customElements.define(tag, IconBlockedUser);
+		}
+	}
+
 	constructor() {
 		super();
 		const template = document.createElement('template');
@@ -89,12 +101,5 @@ export class IconBlockedUser extends HTMLElement {
 		const titleEl = this.$svg.querySelector('title');
 		if (!titleEl) throw new Error('no title element on icon element');
 		return titleEl;
-	}
-}
-
-customElements.define('icon-blocked-user', IconBlockedUser);
-declare global {
-	interface HTMLElementTagNameMap {
-		'icon-blocked-user': IconBlockedUser;
 	}
 }
