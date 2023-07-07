@@ -21,7 +21,7 @@ const postsAndQuotes = (
 	withIcons: boolean
 ): void => {
 	hidePosts($.Post.posts(), searchData, postStyle, lang, withIcons);
-	hideQuotes($.quotes(), searchData, postStyle, lang, withIcons);
+	hideQuotes($.Quote.quotes(), searchData, postStyle, lang, withIcons);
 };
 
 export const getElementDirectText = (el: HTMLElement): string => {

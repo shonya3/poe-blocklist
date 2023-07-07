@@ -3,9 +3,10 @@ import { $ } from '../dom/mod';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText, hideElement, removeFollowingLineBreaks, revealElement } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
+import { Quote } from '../dom/Quote';
 
 export const hideQuotes = (
-	quotes: HTMLElement[],
+	quotes: Quote[],
 	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
 	lang: SupportedLang,
@@ -13,23 +14,13 @@ export const hideQuotes = (
 ): void => {
 	BlockedContent.define();
 	for (const quote of quotes) {
-		const content = $.quote.content(quote);
-		if (!content) continue;
-
 		const userTooltip = byUsers(quote, users);
 		const keywordTooltip = byKeywords(quote, keywords);
 
 		if (!userTooltip && !keywordTooltip) continue;
 
-		hideElement(content);
-		const header = $.quote.header(quote);
-		const quotationMarks = $.quote.quotationMarks(quote);
-		if (header) hideElement(header);
-		if (quotationMarks) hideElement(quotationMarks);
-
-		quote.classList.add($.consts.class.hiddenQuote);
-
-		removeFollowingLineBreaks(quote);
+		quote.hide();
+		removeFollowingLineBreaks(quote.element);
 
 		render(
 			html`<blocked-content
@@ -40,26 +31,23 @@ export const hideQuotes = (
 				user-tooltip="${userTooltip ?? nothing}"
 				keyword-tooltip="${keywordTooltip ?? nothing}"
 				@button-clicked=${() => {
-					quote.classList.remove($.consts.class.hiddenQuote);
-					revealElement(content);
-					if (header) revealElement(header);
-					if (quotationMarks) revealElement(quotationMarks);
+					quote.show();
 				}}
 			></blocked-content>`,
-			quote
+			quote.element
 		);
 	}
 };
 
-const byUsers = (quote: HTMLElement, users: SearchData['users']): Option<Tooltip> => {
-	const username = $.quote.username(quote);
+const byUsers = (quote: Quote, users: SearchData['users']): Option<Tooltip> => {
+	const { username } = quote;
 	if (!username || !users.includes(username)) return null;
 
 	return username;
 };
 
-const byKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Option<Tooltip> => {
-	const content = $.quote.content(quote);
+const byKeywords = (quote: Quote, keywords: SearchData['keywords']): Option<Tooltip> => {
+	const { content } = quote;
 	if (!content) return null;
 
 	const text = getElementDirectText(content);
