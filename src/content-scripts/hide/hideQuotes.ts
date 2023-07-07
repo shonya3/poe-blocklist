@@ -18,7 +18,7 @@ export const hideQuotes = (
 
 		if (!userTooltip && !keywordTooltip) continue;
 
-		quote.hide();
+		quote.hideChildren();
 		removeFollowingLineBreaks(quote.element);
 
 		render(
@@ -30,7 +30,7 @@ export const hideQuotes = (
 				user-tooltip="${userTooltip ?? nothing}"
 				keyword-tooltip="${keywordTooltip ?? nothing}"
 				@button-clicked=${() => {
-					quote.show();
+					quote.showChildren();
 				}}
 			></blocked-content>`,
 			quote.element

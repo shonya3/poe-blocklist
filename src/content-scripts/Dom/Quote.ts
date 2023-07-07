@@ -8,7 +8,7 @@ export class Quote {
 		this.element = element;
 	}
 
-	hide(): void {
+	hideChildren(): void {
 		const { content, header, quotationMarks } = this;
 		if (content) hideElement(content);
 		if (header) hideElement(header);
@@ -17,7 +17,7 @@ export class Quote {
 		this.element.classList.add(consts.class.hiddenQuote);
 	}
 
-	show(): void {
+	showChildren(): void {
 		const { content, header, quotationMarks } = this;
 		if (content) revealElement(content);
 		if (header) revealElement(header);

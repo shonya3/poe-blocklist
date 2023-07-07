@@ -17,7 +17,7 @@ export const hidePosts = (
 		const keywordTooltip = byKeywords(post, keywords);
 		if (!userTooltip && !keywordTooltip) continue;
 
-		post.hide();
+		post.hideChildren();
 
 		render(
 			html`<td style="padding: 0" data-blocklist-ext-temp-td>
@@ -32,7 +32,7 @@ export const hidePosts = (
 							post.element
 								.querySelectorAll('[data-blocklist-ext-temp-td]')
 								.forEach(tempTd => tempTd.remove());
-							post.show();
+							post.showChildren();
 						}}
 					></blocked-content>
 				</td>

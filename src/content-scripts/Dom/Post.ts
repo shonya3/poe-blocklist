@@ -8,11 +8,11 @@ export class Post {
 		this.element = element;
 	}
 
-	hide(): void {
+	hideChildren(): void {
 		this.cells.forEach(td => hideElement(td));
 	}
 
-	show(): void {
+	showChildren(): void {
 		this.cells.forEach(td => revealElement(td));
 	}
 
