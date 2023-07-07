@@ -4,7 +4,7 @@ import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../typ
 import { getElementDirectText, hideElement, removeFollowingLineBreaks, revealElement } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
 
-const build = (
+export const hideQuotes = (
 	quotes: HTMLElement[],
 	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
@@ -67,8 +67,4 @@ const byKeywords = (quote: HTMLElement, keywords: SearchData['keywords']): Optio
 	const foundKeywords = keywords.filter(word => text.includes(word));
 	if (!foundKeywords.length) return null;
 	return foundKeywords.join(', ');
-};
-
-export const Quotes = {
-	build,
 };

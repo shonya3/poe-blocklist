@@ -4,7 +4,7 @@ import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../typ
 import { getElementDirectText, hideElement, revealElement } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
 
-const build = (
+export const hidePosts = (
 	posts: HTMLElement[],
 	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
@@ -53,8 +53,4 @@ const byKeywords = (post: HTMLElement, keywords: SearchData['keywords']): Option
 
 	const text = getElementDirectText(contentElement);
 	return keywords.filter(word => text.toLowerCase().includes(word.toLowerCase())).join(', ');
-};
-
-export const Posts = {
-	build,
 };

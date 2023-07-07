@@ -1,7 +1,7 @@
 import { $ } from '../dom/mod';
 import { PostStyle, SearchData, SupportedLang } from '../../types';
-import { Posts } from './Posts';
-import { Quotes } from './Quotes';
+import { hidePosts } from './hidePosts';
+import { hideQuotes } from './hideQuotes';
 
 export const threads = (users: SearchData['users'] = []): void => {
 	if (!$.Thread.isThreadsView()) return;
@@ -20,8 +20,8 @@ const postsAndQuotes = (
 	lang: SupportedLang,
 	withIcons: boolean
 ): void => {
-	Posts.build($.posts(), searchData, postStyle, lang, withIcons);
-	Quotes.build($.quotes(), searchData, postStyle, lang, withIcons);
+	hidePosts($.posts(), searchData, postStyle, lang, withIcons);
+	hideQuotes($.quotes(), searchData, postStyle, lang, withIcons);
 };
 
 export const getElementDirectText = (el: HTMLElement): string => {
