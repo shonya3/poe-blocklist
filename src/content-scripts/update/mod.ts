@@ -42,33 +42,20 @@ const posts = {
 const threads = {
 	editNames(users: SearchData['users'], lang: SupportedLang) {
 		if (!$.Thread.isThreadsView()) return;
-		for (const theadElement of $.threads()) {
-			const thread = new $.Thread(theadElement);
-			const lastPostedName = thread.lastPostedBy.name;
-			const createdByName = thread.createdBy.name;
-
-			if (users.includes(lastPostedName)) {
-				thread.lastPostedBy.block(lang);
-			}
-
-			if (users.includes(createdByName)) {
-				thread.createdBy.block(lang);
-			}
+		for (const thread of $.Thread.threads()) {
+			const { createdBy, lastPostedBy } = thread;
+			if (users.includes(createdBy.name)) createdBy.block(lang);
+			if (users.includes(lastPostedBy.name)) lastPostedBy.block(lang);
 		}
 	},
 };
 
 const forums = {
 	editNames(users: SearchData['users'], lang: SupportedLang) {
-		if (!$.forums.isForumsView()) return;
-		for (const forum of $.forums.forums()) {
-			const lastPostedEl = $.forums.elementLastPosted(forum);
-			const lastPosted = $.forums.lastPosted(forum);
-
-			if (lastPostedEl && lastPosted && users.includes(lastPosted)) {
-				$.forums.blockName(lastPostedEl, lang);
-				$.forums.hideChallenges(lastPostedEl);
-			}
+		if (!$.Forum.isForumsView()) return;
+		for (const forum of $.Forum.forums()) {
+			const { lastPostedBy } = forum;
+			if (users.includes(lastPostedBy.name)) lastPostedBy.block(lang);
 		}
 	},
 };

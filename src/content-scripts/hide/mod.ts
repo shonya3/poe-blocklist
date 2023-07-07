@@ -5,12 +5,11 @@ import { Quotes } from './Quotes';
 
 export const threads = (users: SearchData['users'] = []): void => {
 	if (!$.Thread.isThreadsView()) return;
-	for (const threadElement of $.threads()) {
-		const thread = new $.Thread(threadElement);
+	for (const thread of $.Thread.threads()) {
 		const { name } = thread.createdBy;
 
 		if (users.includes(name) || thread.createdBy.blocked) {
-			hideElement(threadElement);
+			hideElement(thread.element);
 		}
 	}
 };

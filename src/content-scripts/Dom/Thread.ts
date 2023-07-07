@@ -15,4 +15,13 @@ export class Thread {
 		const { pathname } = new URL(window.location.href);
 		return pathname.includes('view-forum');
 	}
+
+	static threadElements(): HTMLTableRowElement[] {
+		if (!Thread.isThreadsView()) return [];
+		return Array.from(document.querySelectorAll('tr:has(.thread)'));
+	}
+
+	static threads(): Thread[] {
+		return Thread.threadElements().map(element => new Thread(element));
+	}
 }

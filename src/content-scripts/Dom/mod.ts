@@ -1,37 +1,7 @@
-import { SupportedLang, Option } from '../../types';
-import { translate } from '../../translate';
-import { Thread } from './Thread';
+import { Option } from '../../types';
 import { consts } from './consts';
-
-const forums = {
-	isForumsView(): boolean {
-		const { pathname } = new URL(window.location.href);
-		return pathname === '/forum';
-	},
-
-	elementLastPosted(thread: Element): Option<HTMLAnchorElement> {
-		return thread.querySelector('.last_post a');
-	},
-
-	lastPosted(thread: Element): Option<string> {
-		return thread.querySelector('.last_post a')?.textContent ?? null;
-	},
-
-	forums() {
-		if (!forums.isForumsView()) return [];
-		return Array.from(document.querySelectorAll('tr:has(.last_post a)'));
-	},
-
-	blockName(el: HTMLAnchorElement, lang: SupportedLang): void {
-		el.textContent = translate(lang)('blocked');
-		el.href = '';
-		el.classList.add($.consts.class.fontWeight300);
-	},
-
-	hideChallenges(el: Element): void {
-		el.parentElement?.setAttribute($.consts.attr.HIDE_CHALLENGES, '');
-	},
-};
+import { Thread } from './Thread';
+import { Forum } from './Forum';
 
 const post = {
 	buttons(post: Element): Option<HTMLElement> {
@@ -87,11 +57,6 @@ export const $ = {
 		return Array.from(document.querySelectorAll('blockquote'));
 	},
 
-	threads(): HTMLTableRowElement[] {
-		if (!Thread.isThreadsView()) return [];
-		return Array.from(document.querySelectorAll('tr:has(.thread)'));
-	},
-
 	hiddenPosts(): HTMLElement[] {
 		return $.posts().filter(post => $.post.isPostHidden(post));
 	},
@@ -111,7 +76,7 @@ export const $ = {
 
 	post,
 	quote,
-	forums,
 	consts,
 	Thread,
+	Forum,
 };

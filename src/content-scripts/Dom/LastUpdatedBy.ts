@@ -24,13 +24,13 @@ export class LastUpdatedBy {
 		this.hideChallenges();
 	}
 
-	blockName(lang: SupportedLang) {
+	blockName(lang: SupportedLang): void {
 		this.name = translate(lang)('blocked');
 		this.element.href = '';
 		this.element.classList.add(consts.class.fontWeight300);
 	}
 
-	hideChallenges() {
+	hideChallenges(): void {
 		this.element.parentElement?.setAttribute(consts.attr.HIDE_CHALLENGES, '');
 	}
 }

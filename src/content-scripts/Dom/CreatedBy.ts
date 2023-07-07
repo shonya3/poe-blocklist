@@ -28,7 +28,7 @@ export class CreatedBy {
 		return this.element.textContent as string;
 	}
 
-	block(lang: SupportedLang) {
+	block(lang: SupportedLang): void {
 		this.blockName(lang);
 		this.hideChallenges();
 		this.blocked = true;
