@@ -1,6 +1,6 @@
 import { Option } from '../../types';
-import { hideElement, revealElement } from '../hide/mod';
 import { consts } from './consts';
+import { hideElement, showElement } from './utils';
 
 export class Quote {
 	element: HTMLQuoteElement;
@@ -19,9 +19,9 @@ export class Quote {
 
 	showChildren(): void {
 		const { content, header, quotationMarks } = this;
-		if (content) revealElement(content);
-		if (header) revealElement(header);
-		if (quotationMarks) revealElement(quotationMarks);
+		if (content) showElement(content);
+		if (header) showElement(header);
+		if (quotationMarks) showElement(quotationMarks);
 
 		this.element.classList.remove(consts.class.hiddenQuote);
 	}

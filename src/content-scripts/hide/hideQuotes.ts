@@ -1,6 +1,6 @@
 import { html, nothing, render } from 'lit';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
-import { getElementDirectText, removeFollowingLineBreaks } from './mod';
+import { getElementDirectText } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
 import { Quote } from '../dom/Quote';
 
@@ -35,6 +35,15 @@ export const hideQuotes = (
 			></blocked-content>`,
 			quote.element
 		);
+	}
+};
+
+const removeFollowingLineBreaks = (element: HTMLElement): void => {
+	while (true) {
+		const node = element.nextSibling;
+		if (node instanceof HTMLBRElement) {
+			node.remove();
+		} else break;
 	}
 };
 

@@ -21,7 +21,7 @@ async function main(): Promise<void> {
 		);
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
-		Update.posts.addBlockButton(lang);
+		Update.posts.addBlockButton(users, lang);
 		Update.threads.editNames(users, lang);
 		Update.forums.editNames(users, lang);
 

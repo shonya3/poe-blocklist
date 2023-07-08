@@ -1,5 +1,5 @@
 import { Option } from '../../types';
-import { hideElement, revealElement } from '../hide/mod';
+import { hideElement, showElement } from './utils';
 
 export class Post {
 	static POST_SELECTOR = 'tr:has(.content)' as const;
@@ -13,7 +13,7 @@ export class Post {
 	}
 
 	showChildren(): void {
-		this.cells.forEach(td => revealElement(td));
+		this.cells.forEach(td => showElement(td));
 	}
 
 	get visible(): boolean {

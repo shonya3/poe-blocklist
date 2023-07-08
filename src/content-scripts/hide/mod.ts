@@ -2,27 +2,7 @@ import { $ } from '../dom/mod';
 import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { hidePosts } from './hidePosts';
 import { hideQuotes } from './hideQuotes';
-
-export const threads = (users: SearchData['users'] = []): void => {
-	if (!$.Thread.isThreadsView()) return;
-	for (const thread of $.Thread.threads()) {
-		const { name } = thread.createdBy;
-
-		if (users.includes(name) || thread.createdBy.blocked) {
-			hideElement(thread.element);
-		}
-	}
-};
-
-const postsAndQuotes = (
-	searchData: SearchData,
-	postStyle: PostStyle,
-	lang: SupportedLang,
-	withIcons: boolean
-): void => {
-	hidePosts($.Post.posts(), searchData, postStyle, lang, withIcons);
-	hideQuotes($.Quote.quotes(), searchData, postStyle, lang, withIcons);
-};
+import { hideElement } from '../dom/utils';
 
 export const getElementDirectText = (el: HTMLElement): string => {
 	return Array.from(el.childNodes)
@@ -31,18 +11,20 @@ export const getElementDirectText = (el: HTMLElement): string => {
 		.join(' ');
 };
 
-export const hideElement = (element: HTMLElement): void => element.classList.add($.consts.class.hidden);
-export const revealElement = (element: HTMLElement): void => element.classList.remove($.consts.class.hidden);
-export const removeFollowingLineBreaks = (element: HTMLElement): void => {
-	while (true) {
-		const node = element.nextSibling;
-		if (node instanceof HTMLBRElement) {
-			node.remove();
-		} else break;
+export class Hide {
+	static postsAndQuotes(searchData: SearchData, postStyle: PostStyle, lang: SupportedLang, withIcons: boolean): void {
+		hidePosts($.Post.posts(), searchData, postStyle, lang, withIcons);
+		hideQuotes($.Quote.quotes(), searchData, postStyle, lang, withIcons);
 	}
-};
 
-export const Hide = {
-	postsAndQuotes,
-	threads,
-};
+	static threads(users: SearchData['users'] = []) {
+		if (!$.Thread.isThreadsView()) return;
+		for (const thread of $.Thread.threads()) {
+			const { name } = thread.createdBy;
+
+			if (users.includes(name) || thread.createdBy.blocked) {
+				hideElement(thread.element);
+			}
+		}
+	}
+}
