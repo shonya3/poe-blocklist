@@ -2,7 +2,7 @@ import { html, nothing, render } from 'lit';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
-import { Quote } from '../dom/Quote';
+import { Quote } from '../dom/mod';
 
 export const hideQuotes = (
 	quotes: Quote[],

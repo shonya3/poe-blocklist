@@ -1,13 +1,5 @@
-import { consts } from './consts';
-import { Thread } from './Thread';
-import { Forum } from './Forum';
-import { Post } from './Post';
-import { Quote } from './Quote';
-
-export const $ = {
-	consts,
-	Thread,
-	Forum,
-	Post,
-	Quote,
-};
+export { consts } from './consts';
+export { Thread } from './Thread';
+export { Forum } from './Forum';
+export { Post } from './Post';
+export { Quote } from './Quote';

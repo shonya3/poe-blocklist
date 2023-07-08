@@ -1,8 +1,8 @@
-import { $ } from '../dom/mod';
 import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { hidePosts } from './hidePosts';
 import { hideQuotes } from './hideQuotes';
 import { hideElement } from '../dom/utils';
+import { Post, Quote, Thread } from '../dom/mod';
 
 export const getElementDirectText = (el: HTMLElement): string => {
 	return Array.from(el.childNodes)
@@ -13,13 +13,13 @@ export const getElementDirectText = (el: HTMLElement): string => {
 
 export class Hide {
 	static postsAndQuotes(searchData: SearchData, postStyle: PostStyle, lang: SupportedLang, withIcons: boolean): void {
-		hidePosts($.Post.posts(), searchData, postStyle, lang, withIcons);
-		hideQuotes($.Quote.quotes(), searchData, postStyle, lang, withIcons);
+		hidePosts(Post.posts(), searchData, postStyle, lang, withIcons);
+		hideQuotes(Quote.quotes(), searchData, postStyle, lang, withIcons);
 	}
 
 	static threads(users: SearchData['users'] = []) {
-		if (!$.Thread.isThreadsView()) return;
-		for (const thread of $.Thread.threads()) {
+		if (!Thread.isThreadsView()) return;
+		for (const thread of Thread.threads()) {
 			const { name } = thread.createdBy;
 
 			if (users.includes(name) || thread.createdBy.blocked) {

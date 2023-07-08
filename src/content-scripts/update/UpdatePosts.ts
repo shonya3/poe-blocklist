@@ -3,13 +3,13 @@ import { IconBlockedUser } from '../../elements/icons/icon-blocked-user';
 import { IconUnblockUser } from '../../elements/icons/icon-unblock-user';
 import { translate } from '../../translate';
 import { SearchData, SupportedLang } from '../../types';
-import { $ } from '../dom/mod';
+import { Post, consts } from '../dom/mod';
 
 export class UpdatePosts {
 	addBlockButton(users: SearchData['users'], lang: SupportedLang): void {
 		IconBlockedUser.define();
 		IconUnblockUser.define();
-		for (const post of $.Post.posts()) {
+		for (const post of Post.posts()) {
 			const { username, buttons } = post;
 			if (!buttons || !username) continue;
 
@@ -28,7 +28,7 @@ export class UpdatePosts {
 			}
 
 			icon.addEventListener('click', () => location.reload());
-			icon.classList.add($.consts.class.userIcon);
+			icon.classList.add(consts.class.userIcon);
 			buttons.append(icon);
 		}
 	}

@@ -2,7 +2,7 @@ import { html, render, nothing } from 'lit';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
-import { Post } from '../dom/Post';
+import { Post } from '../dom/mod';
 
 export const hidePosts = (
 	posts: Post[],
