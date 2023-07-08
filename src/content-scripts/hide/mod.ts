@@ -1,7 +1,6 @@
 import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { hidePosts } from './hidePosts';
 import { hideQuotes } from './hideQuotes';
-import { hideElement } from '../dom/utils';
 import { Post, Quote, Thread } from '../dom/mod';
 
 export const getElementDirectText = (el: HTMLElement): string => {
@@ -23,7 +22,7 @@ export class Hide {
 			const { name } = thread.createdBy;
 
 			if (users.includes(name) || thread.createdBy.blocked) {
-				hideElement(thread.element);
+				thread.hide();
 			}
 		}
 	}

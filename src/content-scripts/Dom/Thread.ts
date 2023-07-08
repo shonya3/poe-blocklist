@@ -1,5 +1,6 @@
 import { CreatedBy } from './CreatedBy';
 import { LastUpdatedBy } from './LastUpdatedBy';
+import { hideElement } from './utils';
 
 export class Thread {
 	element: HTMLTableRowElement;
@@ -9,6 +10,10 @@ export class Thread {
 		this.element = element;
 		this.createdBy = new CreatedBy(element);
 		this.lastPostedBy = new LastUpdatedBy(element);
+	}
+
+	hide() {
+		hideElement(this.element);
 	}
 
 	static isThreadsView(): boolean {
