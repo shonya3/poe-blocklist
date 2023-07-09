@@ -1,11 +1,11 @@
-import { LastUpdatedBy } from './LastUpdatedBy';
+import { LastPostedBy } from './LastPostedBy';
 
 export class Forum {
 	element: HTMLTableRowElement;
-	lastPostedBy: LastUpdatedBy;
+	lastPostedBy: LastPostedBy;
 	constructor(element: HTMLTableRowElement) {
 		this.element = element;
-		this.lastPostedBy = new LastUpdatedBy(element);
+		this.lastPostedBy = new LastPostedBy(element);
 	}
 
 	static isForumsView(): boolean {

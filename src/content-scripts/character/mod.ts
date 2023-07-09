@@ -1,4 +1,3 @@
-import { $ } from '../dom/mod';
 import { Option } from '../../types';
 import { CharacterInfo, InventoryItem } from './types';
 

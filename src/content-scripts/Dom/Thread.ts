@@ -1,18 +1,18 @@
 import { CreatedBy } from './CreatedBy';
-import { LastUpdatedBy } from './LastUpdatedBy';
+import { LastPostedBy } from './LastPostedBy';
 import { hideElement } from './utils';
 
 export class Thread {
 	element: HTMLTableRowElement;
 	createdBy: CreatedBy;
-	lastPostedBy: LastUpdatedBy;
+	lastPostedBy: LastPostedBy;
 	constructor(element: HTMLTableRowElement) {
 		this.element = element;
 		this.createdBy = new CreatedBy(element);
-		this.lastPostedBy = new LastUpdatedBy(element);
+		this.lastPostedBy = new LastPostedBy(element);
 	}
 
-	hide() {
+	hide(): void {
 		hideElement(this.element);
 	}
 

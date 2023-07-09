@@ -2,7 +2,7 @@ import { translate } from '../../translate';
 import { SupportedLang } from '../../types';
 import { consts } from './consts';
 
-export class LastUpdatedBy {
+export class LastPostedBy {
 	thread: HTMLTableRowElement;
 	constructor(thread: HTMLTableRowElement) {
 		this.thread = thread;
