@@ -122,6 +122,10 @@ const t = computed(() => translate(lang.value));
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
 
+:where(label) {
+	cursor: pointer;
+}
+
 blocked-content {
 	font-family: Verdana;
 	font-size: 13px;
