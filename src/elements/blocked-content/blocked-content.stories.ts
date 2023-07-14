@@ -5,6 +5,8 @@ import { Meta } from '@storybook/web-components';
 import { BlockedContent } from './blocked-content';
 import { BlockedContentProps } from '../../types';
 
+BlockedContent.define();
+
 export default {
 	title: 'Elements/blocked-content',
 	component: 'blocked-content',
