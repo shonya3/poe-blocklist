@@ -8,6 +8,7 @@ export interface StorageItems {
 	withIcons: boolean;
 	hideThreadsCreatedByBlockedUsers: boolean;
 	showSettingsPopover: boolean;
+	hideRuthless: boolean;
 }
 
 export interface ExtensionStorage<T> {

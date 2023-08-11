@@ -5,11 +5,12 @@ import { Update } from './update/mod';
 import { Default } from '../Default';
 
 const onSettingsPopoverClose = () => Storage.set('showSettingsPopover', false);
+const onHideRuthlessChanged = (hide: boolean) => Storage.set('hideRuthless', hide);
 
 async function main(): Promise<void> {
 	try {
-		const [users, keywords, postStyle, lang, withIcons, shouldHideThreads, showSettingsPopover] = await Promise.all(
-			[
+		const [users, keywords, postStyle, lang, withIcons, shouldHideThreads, showSettingsPopover, hideRuthless] =
+			await Promise.all([
 				Storage.getOrDefault('users', []),
 				Storage.getOrDefault('keywords', []),
 				Storage.getOrDefault('postStyle', Default.postStyle),
@@ -17,8 +18,8 @@ async function main(): Promise<void> {
 				Storage.getOrDefault('withIcons', Default.withIcons),
 				Storage.getOrDefault('hideThreadsCreatedByBlockedUsers', Default.hideThreadsCreatedByBlockedUsers),
 				Storage.getOrDefault('showSettingsPopover', true),
-			]
-		);
+				Storage.getOrDefault('hideRuthless', false),
+			]);
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
 		Update.posts.addBlockButton(users, lang);
@@ -27,6 +28,8 @@ async function main(): Promise<void> {
 
 		Hide.postsAndQuotes({ keywords, users }, postStyle, lang, withIcons);
 		if (shouldHideThreads) Hide.threads(users);
+
+		Hide.ruthless(hideRuthless, onHideRuthlessChanged);
 	} catch (err) {
 		console.log(err);
 	}

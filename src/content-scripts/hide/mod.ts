@@ -2,6 +2,7 @@ import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { hidePosts } from './hidePosts';
 import { hideQuotes } from './hideQuotes';
 import { Post, Quote, Thread } from '../dom/mod';
+import { hideRuthless } from './hideRuthless/mod';
 
 export const getElementDirectText = (el: HTMLElement): string => {
 	return Array.from(el.childNodes)
@@ -25,5 +26,9 @@ export class Hide {
 				thread.hide();
 			}
 		}
+	}
+
+	static ruthless(hide: boolean, onHideChanged: (hide: boolean) => void) {
+		hideRuthless(hide, onHideChanged);
 	}
 }
