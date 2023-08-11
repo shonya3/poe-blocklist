@@ -1,3 +1,4 @@
+import { html, render } from 'lit';
 import { Dom } from './Dom';
 import { HideRuthlessElement } from './wc-hide-ruthless';
 
@@ -9,16 +10,18 @@ export const hideRuthless = (hide: boolean, onHideChanged: (hide: boolean) => vo
 	const contentBox = dom.contentBox();
 	if (!(contentBox instanceof HTMLDivElement)) return;
 
-	const hideRuthlessElement = document.createElement('wc-hide-ruthless');
-	hideRuthlessElement.lang = dom.lang;
-	hideRuthlessElement.hide = hide;
-	contentBox.append(hideRuthlessElement);
+	render(
+		html`<wc-hide-ruthless
+			@upd:hide=${(e: CustomEvent<boolean>) => {
+				const eventHide = e.detail;
+				onHideChanged(eventHide);
+				dom.hideElements(eventHide);
+			}}
+			?hide=${hide}
+			lang=${dom.lang}
+		></wc-hide-ruthless>`,
+		contentBox
+	);
 
 	dom.hideElements(hide);
-
-	hideRuthlessElement.addEventListener('upd:hide', e => {
-		const eventHide = (e as CustomEvent).detail as boolean;
-		onHideChanged(eventHide);
-		dom.hideElements(eventHide);
-	});
 };

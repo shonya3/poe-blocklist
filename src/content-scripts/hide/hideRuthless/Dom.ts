@@ -12,11 +12,7 @@ export class Dom {
 
 	is322PatchPage() {
 		if (this.lang === 'ru') {
-			return (
-				this.url.pathname === '/forum/view-thread/3409618' ||
-				'/forum/view-thread/3409618/page/1' ||
-				'/forum/view-thread/3409617'
-			);
+			return this.url.pathname === '/forum/view-thread/3409618' || '/forum/view-thread/3409618/page/1';
 		}
 
 		if (this.lang === 'en') {

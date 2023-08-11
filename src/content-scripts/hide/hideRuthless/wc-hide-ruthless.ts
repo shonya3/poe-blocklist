@@ -1,5 +1,5 @@
-import { CSSResultGroup, LitElement, css, html } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { LitElement, css, html } from 'lit';
+import { property } from 'lit/decorators.js';
 import { SupportedLang } from '../../../types';
 
 declare global {
@@ -9,7 +9,7 @@ declare global {
 }
 
 export class HideRuthlessElement extends LitElement {
-	@property({ type: Boolean, reflect: true }) hide = true;
+	@property({ type: Boolean, reflect: true }) hide = false;
 	@property({ reflect: true }) lang: SupportedLang = 'ru';
 
 	#onCheckboxInput(e: InputEvent) {
