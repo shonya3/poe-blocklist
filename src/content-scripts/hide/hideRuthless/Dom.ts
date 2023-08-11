@@ -16,7 +16,7 @@ export class Dom {
 		}
 
 		if (this.lang === 'en') {
-			return this.url.pathname === '/forum/view-thread/3409617' || '/forum/view-thread/3409618/page/1';
+			return this.url.pathname === '/forum/view-thread/3409617' || '/forum/view-thread/3409617/page/1';
 		}
 	}
 
