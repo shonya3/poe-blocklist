@@ -5,14 +5,16 @@ export const hideRuthless = (hide: boolean, onHideChanged: (hide: boolean) => vo
 	HideRuthlessElement.define();
 	const dom = new Dom();
 	if (!dom.is322PatchPage()) return;
-	dom.hideElements(hide);
 
 	const contentBox = dom.contentBox();
 	if (!(contentBox instanceof HTMLDivElement)) return;
 
 	const hideRuthlessElement = document.createElement('wc-hide-ruthless');
 	hideRuthlessElement.lang = dom.lang;
+	hideRuthlessElement.hide = hide;
 	contentBox.append(hideRuthlessElement);
+
+	dom.hideElements(hide);
 
 	hideRuthlessElement.addEventListener('upd:hide', e => {
 		const eventHide = (e as CustomEvent).detail as boolean;
