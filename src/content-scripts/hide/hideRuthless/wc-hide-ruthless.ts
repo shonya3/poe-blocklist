@@ -30,8 +30,14 @@ export class HideRuthlessElement extends LitElement {
 		:host {
 			display: inline-block;
 			position: absolute;
-			top: 0px;
-			right: 0px;
+			top: 0.6rem;
+			right: 1rem;
+		}
+
+		div {
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
 		}
 	`;
 
