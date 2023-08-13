@@ -72,50 +72,27 @@ export class Dom {
 		}
 	}
 
-	#ruthlessNavList() {
-		return document.querySelector('li:has(a[href="#ruthless-specificchanges"])');
+	#bugfixesNav() {
+		return document.querySelector('li:has(a[href="#bugfixes"])');
+	}
+
+	#bugfixes() {
+		return document.querySelector('#bugfixes');
 	}
 
 	elements() {
-		const elements = [];
-		const navList = this.#ruthlessNavList();
-		if (navList) {
-			elements.push(navList);
+		const els: Element[] = [];
+
+		const bugfixesNav = this.#bugfixesNav();
+		if (bugfixesNav !== null) {
+			els.push(bugfixesNav);
 		}
 
-		const ids = [
-			'ruthless-specificchanges',
-			'r-ascendancychanges',
-			'r-guardian',
-			'r-hierophant',
-			'r-inquisitor',
-			'r-assassin',
-			'r-saboteur',
-			'r-trickster',
-			'r-berserker',
-			'r-juggernaut',
-			'r-chieftain',
-			'r-raider',
-			'r-deadeye',
-			'r-pathfinder',
-			'r-slayer',
-			'r-gladiator',
-			'r-champion',
-			'r-necromancer',
-			'r-occultist',
-			'r-elementalist',
-			'r-ascendant',
-			'r-skillbalance',
-			'r-atlaspassivetreechanges',
-		];
-
-		for (const id of ids) {
-			const element = document.querySelector(`#${id}`);
-			if (element) {
-				elements.push(element);
-			}
+		const bugfixes = this.#bugfixes();
+		if (bugfixes !== null) {
+			els.push(bugfixes);
 		}
 
-		return elements;
+		return els;
 	}
 }

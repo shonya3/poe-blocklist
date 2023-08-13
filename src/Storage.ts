@@ -9,6 +9,7 @@ export interface StorageItems {
 	hideThreadsCreatedByBlockedUsers: boolean;
 	showSettingsPopover: boolean;
 	hideRuthless: boolean;
+	hideBugfixes: boolean;
 }
 
 export interface ExtensionStorage<T> {

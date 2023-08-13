@@ -4,11 +4,11 @@ import { SupportedLang } from '../../../types';
 
 declare global {
 	interface HTMLElementTagNameMap {
-		'wc-hide-ruthless': HideRuthlessElement;
+		'wc-hide-bugfixes': HideBugfixesElement;
 	}
 }
 
-export class HideRuthlessElement extends LitElement {
+export class HideBugfixesElement extends LitElement {
 	@property({ type: Boolean, reflect: true }) hide = false;
 	@property({ reflect: true }) lang: SupportedLang = 'ru';
 
@@ -40,11 +40,11 @@ export class HideRuthlessElement extends LitElement {
 
 	labelText() {
 		if (this.lang === 'ru') {
-			return 'Спрятать рутхлесс';
-		} else return 'Hide ruthless';
+			return 'Спрятать багфиксы';
+		} else return 'Hide bugfixes';
 	}
 
-	static define(tag = 'wc-hide-ruthless') {
+	static define(tag = 'wc-hide-bugfixes') {
 		if (!customElements.get(tag)) {
 			customElements.define(tag, this);
 		}
@@ -52,13 +52,13 @@ export class HideRuthlessElement extends LitElement {
 	protected override render() {
 		return html`
 			<div>
-				<label for="hide-ruthless">${this.labelText()}</label>
+				<label for="hide-bugfixes">${this.labelText()}</label>
 				<input
 					@change=${this.#onCheckboxInput}
 					.checked=${this.hide}
 					type="checkbox"
-					name="hide-ruthless"
-					id="hide-ruthless"
+					name="hide-bugfixes"
+					id="hide-bugfixes"
 				/>
 			</div>
 		`;

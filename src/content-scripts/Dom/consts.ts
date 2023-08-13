@@ -2,6 +2,7 @@ const EXTENSION_PREFIX = 'blocklist-ext';
 
 export const consts = Object.freeze({
 	EXTENSION_PREFIX: 'blocklist-ext',
+	PATCHNOTES_CHECKBOXES_CONTAINER_SELECTOR: `${EXTENSION_PREFIX}-patchnotes-checkboxes-container`,
 	attr: Object.freeze({
 		HIDE_CHALLENGES: 'data-hide-challenges',
 		CREATOR_BLOCKED: 'data-creator-blocked',

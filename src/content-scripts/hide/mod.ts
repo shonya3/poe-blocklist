@@ -3,6 +3,7 @@ import { hidePosts } from './hidePosts';
 import { hideQuotes } from './hideQuotes';
 import { Post, Quote, Thread } from '../dom/mod';
 import { hideRuthless } from './hideRuthless/mod';
+import { hideBugfixes } from './hideBugfixes/mod';
 
 export const getElementDirectText = (el: HTMLElement): string => {
 	return Array.from(el.childNodes)
@@ -29,6 +30,10 @@ export class Hide {
 	}
 
 	static ruthless(hide: boolean, onHideChanged: (hide: boolean) => void) {
-		hideRuthless(hide, onHideChanged);
+		return hideRuthless(hide, onHideChanged);
+	}
+
+	static bugfixes(hide: boolean, onHideChanged: (hide: boolean) => void) {
+		return hideBugfixes(hide, onHideChanged);
 	}
 }
