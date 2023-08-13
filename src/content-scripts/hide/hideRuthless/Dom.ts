@@ -37,7 +37,8 @@ export class Dom {
 		containerEl.id = consts.PATCHNOTES_CHECKBOXES_CONTAINER_SELECTOR;
 
 		contentBox.append(containerEl);
-		return containerEl;
+		this.#container = containerEl;
+		return this.#container;
 	}
 
 	is322PatchPage() {
