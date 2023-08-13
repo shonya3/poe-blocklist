@@ -7,6 +7,7 @@ import { Default } from '../Default';
 const onSettingsPopoverClose = () => Storage.set('showSettingsPopover', false);
 const onHideRuthlessChanged = (hide: boolean) => Storage.set('hideRuthless', hide);
 const onHideBugfixesChanged = (hide: boolean) => Storage.set('hideBugfixes', hide);
+const onHidePagePostsChanged = (hide: boolean) => Storage.set('hidePagePosts', hide);
 
 async function main(): Promise<void> {
 	try {
@@ -20,6 +21,7 @@ async function main(): Promise<void> {
 			showSettingsPopover,
 			hideRuthless,
 			hideBugfixes,
+			hidePagePosts,
 		] = await Promise.all([
 			Storage.getOrDefault('users', []),
 			Storage.getOrDefault('keywords', []),
@@ -30,6 +32,7 @@ async function main(): Promise<void> {
 			Storage.getOrDefault('showSettingsPopover', true),
 			Storage.getOrDefault('hideRuthless', false),
 			Storage.getOrDefault('hideBugfixes', false),
+			Storage.getOrDefault('hidePagePosts', false),
 		]);
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
@@ -42,6 +45,7 @@ async function main(): Promise<void> {
 
 		Hide.ruthless(hideRuthless, onHideRuthlessChanged);
 		Hide.bugfixes(hideBugfixes, onHideBugfixesChanged);
+		Hide.pagePosts(hidePagePosts, onHidePagePostsChanged);
 	} catch (err) {
 		console.log(err);
 	}

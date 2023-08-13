@@ -10,6 +10,7 @@ export interface StorageItems {
 	showSettingsPopover: boolean;
 	hideRuthless: boolean;
 	hideBugfixes: boolean;
+	hidePagePosts: boolean;
 }
 
 export interface ExtensionStorage<T> {
