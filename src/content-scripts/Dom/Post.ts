@@ -1,11 +1,22 @@
 import { Option } from '../../types';
 import { hideElement, showElement } from './utils';
+import { Author } from './Author';
 
 export class Post {
 	static POST_SELECTOR = 'tr:has(.content)' as const;
 	element: HTMLTableRowElement;
+	author: Author | null = null;
 	constructor(element: HTMLTableRowElement) {
 		this.element = element;
+
+		const name = this.username;
+		if (name !== null) {
+			this.author = new Author(this.element, name);
+		}
+	}
+
+	isAuthorGGG(): boolean {
+		return this.author?.isGGG === true;
 	}
 
 	hideChildren(): void {
