@@ -120,7 +120,7 @@ export class Dom {
 
 		document.body.append(containerEl);
 		this.#container = containerEl;
-		this.#placeTop(this.#postElement, this.#container);
+		window.scrollY < 700 ? this.#placeTop(this.#postElement, this.#container) : this.#placeBottom(this.#container);
 		applyCss(this.#container, this.#cssStyles);
 
 		return this.#container;
