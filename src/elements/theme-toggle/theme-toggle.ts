@@ -22,7 +22,8 @@ const themeUtils = Object.freeze({
 	getTheme(): ColorTheme {
 		const storagePreference = this.getStorageValue();
 		if (!storagePreference) {
-			return this.getSystemPreference();
+			// return this.getSystemPreference();
+			return 'dark';
 		}
 
 		if (storagePreference !== 'dark' && storagePreference !== 'light') return 'dark';
