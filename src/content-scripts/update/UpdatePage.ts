@@ -24,7 +24,7 @@ export class UpdatePage {
 					onPopoverClose?.();
 				}
 			});
-			iconSettings.after(popover);
+			// iconSettings.after(popover);
 		}
 
 		return iconSettings;

@@ -29,7 +29,7 @@ async function main(): Promise<void> {
 			Storage.getOrDefault('lang', Default.lang()),
 			Storage.getOrDefault('withIcons', Default.withIcons),
 			Storage.getOrDefault('hideThreadsCreatedByBlockedUsers', Default.hideThreadsCreatedByBlockedUsers),
-			Storage.getOrDefault('showSettingsPopover', true),
+			Storage.getOrDefault('showSettingsPopover', false),
 			Storage.getOrDefault('hideRuthless', false),
 			Storage.getOrDefault('hideBugfixes', false),
 			Storage.getOrDefault('hidePagePosts', false),
