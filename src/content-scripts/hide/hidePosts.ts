@@ -43,7 +43,7 @@ export const hidePosts = (
 };
 
 const byUsers = (post: Post, users: SearchData['users']): Option<Tooltip> => {
-	const postedBy = post.username;
+	const postedBy = post.discriminated_username;
 	if (!postedBy || !users.includes(postedBy)) return null;
 
 	return postedBy;

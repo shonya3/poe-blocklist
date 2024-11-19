@@ -12,12 +12,16 @@ export class Post {
 		this.author = new Author(this.element);
 	}
 
-	get username(): string | null {
-		return this.author.name;
+	get discriminated_username(): string | null {
+		return this.author.name.discriminated;
 	}
 
-	static usernames(posts: Post[] = Post.posts()): string[] {
-		return posts.filter(p => p.author.name).map(p => p.author.name as string);
+	get indiscriminated_username(): string | null {
+		return this.author.name.indiscriminated;
+	}
+
+	static discriminated_usernames(posts: Post[] = Post.posts()): string[] {
+		return posts.filter(p => p.author.name.discriminated).map(p => p.author.name.discriminated as string);
 	}
 
 	hideChildren(): void {
@@ -61,7 +65,7 @@ export class Post {
 	}
 
 	static uniqueUsernames(posts: Post[] = Post.posts()): string[] {
-		return Array.from(new Set(Post.usernames(posts)));
+		return Array.from(new Set(Post.discriminated_usernames(posts)));
 	}
 
 	static visiblePosts(posts: Post[] = Post.posts()): Post[] {

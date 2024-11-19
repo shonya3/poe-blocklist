@@ -10,21 +10,21 @@ export class UpdatePosts {
 		IconBlockedUser.define();
 		IconUnblockUser.define();
 		for (const post of Post.posts()) {
-			const { username, buttons } = post;
-			if (!buttons || !username) continue;
+			const { discriminated_username, buttons } = post;
+			if (!buttons || !discriminated_username) continue;
 
-			const isUserBlocked = users.includes(username);
+			const isUserBlocked = users.includes(discriminated_username);
 			const t = translate(lang);
 
 			let icon: HTMLElement;
 			if (isUserBlocked) {
 				icon = document.createElement('icon-unblock-user');
 				icon.setAttribute('title', t('unblockUser'));
-				icon.addEventListener('click', () => Storage.unblockUser(username));
+				icon.addEventListener('click', () => Storage.unblockUser(discriminated_username));
 			} else {
 				icon = document.createElement('icon-blocked-user');
 				icon.setAttribute('title', t('hideMessages'));
-				icon.addEventListener('click', () => Storage.blockUser(username));
+				icon.addEventListener('click', () => Storage.blockUser(discriminated_username));
 			}
 
 			icon.addEventListener('click', () => location.reload());
