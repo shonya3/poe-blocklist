@@ -34,7 +34,10 @@ async function main(): Promise<void> {
 			Storage.getOrDefault('hideRuthless', false),
 			Storage.getOrDefault('hideBugfixes', false),
 			Storage.getOrDefault('hidePagePosts', false),
-			Storage.getOrDefault('hide_by_indiscriminated_username_aswell', false),
+			Storage.getOrDefault(
+				'hide_by_indiscriminated_username_aswell',
+				Default.hide_by_indiscriminated_username_aswell
+			),
 		]);
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
@@ -47,7 +50,7 @@ async function main(): Promise<void> {
 			postStyle,
 			lang,
 			withIcons,
-			hide_by_indiscriminated_username_aswell: true,
+			hide_by_indiscriminated_username_aswell,
 		});
 		if (shouldHideThreads) Hide.threads(users);
 

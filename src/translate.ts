@@ -67,6 +67,11 @@ const dictionary = {
 		en: 'Blocked',
 		ru: 'Заблокирован',
 	},
+
+	hide_by_indiscriminated_username_aswell: {
+		en: 'Hide by indiscriminated usesernames aswell',
+		ru: 'Также прятать и по никнеймам без дискриминатора',
+	},
 } as const;
 
 export const translate = <Lang extends SupportedLang>(lang: Lang) => {

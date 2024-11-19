@@ -20,7 +20,7 @@ import { PostStyle } from '../types';
 
 const { users, inputUser, addUser, deleteUser } = useUsers();
 const { keywords, inputKeyword, addKeyword, deleteKeyword } = useKeywords();
-const { postStyle, lang, withIcons, shouldHideThreads } = useSettings();
+const { postStyle, lang, withIcons, shouldHideThreads, hide_by_indiscriminated_username_aswell } = useSettings();
 const t = computed(() => translate(lang.value));
 </script>
 
@@ -112,6 +112,17 @@ const t = computed(() => translate(lang.value));
 						name="should-hide-threads-control"
 						id="should-hide-threads-control"
 						v-model="shouldHideThreads"
+					/>
+				</div>
+				<div class="should-hide_by_indiscriminated_username_aswell">
+					<label for="hide_by_indiscriminated_username_aswell">{{
+						t('hide_by_indiscriminated_username_aswell')
+					}}</label>
+					<input
+						type="checkbox"
+						name="hide_by_indiscriminated_username_aswell"
+						id="hide_by_indiscriminated_username_aswell"
+						v-model="hide_by_indiscriminated_username_aswell"
 					/>
 				</div>
 			</div>
@@ -220,7 +231,8 @@ blocked-content {
 	width: 1.2rem;
 }
 
-.should-hide-threads {
+.should-hide-threads,
+.should-hide_by_indiscriminated_username_aswell {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
