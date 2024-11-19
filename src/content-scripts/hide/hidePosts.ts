@@ -1,4 +1,4 @@
-import { html, render, nothing } from 'lit';
+import { html, render } from 'lit';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
