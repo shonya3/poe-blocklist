@@ -1,11 +1,24 @@
 import { Option } from '../../types';
+import { Author } from './Author';
 import { consts } from './consts';
 import { hideElement, showElement } from './utils';
 
 export class Quote {
 	element: HTMLQuoteElement;
+	author: Author;
 	constructor(element: HTMLQuoteElement) {
 		this.element = element;
+		this.author = new Author(this.element.querySelector('.profile-link > a'));
+
+		// console.log({ discr: this.discriminated_username, indiscr: this.indiscriminated_username });
+	}
+
+	get discriminated_username(): string | null {
+		return this.author.name.discriminated;
+	}
+
+	get indiscriminated_username(): string | null {
+		return this.author.name.indiscriminated;
 	}
 
 	hideChildren(): void {
@@ -34,9 +47,6 @@ export class Quote {
 	}
 	get content(): Option<HTMLElement> {
 		return this.element.querySelector('.bot');
-	}
-	get username(): Option<string> {
-		return this.element.querySelector('.profile-link > a')?.textContent ?? null;
 	}
 
 	static quoteElements(): HTMLQuoteElement[] {

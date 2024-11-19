@@ -9,11 +9,12 @@ export const hideQuotes = (
 	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
 	lang: SupportedLang,
-	withIcons: boolean
+	withIcons: boolean,
+	hide_by_indiscriminated_username_aswell: boolean
 ): void => {
 	BlockedContent.define();
 	for (const quote of quotes) {
-		const userTooltip = byUsers(quote, users);
+		const userTooltip = byUsers({ quote, users, hide_by_indiscriminated_username_aswell });
 		const keywordTooltip = byKeywords(quote, keywords);
 
 		if (!userTooltip && !keywordTooltip) continue;
@@ -47,11 +48,30 @@ const removeFollowingLineBreaks = (element: HTMLElement): void => {
 	}
 };
 
-const byUsers = (quote: Quote, users: SearchData['users']): Option<Tooltip> => {
-	const { username } = quote;
-	if (!username || !users.includes(username)) return null;
+const byUsers = ({
+	quote,
+	users,
+	hide_by_indiscriminated_username_aswell,
+}: {
+	quote: Quote;
+	users: SearchData['users'];
+	hide_by_indiscriminated_username_aswell: boolean;
+}): Option<Tooltip> => {
+	const discriminated = quote.discriminated_username;
+	if (discriminated && users.includes(discriminated)) {
+		return discriminated;
+	}
 
-	return username;
+	if (!hide_by_indiscriminated_username_aswell) {
+		return null;
+	}
+
+	const indiscriminated = quote.indiscriminated_username;
+	if (indiscriminated && users.includes(indiscriminated)) {
+		return indiscriminated;
+	}
+
+	return null;
 };
 
 const byKeywords = (quote: Quote, keywords: SearchData['keywords']): Option<Tooltip> => {
