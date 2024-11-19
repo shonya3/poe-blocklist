@@ -67,4 +67,3 @@ async function main(): Promise<void> {
 }
 
 main();
-console.log('Poe Blocklist Extension HELLO');
