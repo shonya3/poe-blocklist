@@ -1,7 +1,7 @@
 import { SupportedLang } from '../../../types';
-import { Post } from '../../dom/Post';
-import { consts } from '../../dom/consts';
-import { hideElement, showElement } from '../../dom/utils';
+import { Post } from '../../Dom/Post';
+import { consts } from '../../Dom/consts';
+import { hideElement, showElement } from '../../Dom/utils';
 
 export class Dom {
 	lang: SupportedLang;

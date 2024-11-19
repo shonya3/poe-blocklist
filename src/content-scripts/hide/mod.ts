@@ -1,7 +1,7 @@
 import { PostStyle, SearchData, SupportedLang } from '../../types';
 import { hidePosts } from './hidePosts';
 import { hideQuotes } from './hideQuotes';
-import { Post, Quote, Thread } from '../dom/mod';
+import { Post, Quote, Thread } from '../Dom/mod';
 import { hideRuthless } from './hideRuthless/mod';
 import { hideBugfixes } from './hideBugfixes/mod';
 import { hidePagePosts } from './hidePagePosts/mod';

@@ -4,6 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
+		"lint": "tsc --noEmit",
 		"build": "vue-tsc && vite build",
 		"preview": "vite preview",
 		"storybook": "storybook dev -p 6006"

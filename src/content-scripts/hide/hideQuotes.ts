@@ -2,7 +2,7 @@ import { html, nothing, render } from 'lit';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
-import { Quote } from '../dom/mod';
+import { Quote } from '../Dom/mod';
 
 export const hideQuotes = (
 	quotes: Quote[],
@@ -27,8 +27,8 @@ export const hideQuotes = (
 				post-style="${postStyle}"
 				kind="quote"
 				?with-icons=${withIcons}
-				user-tooltip="${userTooltip ?? nothing}"
-				keyword-tooltip="${keywordTooltip ?? nothing}"
+				.userTooltip=${userTooltip}
+				.keywordTooltip=${keywordTooltip}
 				@button-clicked=${() => {
 					quote.showChildren();
 				}}

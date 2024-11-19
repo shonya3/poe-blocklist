@@ -1,6 +1,6 @@
 import { Option } from '../../types';
-import { hideElement, showElement } from './utils';
 import { Author } from './Author';
+import { hideElement, showElement } from './utils';
 
 export class Post {
 	static POST_SELECTOR = 'tr:has(.content)' as const;

@@ -1,5 +1,5 @@
 import { SearchData, SupportedLang } from '../../types';
-import { Thread } from '../dom/mod';
+import { Thread } from '../Dom/mod';
 
 export class UpdateThreads {
 	editNames(users: SearchData['users'], lang: SupportedLang) {

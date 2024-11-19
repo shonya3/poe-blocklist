@@ -2,7 +2,7 @@ import { html, render, nothing } from 'lit';
 import { SearchData, PostStyle, Tooltip, Option, SupportedLang } from '../../types';
 import { getElementDirectText } from './mod';
 import { BlockedContent } from '../../elements/blocked-content/blocked-content';
-import { Post } from '../dom/mod';
+import { Post } from '../Dom/mod';
 
 export const hidePosts = (
 	posts: Post[],
@@ -26,8 +26,8 @@ export const hidePosts = (
 						post-style="${postStyle}"
 						kind="post"
 						?with-icons=${withIcons}
-						user-tooltip="${userTooltip ?? nothing}"
-						keyword-tooltip="${keywordTooltip ?? nothing}"
+						.userTooltip=${userTooltip}
+						.keywordTooltip=${keywordTooltip}
 						@button-clicked=${() => {
 							post.element
 								.querySelectorAll('[data-blocklist-ext-temp-td]')

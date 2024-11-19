@@ -1,5 +1,5 @@
 import { SearchData, SupportedLang } from '../../types';
-import { Forum } from '../dom/mod';
+import { Forum } from '../Dom/mod';
 
 export class UpdateForums {
 	editNames(users: SearchData['users'], lang: SupportedLang): void {

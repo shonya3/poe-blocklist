@@ -1,13 +1,7 @@
 import { SupportedLang } from '../../../types';
-import { Post } from '../../dom/Post';
-import { consts } from '../../dom/consts';
-import { hideElement, showElement } from '../../dom/utils';
-
-declare global {
-	interface Document {
-		startViewTransition: (cb: () => void) => Promise<void>;
-	}
-}
+import { Post } from '../../Dom/Post';
+import { consts } from '../../Dom/consts';
+import { hideElement, showElement } from '../../Dom/utils';
 
 const setPosition = (container: HTMLElement, position: Position) => {
 	for (const [key, value] of Object.entries(position)) {
