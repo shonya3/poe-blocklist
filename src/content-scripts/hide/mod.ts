@@ -28,7 +28,7 @@ export class Hide {
 		hide_by_indiscriminated_username_aswell: boolean;
 	}): void {
 		hidePosts(Post.posts(), searchData, postStyle, lang, withIcons, hide_by_indiscriminated_username_aswell);
-		hideQuotes(Quote.quotes(), searchData, postStyle, lang, withIcons);
+		hideQuotes(Quote.quotes(), searchData, postStyle, lang, withIcons, hide_by_indiscriminated_username_aswell);
 	}
 
 	static threads(users: SearchData['users'] = []) {
