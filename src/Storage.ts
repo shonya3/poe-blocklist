@@ -11,6 +11,7 @@ export interface StorageItems {
 	hideRuthless: boolean;
 	hideBugfixes: boolean;
 	hidePagePosts: boolean;
+	hide_by_indiscriminated_username_aswell: boolean;
 }
 
 export interface ExtensionStorage<T> {

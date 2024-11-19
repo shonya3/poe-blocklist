@@ -9,11 +9,12 @@ export const hidePosts = (
 	{ users, keywords }: SearchData,
 	postStyle: PostStyle,
 	lang: SupportedLang,
-	withIcons: boolean
+	withIcons: boolean,
+	hide_by_indiscriminated_username_aswell: boolean
 ): void => {
 	BlockedContent.define();
 	for (const post of posts) {
-		const userTooltip = byUsers(post, users);
+		const userTooltip = byUsers({ post, users, hide_by_indiscriminated_username_aswell });
 		const keywordTooltip = byKeywords(post, keywords);
 		if (!userTooltip && !keywordTooltip) continue;
 
@@ -42,11 +43,30 @@ export const hidePosts = (
 	}
 };
 
-const byUsers = (post: Post, users: SearchData['users']): Option<Tooltip> => {
-	const postedBy = post.discriminated_username;
-	if (!postedBy || !users.includes(postedBy)) return null;
+const byUsers = ({
+	post,
+	users,
+	hide_by_indiscriminated_username_aswell,
+}: {
+	post: Post;
+	users: SearchData['users'];
+	hide_by_indiscriminated_username_aswell: boolean;
+}): Option<Tooltip> => {
+	const discriminated = post.discriminated_username;
+	if (discriminated && users.includes(discriminated)) {
+		return discriminated;
+	}
 
-	return postedBy;
+	if (!hide_by_indiscriminated_username_aswell) {
+		return null;
+	}
+
+	const indiscriminated = post.indiscriminated_username;
+	if (indiscriminated && users.includes(indiscriminated)) {
+		return indiscriminated;
+	}
+
+	return null;
 };
 
 const byKeywords = (post: Post, keywords: SearchData['keywords']): Option<Tooltip> => {

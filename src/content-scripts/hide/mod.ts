@@ -14,8 +14,20 @@ export const getElementDirectText = (el: HTMLElement): string => {
 };
 
 export class Hide {
-	static postsAndQuotes(searchData: SearchData, postStyle: PostStyle, lang: SupportedLang, withIcons: boolean): void {
-		hidePosts(Post.posts(), searchData, postStyle, lang, withIcons);
+	static postsAndQuotes({
+		searchData,
+		postStyle,
+		lang,
+		withIcons,
+		hide_by_indiscriminated_username_aswell,
+	}: {
+		searchData: SearchData;
+		postStyle: PostStyle;
+		lang: SupportedLang;
+		withIcons: boolean;
+		hide_by_indiscriminated_username_aswell: boolean;
+	}): void {
+		hidePosts(Post.posts(), searchData, postStyle, lang, withIcons, hide_by_indiscriminated_username_aswell);
 		hideQuotes(Quote.quotes(), searchData, postStyle, lang, withIcons);
 	}
 
@@ -38,7 +50,15 @@ export class Hide {
 		return hideBugfixes(hide, onHideChanged);
 	}
 
-	static pagePosts(hide: boolean, onHideChanged: (hide: boolean) => void) {
+	static pagePosts({
+		hide,
+		onHideChanged,
+		hide_by_indiscriminated_username_aswell,
+	}: {
+		hide: boolean;
+		hide_by_indiscriminated_username_aswell: boolean;
+		onHideChanged: (hide: boolean) => void;
+	}) {
 		hidePagePosts(hide, onHideChanged);
 	}
 }

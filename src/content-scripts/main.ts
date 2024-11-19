@@ -22,6 +22,7 @@ async function main(): Promise<void> {
 			hideRuthless,
 			hideBugfixes,
 			hidePagePosts,
+			hide_by_indiscriminated_username_aswell,
 		] = await Promise.all([
 			Storage.getOrDefault('users', []),
 			Storage.getOrDefault('keywords', []),
@@ -33,6 +34,7 @@ async function main(): Promise<void> {
 			Storage.getOrDefault('hideRuthless', false),
 			Storage.getOrDefault('hideBugfixes', false),
 			Storage.getOrDefault('hidePagePosts', false),
+			Storage.getOrDefault('hide_by_indiscriminated_username_aswell', false),
 		]);
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
@@ -40,12 +42,22 @@ async function main(): Promise<void> {
 		Update.threads.editNames(users, lang);
 		Update.forums.editNames(users, lang);
 
-		Hide.postsAndQuotes({ keywords, users }, postStyle, lang, withIcons);
+		Hide.postsAndQuotes({
+			searchData: { keywords, users },
+			postStyle,
+			lang,
+			withIcons,
+			hide_by_indiscriminated_username_aswell: true,
+		});
 		if (shouldHideThreads) Hide.threads(users);
 
 		Hide.ruthless(hideRuthless, onHideRuthlessChanged);
 		Hide.bugfixes(hideBugfixes, onHideBugfixesChanged);
-		Hide.pagePosts(hidePagePosts, onHidePagePostsChanged);
+		Hide.pagePosts({
+			hide: hidePagePosts,
+			hide_by_indiscriminated_username_aswell,
+			onHideChanged: onHidePagePostsChanged,
+		});
 	} catch (err) {
 		console.log(err);
 	}
