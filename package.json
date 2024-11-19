@@ -11,24 +11,22 @@
 	},
 	"dependencies": {
 		"@webcomponents/custom-elements": "^1.6.0",
-		"lit": "^3.1.2",
-		"vue": "^3.4.21"
+		"lit": "3.2.1",
+		"vue": "3.5.13"
 	},
 	"devDependencies": {
-		"@babel/core": "7.24.4",
 		"@crxjs/vite-plugin": "2.0.0-beta.28",
-		"@custom-elements-manifest/analyzer": "0.9.4",
-		"@storybook/addon-actions": "^8.0.6",
-		"@storybook/addon-essentials": "^8.0.6",
-		"@storybook/addon-links": "^8.0.6",
-		"@storybook/web-components": "^8.0.6",
-		"@storybook/web-components-vite": "^8.0.6",
-		"@types/chrome": "0.0.279",
-		"@vitejs/plugin-vue": "5.0.4",
-		"babel-loader": "9.1.3",
-		"storybook": "^8.0.6",
+		"@custom-elements-manifest/analyzer": "0.10.3",
+		"@storybook/addon-actions": "8.4.4",
+		"@storybook/addon-essentials": "8.4.4",
+		"@storybook/addon-links": "8.4.4",
+		"@storybook/web-components": "8.4.4",
+		"@storybook/web-components-vite": "8.4.4",
+		"@types/chrome": "0.0.283",
+		"@vitejs/plugin-vue": "5.2.0",
+		"storybook": "8.4.4",
 		"typescript": "5.6.3",
-		"vite": "5.0.11",
-		"vue-tsc": "2.0.11"
+		"vite": "5.4.11",
+		"vue-tsc": "2.1.10"
 	}
 }
