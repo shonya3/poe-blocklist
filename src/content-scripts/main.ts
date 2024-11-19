@@ -42,8 +42,8 @@ async function main(): Promise<void> {
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
 		Update.posts.addBlockButton(users, lang);
-		Update.threads.editNames(users, lang);
-		Update.forums.editNames(users, lang);
+		Update.threads.editNames({ users, lang, hide_by_indiscriminated_username_aswell });
+		Update.forums.editNames({ users, lang, hide_by_indiscriminated_username_aswell });
 
 		Hide.postsAndQuotes({
 			searchData: { keywords, users },

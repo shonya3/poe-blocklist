@@ -1,22 +1,33 @@
 import { translate } from '../../translate';
 import { SupportedLang } from '../../types';
+import { get_user_name, Name } from '../name';
 import { consts } from './consts';
 
 export class LastPostedBy {
 	thread: HTMLTableRowElement;
+	name: Name;
 	constructor(thread: HTMLTableRowElement) {
 		this.thread = thread;
+
+		this.name = new Name({
+			value: get_user_name(this.thread.querySelector('.last_post a')),
+			onChange: ({ indiscriminated }) => {
+				if (!indiscriminated) {
+					return;
+				}
+
+				const el = this.thread.querySelector('.last_post a');
+				if (!el) {
+					return;
+				}
+
+				el.textContent = indiscriminated;
+			},
+		});
 	}
 
 	get element(): HTMLAnchorElement {
 		return this.thread.querySelector('.last_post a') as HTMLAnchorElement;
-	}
-
-	set name(name: string) {
-		this.element.textContent = name;
-	}
-	get name(): string {
-		return this.element.textContent as string;
 	}
 
 	block(lang: SupportedLang): void {
@@ -25,7 +36,7 @@ export class LastPostedBy {
 	}
 
 	blockName(lang: SupportedLang): void {
-		this.name = translate(lang)('blocked');
+		this.name.change(translate(lang)('blocked'));
 		this.element.href = '';
 		this.element.classList.add(consts.class.fontWeight300);
 	}
