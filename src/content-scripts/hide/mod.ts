@@ -31,12 +31,27 @@ export class Hide {
 		hideQuotes(Quote.quotes(), searchData, postStyle, lang, withIcons, hide_by_indiscriminated_username_aswell);
 	}
 
-	static threads(users: SearchData['users'] = []) {
+	static threads({
+		users = [],
+		hide_by_indiscriminated_username_aswell,
+	}: {
+		users?: SearchData['users'];
+		hide_by_indiscriminated_username_aswell: boolean;
+	}) {
 		if (!Thread.isThreadsView()) return;
 		for (const thread of Thread.threads()) {
 			const { name } = thread.createdBy;
 
-			if (users.includes(name) || thread.createdBy.blocked) {
+			if ((name.discriminated && users.includes(name.discriminated)) || thread.createdBy.blocked) {
+				thread.hide();
+			}
+
+			if (
+				(hide_by_indiscriminated_username_aswell &&
+					name.indiscriminated &&
+					users.includes(name.indiscriminated)) ||
+				thread.createdBy.blocked
+			) {
 				thread.hide();
 			}
 		}

@@ -52,7 +52,7 @@ async function main(): Promise<void> {
 			withIcons,
 			hide_by_indiscriminated_username_aswell,
 		});
-		if (shouldHideThreads) Hide.threads(users);
+		if (shouldHideThreads) Hide.threads({ users, hide_by_indiscriminated_username_aswell });
 
 		Hide.ruthless(hideRuthless, onHideRuthlessChanged);
 		Hide.bugfixes(hideBugfixes, onHideBugfixesChanged);

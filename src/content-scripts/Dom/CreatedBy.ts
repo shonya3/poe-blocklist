@@ -1,11 +1,28 @@
 import { SupportedLang } from '../../types';
 import { translate } from '../../translate';
 import { consts } from './consts';
+import { get_user_name, Name } from '../name';
 
 export class CreatedBy {
 	thread: HTMLTableRowElement;
+	name: Name;
 	constructor(thread: HTMLTableRowElement) {
 		this.thread = thread;
+		this.name = new Name({
+			value: get_user_name(this.element),
+			onChange: ({ indiscriminated }) => {
+				if (!indiscriminated) {
+					return;
+				}
+
+				const el = this.element;
+				if (!el) {
+					return;
+				}
+
+				el.textContent = indiscriminated;
+			},
+		});
 	}
 
 	get blocked(): boolean {
@@ -21,13 +38,6 @@ export class CreatedBy {
 		return this.thread.querySelector('.postBy a') as HTMLAnchorElement;
 	}
 
-	set name(name: string) {
-		this.element.textContent = name;
-	}
-	get name(): string {
-		return this.element.textContent as string;
-	}
-
 	block(lang: SupportedLang): void {
 		this.blockName(lang);
 		this.hideChallenges();
@@ -35,7 +45,7 @@ export class CreatedBy {
 	}
 
 	blockName(lang: SupportedLang): void {
-		this.name = translate(lang)('blocked');
+		this.name.change(translate(lang)('blocked'));
 		this.element.href = '';
 		this.element.classList.add(consts.class.fontWeight300);
 	}

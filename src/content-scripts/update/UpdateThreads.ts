@@ -14,7 +14,13 @@ export class UpdateThreads {
 		if (!Thread.isThreadsView()) return;
 		for (const thread of Thread.threads()) {
 			const { createdBy, lastPostedBy } = thread;
-			if (users.includes(createdBy.name)) createdBy.block(lang);
+			if (createdBy.name.discriminated && users.includes(createdBy.name.discriminated)) {
+				createdBy.block(lang);
+			}
+
+			if (createdBy.name.indiscriminated && users.includes(createdBy.name.indiscriminated)) {
+				createdBy.block(lang);
+			}
 
 			if (lastPostedBy.name.discriminated && users.includes(lastPostedBy.name.discriminated))
 				lastPostedBy.block(lang);
