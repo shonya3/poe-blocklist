@@ -9,7 +9,7 @@ export class Post {
 	constructor(element: HTMLTableRowElement) {
 		this.element = element;
 
-		this.author = new Author(this.element);
+		this.author = new Author(this.element.querySelector('span.profile-link.post_by_account > a'));
 	}
 
 	get discriminated_username(): string | null {
