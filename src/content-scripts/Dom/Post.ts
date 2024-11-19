@@ -5,18 +5,19 @@ import { hideElement, showElement } from './utils';
 export class Post {
 	static POST_SELECTOR = 'tr:has(.content)' as const;
 	element: HTMLTableRowElement;
-	author: Author | null = null;
+	author: Author;
 	constructor(element: HTMLTableRowElement) {
 		this.element = element;
 
-		const name = this.username;
-		if (name !== null) {
-			this.author = new Author(this.element, name);
-		}
+		this.author = new Author(this.element);
 	}
 
-	isAuthorGGG(): boolean {
-		return this.author?.isGGG === true;
+	get username(): string | null {
+		return this.author.name;
+	}
+
+	static usernames(posts: Post[] = Post.posts()): string[] {
+		return posts.filter(p => p.author.name).map(p => p.author.name as string);
 	}
 
 	hideChildren(): void {
@@ -33,10 +34,6 @@ export class Post {
 
 	get buttons(): HTMLDivElement {
 		return this.element.querySelector('div.buttons') as HTMLDivElement;
-	}
-
-	get username(): Option<string> {
-		return this.element.querySelector('span.profile-link.post_by_account > a')?.textContent ?? null;
 	}
 
 	get content(): Option<HTMLElement> {
@@ -61,10 +58,6 @@ export class Post {
 
 	static posts(postElements: HTMLTableRowElement[] = Post.postElements()): Post[] {
 		return postElements.map(element => new Post(element));
-	}
-
-	static usernames(posts: Post[] = Post.posts()): string[] {
-		return posts.filter(p => p.username !== null).map(p => p.username as string);
 	}
 
 	static uniqueUsernames(posts: Post[] = Post.posts()): string[] {
