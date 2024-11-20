@@ -79,5 +79,5 @@ export function get_user_name(el: HTMLAnchorElement | null) {
 		return null;
 	}
 
-	return sliced.slice(0, last_dash_index) + '#' + sliced.slice(last_dash_index + 1);
+	return decodeURI(sliced.slice(0, last_dash_index)) + '#' + decodeURI(sliced.slice(last_dash_index + 1));
 }
