@@ -16,7 +16,8 @@ export class UpdatePage {
 		document.querySelector('#statusBar')?.append(iconSettings);
 		if (showSettingsPopover) {
 			const popover = document.createElement('my-popover');
-			popover.textContent = translate(lang)('hereIsBlocklistSettings');
+			popover.style.setProperty('z-index', '200');
+			popover.textContent = t('hereIsBlocklistSettings');
 			popover.addEventListener('click', e => {
 				const [target] = e.composedPath();
 				if (target instanceof HTMLButtonElement) {
@@ -24,7 +25,7 @@ export class UpdatePage {
 					onPopoverClose?.();
 				}
 			});
-			// iconSettings.after(popover);
+			iconSettings.after(popover);
 		}
 
 		return iconSettings;
