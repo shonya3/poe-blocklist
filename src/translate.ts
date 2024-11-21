@@ -70,7 +70,7 @@ const dictionary = {
 
 	hide_by_indiscriminated_username_aswell: {
 		en: 'Hide by indiscriminated usesernames aswell (compatibility option for old lists)',
-		ru: 'Также блокировать и без дискриминатора (опция для совместимости со старыми списками)',
+		ru: 'Также блокировать и без дискриминатора (опция совместимости со старыми списками)',
 	},
 } as const;
 
