@@ -15,7 +15,7 @@ export interface StorageItems {
 }
 
 export interface ExtensionStorage<T> {
-	get: () => Promise<Record<string, unknown>>;
+	get: () => Promise<Partial<T>>;
 	set: <Key extends keyof T>(key: Key, value: T[Key]) => Promise<void>;
 	getOrDefault: <Key extends keyof T>(key: Key, defaultValue: T[Key]) => Promise<T[Key]>;
 	clearAll: () => Promise<void>;
