@@ -2,6 +2,7 @@ import { IconSettings } from '../../elements/icons/icon-settings';
 import { MyPopoverElement } from '../../elements/popover/my-popover';
 import { translate } from '../../translate';
 import { Message, SupportedLang } from '../../types';
+import { get_user_name, Name } from '../name';
 
 export class UpdatePage {
 	addSettingsButton(lang: SupportedLang, showSettingsPopover: boolean, onPopoverClose?: () => void): IconSettings {
@@ -29,5 +30,18 @@ export class UpdatePage {
 		}
 
 		return iconSettings;
+	}
+
+	remove_discriminator_from_logged_in() {
+		const page_profile_link = document.querySelector<HTMLAnchorElement>('#statusBar .profile-link a');
+		new Name({
+			value: get_user_name(page_profile_link),
+			onChange: ({ indiscriminated }) => {
+				const page_profile_link = document.querySelector<HTMLAnchorElement>('#statusBar .profile-link a');
+				if (page_profile_link) {
+					page_profile_link.textContent = indiscriminated;
+				}
+			},
+		});
 	}
 }

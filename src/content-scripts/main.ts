@@ -3,6 +3,7 @@ import { Hide } from './hide/mod';
 import { Storage } from '../Storage';
 import { Update } from './update/mod';
 import { Default } from '../Default';
+import { get_user_name, Name } from './name';
 
 const onSettingsPopoverClose = () => Storage.set('showSettingsPopover', false);
 const onHideRuthlessChanged = (hide: boolean) => Storage.set('hideRuthless', hide);
@@ -41,6 +42,8 @@ async function main(): Promise<void> {
 		]);
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
+		Update.page.remove_discriminator_from_logged_in();
+
 		Update.posts.addBlockButton(users, lang);
 		Update.threads.editNames({ users, lang, hide_by_indiscriminated_username_aswell });
 		Update.forums.editNames({ users, lang, hide_by_indiscriminated_username_aswell });
