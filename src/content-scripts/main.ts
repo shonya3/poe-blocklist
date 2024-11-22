@@ -12,34 +12,19 @@ const onHidePagePostsChanged = (hide: boolean) => Storage.set('hidePagePosts', h
 
 async function main(): Promise<void> {
 	try {
-		const [
-			users,
-			keywords,
-			postStyle,
-			lang,
-			withIcons,
-			shouldHideThreads,
-			showSettingsPopover,
-			hideRuthless,
-			hideBugfixes,
-			hidePagePosts,
-			hide_by_indiscriminated_username_aswell,
-		] = await Promise.all([
-			Storage.getOrDefault('users', []),
-			Storage.getOrDefault('keywords', []),
-			Storage.getOrDefault('postStyle', Default.postStyle),
-			Storage.getOrDefault('lang', Default.lang()),
-			Storage.getOrDefault('withIcons', Default.withIcons),
-			Storage.getOrDefault('hideThreadsCreatedByBlockedUsers', Default.hideThreadsCreatedByBlockedUsers),
-			Storage.getOrDefault('showSettingsPopover', false),
-			Storage.getOrDefault('hideRuthless', false),
-			Storage.getOrDefault('hideBugfixes', false),
-			Storage.getOrDefault('hidePagePosts', false),
-			Storage.getOrDefault(
-				'hide_by_indiscriminated_username_aswell',
-				Default.hide_by_indiscriminated_username_aswell
-			),
-		]);
+		const {
+			users = [],
+			keywords = [],
+			postStyle = Default.postStyle,
+			lang = Default.lang(),
+			withIcons = Default.withIcons,
+			hideThreadsCreatedByBlockedUsers = Default.hideThreadsCreatedByBlockedUsers,
+			showSettingsPopover = true,
+			hideRuthless = false,
+			hideBugfixes = false,
+			hidePagePosts = false,
+			hide_by_indiscriminated_username_aswell = Default.hideThreadsCreatedByBlockedUsers,
+		} = await Storage.get();
 
 		Update.page.addSettingsButton(lang, showSettingsPopover, onSettingsPopoverClose);
 		Update.page.remove_discriminator_from_logged_in();
@@ -55,7 +40,7 @@ async function main(): Promise<void> {
 			withIcons,
 			hide_by_indiscriminated_username_aswell,
 		});
-		if (shouldHideThreads) Hide.threads({ users, hide_by_indiscriminated_username_aswell });
+		if (hideThreadsCreatedByBlockedUsers) Hide.threads({ users, hide_by_indiscriminated_username_aswell });
 
 		Hide.ruthless(hideRuthless, onHideRuthlessChanged);
 		Hide.bugfixes(hideBugfixes, onHideBugfixesChanged);
