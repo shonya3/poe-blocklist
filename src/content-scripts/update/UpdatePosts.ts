@@ -32,4 +32,25 @@ export class UpdatePosts {
 			buttons.append(icon);
 		}
 	}
+
+	highlight_funny_discriminators(): void {
+		Post.posts().forEach(post => {
+			console.log(post.author.name.discriminant);
+		});
+		for (const post of Post.posts()) {
+			if (
+				['1337', '6969', '0420', '1488', '4200', '0069'].some(d => post.author.name.discriminant?.includes(d))
+			) {
+				const anchor_el = post.author.name_anchor_element;
+				if (!anchor_el) return;
+
+				if (!post.element.querySelector('span.discriminator')) {
+					anchor_el.insertAdjacentHTML(
+						'afterend',
+						`<span style="color: gold;" class="discriminator">${post.author.name.discriminant}</span>`
+					);
+				}
+			}
+		}
+	}
 }

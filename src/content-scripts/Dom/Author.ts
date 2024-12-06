@@ -20,4 +20,8 @@ export class Author {
 			},
 		});
 	}
+
+	get name_anchor_element() {
+		return this.#name_anchor_element;
+	}
 }

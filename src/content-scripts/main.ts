@@ -33,6 +33,7 @@ async function main(): Promise<void> {
 		Update.threads.editNames({ users, lang, hide_by_indiscriminated_username_aswell });
 		Update.forums.editNames({ users, lang, hide_by_indiscriminated_username_aswell });
 
+		Update.posts.highlight_funny_discriminators();
 		Hide.postsAndQuotes({
 			searchData: { keywords, users },
 			postStyle,
