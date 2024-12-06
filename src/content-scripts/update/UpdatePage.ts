@@ -2,7 +2,7 @@ import { IconSettings } from '../../elements/icons/icon-settings';
 import { MyPopoverElement } from '../../elements/popover/my-popover';
 import { translate } from '../../translate';
 import { Message, SupportedLang } from '../../types';
-import { get_user_name, Name } from '../name';
+import { get_user_name, Name } from '../_name';
 
 export class UpdatePage {
 	addSettingsButton(lang: SupportedLang, showSettingsPopover: boolean, onPopoverClose?: () => void): IconSettings {

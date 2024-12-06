@@ -3,7 +3,7 @@ import { Hide } from './hide/mod';
 import { Storage } from '../Storage';
 import { Update } from './update/mod';
 import { Default } from '../Default';
-import { get_user_name, Name } from './name';
+import { get_user_name, Name } from './_name';
 
 const onSettingsPopoverClose = () => Storage.set('showSettingsPopover', false);
 const onHideRuthlessChanged = (hide: boolean) => Storage.set('hideRuthless', hide);

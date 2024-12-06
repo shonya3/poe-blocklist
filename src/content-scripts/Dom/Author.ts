@@ -1,4 +1,4 @@
-import { get_user_name, Name } from '../name';
+import { get_user_name, Name } from '../_name';
 
 export class Author {
 	name: Name;

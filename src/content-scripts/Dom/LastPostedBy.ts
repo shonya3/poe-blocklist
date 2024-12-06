@@ -1,6 +1,6 @@
 import { translate } from '../../translate';
 import { SupportedLang } from '../../types';
-import { get_user_name, Name } from '../name';
+import { get_user_name, Name } from '../_name';
 import { consts } from './consts';
 
 export class LastPostedBy {
